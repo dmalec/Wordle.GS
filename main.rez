@@ -1,0 +1,174 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2022 Dan Malec
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+#include "types.rez"
+
+resource rAlertString (1) {
+  "43/"
+  "I don't know the word: *0\n"
+  "/^#0"
+  $"00";
+};
+
+resource rWindParam1 (1001) {
+  $DDA5,                      /* wFrameBits */
+  nil,                        /* wTitle */
+  0,                          /* wRefCon */
+  {0,0,0,0},                  /* ZoomRect */
+  nil,                        /* wColor ID */
+  {0,0},                      /* Origin */
+  {1,1},                      /* data size */
+  {0,0},                      /* max height-width */
+  {8,8},                      /* scroll ver hors */
+  {0,0},                      /* page ver horiz */
+  0,                          /* winfoRefcon */
+  0,                          /* wInfoHeight */
+  {0,0,200,320},              /* wposition */
+  infront,                    /* wPlane */
+  nil,                        /* wStorage */
+  $0000                       /* wInVerb */
+};
+
+resource rWindParam1 (1002) {
+  $2028,                      /* wFrameBits */
+  nil,                        /* wTitle */
+  0,                          /* wRefCon */
+  {0,0,0,0},                  /* ZoomRect */
+  nil,                        /* wColor ID */
+  {0,0},                      /* Origin */
+  {1,1},                      /* data size */
+  {0,0},                      /* max height-width */
+  {0,0},                      /* scroll ver hors */
+  {0,0},                      /* page ver horiz */
+  0,                          /* winfoRefcon */
+  0,                          /* wInfoHeight */
+  {33,20,180,300},            /* wposition */
+  infront,                    /* wPlane */
+  1001,                       /* wStorage */
+  $0809                       /* wInVerb */
+};
+
+resource rControlTemplate (1001) {
+  1,
+  {126,180,0,0},
+  SimpleButtonControl {{
+    $0001,
+    $3002,
+    0,
+    1001,
+    0,
+    {"\$0D","\$0D",0,0}
+  }};
+};
+
+resource rPString (1001) {"New Game"};
+
+resource rControlTemplate (1002) {
+  2,
+  {126,100,0,0},
+  SimpleButtonControl {{
+    $0000,
+    $3002,
+    0,
+    1002,
+    0,
+    {"\$1B","\$1B",0,0}
+  }};
+};
+
+resource rPString (1002) {"Close"};
+
+resource rControlList (1001) {
+  {
+    1001,
+    1002
+  }
+};
+
+resource rWindParam1 (1101) {
+  $2028,                      /* wFrameBits */
+  nil,                        /* wTitle */
+  0,                          /* wRefCon */
+  {0,0,0,0},                  /* ZoomRect */
+  nil,                        /* wColor ID */
+  {0,0},                      /* Origin */
+  {1,1},                      /* data size */
+  {0,0},                      /* max height-width */
+  {0,0},                      /* scroll ver hors */
+  {0,0},                      /* page ver horiz */
+  0,                          /* winfoRefcon */
+  0,                          /* wInfoHeight */
+  {33,20,180,300},            /* wposition */
+  infront,                    /* wPlane */
+  1101,                       /* wStorage */
+  $0809                       /* wInVerb */
+};
+
+resource rControlTemplate (1101) {
+  1,
+  {126,226,0,0},
+  SimpleButtonControl {{
+    $0001,
+    $3002,
+    0,
+    1101,
+    0,
+    {"\$0D","\$0D",0,0}
+  }};
+};
+
+resource rPString (1101) {"OK"};
+
+resource rControlTemplate (1102) {
+  2,
+  {5,5,200,300},
+  statTextControl {{
+    $0000,
+    $1002,
+    0,
+    1102
+  }};
+};
+
+resource rTextForLETextBox2 (1102) {
+  "WORDLE GS v0.1\n"
+  "by Dan Malec\n"
+  "\n"
+  "Based on WORDLE\n"
+  "by Josh Wardle\n"
+  "\n"
+  "Contains libraries from ORCA C,\n"
+  "Copyright 1991, Byte Works Inc.\n"
+  "\n"
+  "Built using:\n"
+  "Golden Gate by Kelvin Sherlock\n"
+  "Apple2GSBuildPipeline by Jeremy Rand\n"
+};
+
+resource rControlList (1101) {
+  {
+    1101,
+    1102
+  }
+};
