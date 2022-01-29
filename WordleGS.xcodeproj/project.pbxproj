@@ -1,0 +1,606 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3678008227A100E7002A9ACC /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 3678008127A100E7002A9ACC /* main.c */; };
+		3678008527A100E7002A9ACC /* main.rez in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3678008427A100E7002A9ACC /* main.rez */; };
+		3678008727A100E7002A9ACC /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 3678008627A100E7002A9ACC /* Makefile */; };
+		3678008A27A100E7002A9ACC /* config.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3678008927A100E7002A9ACC /* config.txt */; };
+		3678008C27A100E7002A9ACC /* createDiskImage in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3678008B27A100E7002A9ACC /* createDiskImage */; };
+		3678008E27A100E7002A9ACC /* head.mk in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3678008D27A100E7002A9ACC /* head.mk */; };
+		3678009027A100E7002A9ACC /* launchEmulator in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3678008F27A100E7002A9ACC /* launchEmulator */; };
+		3678009227A100E7002A9ACC /* md2teach in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3678009127A100E7002A9ACC /* md2teach */; };
+		3678009427A100E7002A9ACC /* orca-asm in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3678009327A100E7002A9ACC /* orca-asm */; };
+		3678009627A100E7002A9ACC /* orca-cc in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3678009527A100E7002A9ACC /* orca-cc */; };
+		3678009827A100E7002A9ACC /* orca-rez in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3678009727A100E7002A9ACC /* orca-rez */; };
+		3678009A27A100E7002A9ACC /* system601.2mg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3678009927A100E7002A9ACC /* system601.2mg */; };
+		3678009C27A100E7002A9ACC /* empty.2mg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3678009B27A100E7002A9ACC /* empty.2mg */; };
+		3678009E27A100E7002A9ACC /* tar in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3678009D27A100E7002A9ACC /* tar */; };
+		367800A027A100E7002A9ACC /* tail.mk in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3678009F27A100E7002A9ACC /* tail.mk */; };
+		367800A327A100E7002A9ACC /* WordleGS.xcscheme in CopyFiles */ = {isa = PBXBuildFile; fileRef = 367800A227A100E7002A9ACC /* WordleGS.xcscheme */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3678007D27A100E7002A9ACC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				3678009227A100E7002A9ACC /* md2teach in CopyFiles */,
+				3678009827A100E7002A9ACC /* orca-rez in CopyFiles */,
+				367800A027A100E7002A9ACC /* tail.mk in CopyFiles */,
+				3678009027A100E7002A9ACC /* launchEmulator in CopyFiles */,
+				3678009C27A100E7002A9ACC /* empty.2mg in CopyFiles */,
+				3678009427A100E7002A9ACC /* orca-asm in CopyFiles */,
+				3678008C27A100E7002A9ACC /* createDiskImage in CopyFiles */,
+				3678009E27A100E7002A9ACC /* tar in CopyFiles */,
+				3678008A27A100E7002A9ACC /* config.txt in CopyFiles */,
+				3678008527A100E7002A9ACC /* main.rez in CopyFiles */,
+				3678008E27A100E7002A9ACC /* head.mk in CopyFiles */,
+				3678009627A100E7002A9ACC /* orca-cc in CopyFiles */,
+				367800A327A100E7002A9ACC /* WordleGS.xcscheme in CopyFiles */,
+				3678009A27A100E7002A9ACC /* system601.2mg in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3678007527A100E7002A9ACC /* WordleGS */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WordleGS; sourceTree = BUILT_PRODUCTS_DIR; };
+		3678007827A100E7002A9ACC /* WordleGS.2mg */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WordleGS.2mg; sourceTree = BUILT_PRODUCTS_DIR; };
+		3678007A27A100E7002A9ACC /* WordleGS.shk */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WordleGS.shk; sourceTree = BUILT_PRODUCTS_DIR; };
+		3678007F27A100E7002A9ACC /* doNotBuild */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = doNotBuild; sourceTree = BUILT_PRODUCTS_DIR; };
+		3678008127A100E7002A9ACC /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		3678008327A100E7002A9ACC /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		3678008427A100E7002A9ACC /* main.rez */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.rez; path = main.rez; sourceTree = "<group>"; };
+		3678008627A100E7002A9ACC /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		3678008927A100E7002A9ACC /* config.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = config.txt; sourceTree = "<group>"; };
+		3678008B27A100E7002A9ACC /* createDiskImage */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = createDiskImage; sourceTree = "<group>"; };
+		3678008D27A100E7002A9ACC /* head.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = head.mk; sourceTree = "<group>"; };
+		3678008F27A100E7002A9ACC /* launchEmulator */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = launchEmulator; sourceTree = "<group>"; };
+		3678009127A100E7002A9ACC /* md2teach */ = {isa = PBXFileReference; lastKnownFileType = file; path = md2teach; sourceTree = "<group>"; };
+		3678009327A100E7002A9ACC /* orca-asm */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "orca-asm"; sourceTree = "<group>"; };
+		3678009527A100E7002A9ACC /* orca-cc */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "orca-cc"; sourceTree = "<group>"; };
+		3678009727A100E7002A9ACC /* orca-rez */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "orca-rez"; sourceTree = "<group>"; };
+		3678009927A100E7002A9ACC /* system601.2mg */ = {isa = PBXFileReference; lastKnownFileType = file; path = system601.2mg; sourceTree = "<group>"; };
+		3678009B27A100E7002A9ACC /* empty.2mg */ = {isa = PBXFileReference; lastKnownFileType = file; path = empty.2mg; sourceTree = "<group>"; };
+		3678009D27A100E7002A9ACC /* tar */ = {isa = PBXFileReference; lastKnownFileType = file; path = tar; sourceTree = "<group>"; };
+		3678009F27A100E7002A9ACC /* tail.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = tail.mk; sourceTree = "<group>"; };
+		367800A227A100E7002A9ACC /* WordleGS.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = WordleGS.xcscheme; path = ../../WordleGS.xcodeproj/xcshareddata/xcschemes/WordleGS.xcscheme; sourceTree = "<group>"; };
+		36B5FEFE27A3A06D0097B2BD /* wgs_game_model.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wgs_game_model.c; sourceTree = "<group>"; };
+		36B5FEFF27A3A06D0097B2BD /* wgs_dictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wgs_dictionary.c; sourceTree = "<group>"; };
+		36B5FF0127A3A06D0097B2BD /* dictionary.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dictionary.txt; sourceTree = "<group>"; };
+		36B5FF0227A3A06D0097B2BD /* secrets.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = secrets.txt; sourceTree = "<group>"; };
+		36B5FF0327A3A06D0097B2BD /* wgs_about_dialog.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wgs_about_dialog.c; sourceTree = "<group>"; };
+		36B5FF0427A3A06D0097B2BD /* wgs_game_entities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wgs_game_entities.h; sourceTree = "<group>"; };
+		36B5FF0627A3A06D0097B2BD /* wgs_about_dialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wgs_about_dialog.h; sourceTree = "<group>"; };
+		36B5FF0727A3A06D0097B2BD /* wgs_app_window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wgs_app_window.h; sourceTree = "<group>"; };
+		36B5FF0827A3A06D0097B2BD /* wgs_game_over_dialog.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wgs_game_over_dialog.c; sourceTree = "<group>"; };
+		36B5FF0A27A3A06D0097B2BD /* wgs_dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wgs_dictionary.h; sourceTree = "<group>"; };
+		36B5FF0B27A3A06D0097B2BD /* wgs_game_entities.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wgs_game_entities.c; sourceTree = "<group>"; };
+		36B5FF0C27A3A06D0097B2BD /* wgs_game_model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wgs_game_model.h; sourceTree = "<group>"; };
+		36B5FF0D27A3A06D0097B2BD /* wgs_game_over_dialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wgs_game_over_dialog.h; sourceTree = "<group>"; };
+		36B5FF0E27A3A06D0097B2BD /* wgs_render_system.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wgs_render_system.c; sourceTree = "<group>"; };
+		36B5FF0F27A3A06D0097B2BD /* wgs_render_system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wgs_render_system.h; sourceTree = "<group>"; };
+		36B5FF1027A3A06D0097B2BD /* wgs_app_window.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wgs_app_window.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3678007C27A100E7002A9ACC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3678006E27A100E7002A9ACC = {
+			isa = PBXGroup;
+			children = (
+				3678008027A100E7002A9ACC /* WordleGS */,
+				3678007627A100E7002A9ACC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3678007627A100E7002A9ACC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3678007527A100E7002A9ACC /* WordleGS */,
+				3678007827A100E7002A9ACC /* WordleGS.2mg */,
+				3678007A27A100E7002A9ACC /* WordleGS.shk */,
+				3678007F27A100E7002A9ACC /* doNotBuild */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3678008027A100E7002A9ACC /* WordleGS */ = {
+			isa = PBXGroup;
+			children = (
+				3678008327A100E7002A9ACC /* main.h */,
+				3678008127A100E7002A9ACC /* main.c */,
+				36B5FF0627A3A06D0097B2BD /* wgs_about_dialog.h */,
+				36B5FF0327A3A06D0097B2BD /* wgs_about_dialog.c */,
+				36B5FF0727A3A06D0097B2BD /* wgs_app_window.h */,
+				36B5FF1027A3A06D0097B2BD /* wgs_app_window.c */,
+				36B5FF0A27A3A06D0097B2BD /* wgs_dictionary.h */,
+				36B5FEFF27A3A06D0097B2BD /* wgs_dictionary.c */,
+				36B5FF0427A3A06D0097B2BD /* wgs_game_entities.h */,
+				36B5FF0B27A3A06D0097B2BD /* wgs_game_entities.c */,
+				36B5FF0C27A3A06D0097B2BD /* wgs_game_model.h */,
+				36B5FEFE27A3A06D0097B2BD /* wgs_game_model.c */,
+				36B5FF0D27A3A06D0097B2BD /* wgs_game_over_dialog.h */,
+				36B5FF0827A3A06D0097B2BD /* wgs_game_over_dialog.c */,
+				36B5FF0F27A3A06D0097B2BD /* wgs_render_system.h */,
+				36B5FF0E27A3A06D0097B2BD /* wgs_render_system.c */,
+				36B5FF0027A3A06D0097B2BD /* data */,
+				3678008427A100E7002A9ACC /* main.rez */,
+				3678008627A100E7002A9ACC /* Makefile */,
+				3678008827A100E7002A9ACC /* make */,
+				367800A127A100E7002A9ACC /* Supporting Files */,
+			);
+			path = WordleGS;
+			sourceTree = "<group>";
+		};
+		3678008827A100E7002A9ACC /* make */ = {
+			isa = PBXGroup;
+			children = (
+				3678008927A100E7002A9ACC /* config.txt */,
+				3678008B27A100E7002A9ACC /* createDiskImage */,
+				3678008D27A100E7002A9ACC /* head.mk */,
+				3678008F27A100E7002A9ACC /* launchEmulator */,
+				3678009127A100E7002A9ACC /* md2teach */,
+				3678009327A100E7002A9ACC /* orca-asm */,
+				3678009527A100E7002A9ACC /* orca-cc */,
+				3678009727A100E7002A9ACC /* orca-rez */,
+				3678009927A100E7002A9ACC /* system601.2mg */,
+				3678009B27A100E7002A9ACC /* empty.2mg */,
+				3678009D27A100E7002A9ACC /* tar */,
+				3678009F27A100E7002A9ACC /* tail.mk */,
+			);
+			path = make;
+			sourceTree = "<group>";
+		};
+		367800A127A100E7002A9ACC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				367800A227A100E7002A9ACC /* WordleGS.xcscheme */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		36B5FF0027A3A06D0097B2BD /* data */ = {
+			isa = PBXGroup;
+			children = (
+				36B5FF0127A3A06D0097B2BD /* dictionary.txt */,
+				36B5FF0227A3A06D0097B2BD /* secrets.txt */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		3678007327A100E7002A9ACC /* WordleGS */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "-C WordleGS $(ACTION)";
+			buildConfigurationList = 367800A627A100E7002A9ACC /* Build configuration list for PBXLegacyTarget "WordleGS" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			dependencies = (
+			);
+			name = WordleGS;
+			passBuildSettingsInEnvironment = 1;
+			productName = WordleGS;
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXNativeTarget section */
+		3678007427A100E7002A9ACC /* Binary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 367800A927A100E7002A9ACC /* Build configuration list for PBXNativeTarget "Binary" */;
+			buildPhases = (
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Binary;
+			productName = Binary;
+			productReference = 3678007527A100E7002A9ACC /* WordleGS */;
+			productType = "com.apple.product-type.tool";
+		};
+		3678007727A100E7002A9ACC /* DiskImage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 367800AC27A100E7002A9ACC /* Build configuration list for PBXNativeTarget "DiskImage" */;
+			buildPhases = (
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DiskImage;
+			productName = DiskImage;
+			productReference = 3678007827A100E7002A9ACC /* WordleGS.2mg */;
+			productType = "com.apple.product-type.tool";
+		};
+		3678007927A100E7002A9ACC /* Archive */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 367800AF27A100E7002A9ACC /* Build configuration list for PBXNativeTarget "Archive" */;
+			buildPhases = (
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Archive;
+			productName = Archive;
+			productReference = 3678007A27A100E7002A9ACC /* WordleGS.shk */;
+			productType = "com.apple.product-type.tool";
+		};
+		3678007E27A100E7002A9ACC /* doNotBuild */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 367800B227A100E7002A9ACC /* Build configuration list for PBXNativeTarget "doNotBuild" */;
+			buildPhases = (
+				3678007B27A100E7002A9ACC /* Sources */,
+				3678007C27A100E7002A9ACC /* Frameworks */,
+				3678007D27A100E7002A9ACC /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = doNotBuild;
+			productName = doNotBuild;
+			productReference = 3678007F27A100E7002A9ACC /* doNotBuild */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3678006F27A100E7002A9ACC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					3678007327A100E7002A9ACC = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					3678007427A100E7002A9ACC = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					3678007727A100E7002A9ACC = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					3678007927A100E7002A9ACC = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					3678007E27A100E7002A9ACC = {
+						CreatedOnToolsVersion = 12.4;
+					};
+				};
+			};
+			buildConfigurationList = 3678007227A100E7002A9ACC /* Build configuration list for PBXProject "WordleGS" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3678006E27A100E7002A9ACC;
+			productRefGroup = 3678007627A100E7002A9ACC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3678007327A100E7002A9ACC /* WordleGS */,
+				3678007427A100E7002A9ACC /* Binary */,
+				3678007727A100E7002A9ACC /* DiskImage */,
+				3678007927A100E7002A9ACC /* Archive */,
+				3678007E27A100E7002A9ACC /* doNotBuild */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3678007B27A100E7002A9ACC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3678008727A100E7002A9ACC /* Makefile in Sources */,
+				3678008227A100E7002A9ACC /* main.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		367800A427A100E7002A9ACC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+			};
+			name = Debug;
+		};
+		367800A527A100E7002A9ACC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+			};
+			name = Release;
+		};
+		367800A727A100E7002A9ACC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		367800A827A100E7002A9ACC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		367800AA27A100E7002A9ACC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = WordleGS;
+			};
+			name = Debug;
+		};
+		367800AB27A100E7002A9ACC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = WordleGS;
+			};
+			name = Release;
+		};
+		367800AD27A100E7002A9ACC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = WordleGS.2mg;
+			};
+			name = Debug;
+		};
+		367800AE27A100E7002A9ACC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = WordleGS.2mg;
+			};
+			name = Release;
+		};
+		367800B027A100E7002A9ACC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = WordleGS.shk;
+			};
+			name = Debug;
+		};
+		367800B127A100E7002A9ACC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = WordleGS.shk;
+			};
+			name = Release;
+		};
+		367800B327A100E7002A9ACC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"inline(X,Y)=\"\"\n",
+					"extended=double\n",
+					"pascal=\"\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$TEMP_ROOT/WordleGS.build/$CONFIGURATION/WordleGS.build/DerivedSources\n",
+					"$GOLDEN_GATE/Libraries/ORCACDefs\n",
+					"~/Library/GoldenGate/Libraries/ORCACDefs\n",
+					"/Library/GoldenGate/Libraries/ORCACDefs\n",
+					"~/GoldenGate/Libraries/ORCACDefs",
+				);
+				PRODUCT_NAME = doNotBuild;
+			};
+			name = Debug;
+		};
+		367800B427A100E7002A9ACC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"inline(X,Y)=\"\"\n",
+					"extended=double\n",
+					"pascal=\"\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$TEMP_ROOT/WordleGS.build/$CONFIGURATION/WordleGS.build/DerivedSources\n",
+					"$GOLDEN_GATE/Libraries/ORCACDefs\n",
+					"~/Library/GoldenGate/Libraries/ORCACDefs\n",
+					"/Library/GoldenGate/Libraries/ORCACDefs\n",
+					"~/GoldenGate/Libraries/ORCACDefs",
+				);
+				PRODUCT_NAME = doNotBuild;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3678007227A100E7002A9ACC /* Build configuration list for PBXProject "WordleGS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				367800A427A100E7002A9ACC /* Debug */,
+				367800A527A100E7002A9ACC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		367800A627A100E7002A9ACC /* Build configuration list for PBXLegacyTarget "WordleGS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				367800A727A100E7002A9ACC /* Debug */,
+				367800A827A100E7002A9ACC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		367800A927A100E7002A9ACC /* Build configuration list for PBXNativeTarget "Binary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				367800AA27A100E7002A9ACC /* Debug */,
+				367800AB27A100E7002A9ACC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		367800AC27A100E7002A9ACC /* Build configuration list for PBXNativeTarget "DiskImage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				367800AD27A100E7002A9ACC /* Debug */,
+				367800AE27A100E7002A9ACC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		367800AF27A100E7002A9ACC /* Build configuration list for PBXNativeTarget "Archive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				367800B027A100E7002A9ACC /* Debug */,
+				367800B127A100E7002A9ACC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		367800B227A100E7002A9ACC /* Build configuration list for PBXNativeTarget "doNotBuild" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				367800B327A100E7002A9ACC /* Debug */,
+				367800B427A100E7002A9ACC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3678006F27A100E7002A9ACC /* Project object */;
+}
