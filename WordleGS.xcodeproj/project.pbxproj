@@ -126,6 +126,7 @@
 			children = (
 				3678008327A100E7002A9ACC /* main.h */,
 				3678008127A100E7002A9ACC /* main.c */,
+				3678008427A100E7002A9ACC /* main.rez */,
 				36B5FF0627A3A06D0097B2BD /* wgs_about_dialog.h */,
 				36B5FF0327A3A06D0097B2BD /* wgs_about_dialog.c */,
 				36B5FF0727A3A06D0097B2BD /* wgs_app_window.h */,
@@ -141,7 +142,6 @@
 				36B5FF0F27A3A06D0097B2BD /* wgs_render_system.h */,
 				36B5FF0E27A3A06D0097B2BD /* wgs_render_system.c */,
 				36B5FF0027A3A06D0097B2BD /* data */,
-				3678008427A100E7002A9ACC /* main.rez */,
 				3678008627A100E7002A9ACC /* Makefile */,
 				3678008827A100E7002A9ACC /* make */,
 				367800A127A100E7002A9ACC /* Supporting Files */,

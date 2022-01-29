@@ -195,6 +195,11 @@ wgs_game_state GetGameState(void) {
 }
 
 
+BOOLEAN IsGameInProgress(void) {
+  return game_state == InProgress && (current_guess_row > 0 || current_guess_col > 0);
+}
+
+
 int GetGuessRow(void) {
   return current_guess_row;
 }

@@ -23,13 +23,37 @@
  */
 
 #include "types.rez"
+#include "main.h"
 
-resource rAlertString (1) {
-  "43/"
-  "I don't know the word: *0\n"
+
+/* *****************************************************************************
+ * Alerts
+ * *****************************************************************************/
+
+resource rAlertString (rez_alert_UnknownWord) {
+  "33/"
+  "I don't know the word:\n"
+  "*0\n"
   "/^#0"
   $"00";
 };
+
+resource rAlertString (rez_alert_VerifyNewGame) {
+  "34/"
+  "New Game will terminate the current game.\n"
+  "/New Game"
+  "/^#1"
+  $"00";
+};
+
+resource rAlertString (rez_alert_VerifyQuitGame) {
+  "34/"
+  "Quit will terminate the current game.\n"
+  "/Quit"
+  "/^#1"
+  $"00";
+};
+
 
 resource rWindParam1 (1001) {
   $DDA5,                      /* wFrameBits */

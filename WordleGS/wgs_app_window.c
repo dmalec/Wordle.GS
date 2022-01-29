@@ -29,6 +29,7 @@
 #include <stdio.h>
 #include <time.h>
 
+#include "main.h"
 #include "wgs_app_window.h"
 #include "wgs_dictionary.h"
 #include "wgs_game_entities.h"
@@ -67,6 +68,15 @@ void InvalidateWindow(void) {
 
 void HandleNewGame(void) {
   char word[16];
+  Word alert_result;
+
+  if (IsGameInProgress()) {
+    alert_result = AlertWindow(awResource, NULL, rez_alert_VerifyNewGame);
+    if (alert_result == rez_alert_VerifyNewGame_Cancel) {
+      return;
+    }
+  }
+
   announce_status = NoAnnouncement;
 
   ResetLetterGuessEntities();
@@ -95,7 +105,7 @@ void HandleKeyPress (EventRecord event)
     
     if (status == InvalidWord) {
       char *guess_word = GetGuessWord();
-      AlertWindow(awCString+awResource, (Pointer) &guess_word, 1);
+      AlertWindow(awCString+awResource, (Pointer) &guess_word, rez_alert_UnknownWord);
       manual_update_needed = false;
     }
   }

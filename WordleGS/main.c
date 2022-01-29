@@ -37,6 +37,7 @@
 
 #include "wgs_app_window.h"
 #include "wgs_game_entities.h"
+#include "wgs_game_model.h"
 #include "wgs_render_system.h"
 #include "wgs_about_dialog.h"
 #include "wgs_dictionary.h"
@@ -46,12 +47,26 @@ EventRecord my_event;
 int menu_num, menu_item_num;
 
 
+void HandleQuitGame(void) {
+  Word alert_result;
+
+  if (IsGameInProgress()) {
+    alert_result = AlertWindow(awResource, NULL, rez_alert_VerifyQuitGame);
+    if (alert_result == rez_alert_VerifyNewGame_Cancel) {
+      return;
+    }
+  }
+
+  done = TRUE;
+}
+
+
 void HandleMenu (void) {
   int i;
   
   switch (menu_item_num) {
     case file_Quit:
-      done = TRUE;
+      HandleQuitGame();
       break;
       
     case 255:
