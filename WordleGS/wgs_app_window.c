@@ -203,7 +203,7 @@ void AppTick(void) {
 GrafPortPtr CreateAppWindow(void) {
   offscreen_graf_port = GetRenderSystemOffscreen();
   
-  app_graf_port = NewWindow2("\pWordleGS", 0, DrawContents, NULL, 0x02, 1001, rWindParam1);
+  app_graf_port = NewWindow2("\pWordleGS", 0, DrawContents, NULL, 0x02, rez_window_Wordle, rWindParam1);
 
   return app_graf_port;
 }
