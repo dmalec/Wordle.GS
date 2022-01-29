@@ -25,6 +25,19 @@
 #ifndef _____PROJECTNAMEASIDENTIFIER________FILEBASENAMEASIDENTIFIER_____
 #define _____PROJECTNAMEASIDENTIFIER________FILEBASENAMEASIDENTIFIER_____
 
+/* *****************************************************************************
+ * Alerts
+ * *****************************************************************************/
+
+#define rez_alert_UnknownWord                   1001
+
+#define rez_alert_VerifyNewGame                 1002
+#define rez_alert_VerifyNewGame_Cancel             1
+
+#define rez_alert_VerifyQuitGame                1003
+#define rez_alert_VerifyNewGame_Cancel             1
+
+
 #define file_Quit       256
 
 #endif /* defined(_____PROJECTNAMEASIDENTIFIER________FILEBASENAMEASIDENTIFIER_____) */
