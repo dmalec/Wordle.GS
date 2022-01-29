@@ -109,6 +109,7 @@ void RemoveLetterFromGuess(void) {
 wgs_guess_status GuessCurrentWord(void) {
   int i, letter_index;
   int matches = 0;
+  char tmp_secret[5];
   char c;
   
   if (current_guess_col < 5) return WordFilled;
@@ -118,25 +119,43 @@ wgs_guess_status GuessCurrentWord(void) {
   if (!IsValidGuess(guesses[current_guess_row])) return InvalidWord;
   
   for (i=0; i<5; i++) {
+    // Mark matches in advance - this will help with properly
+    // marking misplaced versus incorrect letters later.
+    if (guesses[current_guess_row][i] == secret_word[i]) {
+      tmp_secret[i] = '+';
+    } else {
+      tmp_secret[i] = secret_word[i];
+    }
+  }
+
+  for (i=0; i<5; i++) {
     c = guesses[current_guess_row][i];
     letter_index = c - 'A';
     
-    if (c == secret_word[i]) {
+    if (tmp_secret[i] == '+') {
       letter_guesses[letter_index] = Correct;
       guess_square_status[current_guess_row][i] = Correct;
       wgs_letter_guess_entities[current_guess_row][i].state = CorrectGuess;
       UpdateLetterKey(c, CorrectKey);
       matches++;
-    } else if (ContainsLetter(c)) {
-      letter_guesses[letter_index] = WrongPlace;
-      guess_square_status[current_guess_row][i] = WrongPlace;
-      wgs_letter_guess_entities[current_guess_row][i].state = WrongPlaceGuess;
-      UpdateLetterKey(c, WrongPlaceKey);
     } else {
-      letter_guesses[letter_index] = UnusedLetter;
-      guess_square_status[current_guess_row][i] = UnusedLetter;
-      wgs_letter_guess_entities[current_guess_row][i].state = IncorrectGuess;
-      UpdateLetterKey(c, IncorrectKey);
+      int letter_idx = IndexOfLetter(tmp_secret, c);
+
+      if (letter_idx >= 0) {
+        letter_guesses[letter_index] = WrongPlace;
+        guess_square_status[current_guess_row][i] = WrongPlace;
+        wgs_letter_guess_entities[current_guess_row][i].state = WrongPlaceGuess;
+        UpdateLetterKey(c, WrongPlaceKey);
+
+        // Clear the letter, so it won't be double counted
+        // if it appears again in the guess.
+        tmp_secret[letter_idx] = ' ';
+      } else {
+        letter_guesses[letter_index] = UnusedLetter;
+        guess_square_status[current_guess_row][i] = UnusedLetter;
+        wgs_letter_guess_entities[current_guess_row][i].state = IncorrectGuess;
+        UpdateLetterKey(c, IncorrectKey);
+      }
     }
     
     wgs_letter_guess_entities[current_guess_row][i].image_state = ImageDirty;
@@ -207,14 +226,14 @@ int GetGuessNumberWon(int guess_num) {
   return stats[guess_num];
 }
 
-int ContainsLetter(char letter) {
+int IndexOfLetter(char* word, char letter) {
   int i;
   
   for (i=0; i<5; i++) {
-    if (secret_word[i] == letter) {
-      return 1;
+    if (word[i] == letter) {
+      return i;
     }
   }
   
-  return 0;
+  return -1;
 }

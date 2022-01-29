@@ -53,6 +53,6 @@ void NewSecretWord(char *word);
 int GetGamesWon(void);
 int GetGuessNumberWon(int guess_num);
 
-int ContainsLetter(char letter);
+int IndexOfLetter(char* word, char letter);
 
 #endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_model_ */
