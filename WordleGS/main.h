@@ -39,6 +39,24 @@
 #define rez_alert_VerifyQuitGame                1004
 #define rez_alert_VerifyNewGame_Cancel             1
 
+/* *****************************************************************************
+ * Windows
+ * *****************************************************************************/
+
+#define rez_window_Wordle                       1001
+
+#define rez_window_GameOver                     1101
+
+#define rez_window_GameOver_ControlList         1101
+
+#define rez_window_GameOver_NewGameButton       1101
+#define rez_window_GameOver_NewGameButtonId        1
+#define rez_window_GameOver_NewGameButtonTitle  1101
+
+#define rez_window_GameOver_CloseButton         1102
+#define rez_window_GameOver_CloseButtonId          2
+#define rez_window_GameOver_CloseButtonTitle    1102
+
 
 #define file_Quit       256
 

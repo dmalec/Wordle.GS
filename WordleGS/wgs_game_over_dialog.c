@@ -27,6 +27,7 @@
 #include <resources.h>
 #include <window.h>
 
+#include "main.h"
 #include "wgs_game_over_dialog.h"
 #include "wgs_game_model.h"
 
@@ -110,17 +111,17 @@ wgs_game_over_response HandleGameOverDialog(void) {
   EventRecord dlg_event;
   LongWord dlg_part;
 
-  game_over_dialog_ptr = NewWindow2("\pGame Over", 0, GameOverDialogDrawContents, NULL, 0x02, 1002, rWindParam1);
+  game_over_dialog_ptr = NewWindow2("\pGame Over", 0, GameOverDialogDrawContents, NULL, 0x02, rez_window_GameOver, rWindParam1);
   if (game_over_dialog_ptr == NULL) return;
   
   do {
     dlg_part = DoModalWindow(&dlg_event, NULL, NULL, NULL, 0x401E);
-  } while (dlg_part != 1 && dlg_part != 2);
+  } while (dlg_part != rez_window_GameOver_NewGameButtonId && dlg_part != rez_window_GameOver_CloseButtonId);
   
   InitCursor();
   CloseWindow(game_over_dialog_ptr);
   
-  if (dlg_part == 1) {
+  if (dlg_part == rez_window_GameOver_NewGameButtonId) {
     return NewGameRequested;
   } else {
     return CloseGameOver;

@@ -31,8 +31,10 @@
  * *****************************************************************************/
 
 resource rAlertString (rez_alert_About) {
-  "90/"
-  "WORDLE GS v0.1\n"
+  "9"                                               /* size */
+  "0"                                               /* icon */
+  "/"                                               /* divider */
+  "WORDLE GS v0.1\n"                                /* begin text */
   "by Dan Malec\n"
   "\n"
   "Based on WORDLE\n"
@@ -43,107 +45,123 @@ resource rAlertString (rez_alert_About) {
   "\n"
   "Built using:\n"
   "Golden Gate by Kelvin Sherlock\n"
-  "Apple2GSBuildPipeline by Jeremy Rand\n"
-  "/^#0"
-  $"00";
+  "Apple2GSBuildPipeline by Jeremy Rand\n"          /* end text */
+  "/"                                               /* divider */
+  "^#0"                                             /* button */
+  $"00";                                            /* terminator */
 };
 
 resource rAlertString (rez_alert_UnknownWord) {
-  "33/"
-  "I don't know the word:\n"
-  "*0\n"
-  "/^#0"
-  $"00";
+  "3"                                               /* size */
+  "3"                                               /* icon */
+  "/"                                               /* divider */
+  "I don't know the word:\n"                        /* text */
+  "*0\n"                                            /* substitution text */
+  "/"                                               /* divider */
+  "^#0"                                             /* button */
+  $"00";                                            /* terminator */
 };
 
 resource rAlertString (rez_alert_VerifyNewGame) {
-  "34/"
-  "New Game will terminate the current game.\n"
-  "/New Game"
-  "/^#1"
-  $"00";
+  "3"                                               /* size */
+  "4"                                               /* icon */
+  "/"                                               /* divider */
+  "New Game will terminate the current game.\n"     /* text */
+  "/"                                               /* divider */
+  "New Game"                                        /* button */
+  "/"                                               /* divider */
+  "^#1"                                             /* button */
+  $"00";                                            /* terminator */
 };
 
 resource rAlertString (rez_alert_VerifyQuitGame) {
-  "34/"
-  "Quit will terminate the current game.\n"
-  "/Quit"
-  "/^#1"
-  $"00";
+  "3"                                               /* size */
+  "4"                                               /* icon */
+  "/"                                               /* divider */
+  "Quit will terminate the current game.\n"         /* text */
+  "/"                                               /* divider */
+  "Quit"                                            /* button */
+  "/"                                               /* divider */
+  "^#1"                                             /* button */
+  $"00";                                            /* terminator */
 };
 
 
-resource rWindParam1 (1001) {
-  $DDA5,                      /* wFrameBits */
-  nil,                        /* wTitle */
-  0,                          /* wRefCon */
-  {0,0,0,0},                  /* ZoomRect */
-  nil,                        /* wColor ID */
-  {0,0},                      /* Origin */
-  {1,1},                      /* data size */
-  {0,0},                      /* max height-width */
-  {8,8},                      /* scroll ver hors */
-  {0,0},                      /* page ver horiz */
-  0,                          /* winfoRefcon */
-  0,                          /* wInfoHeight */
-  {0,0,200,320},              /* wposition */
-  infront,                    /* wPlane */
-  nil,                        /* wStorage */
-  $0000                       /* wInVerb */
+/* *****************************************************************************
+ * Windows
+ * *****************************************************************************/
+
+resource rWindParam1 (rez_window_Wordle) {
+  $DDA5,                                            /* wFrameBits */
+  nil,                                              /* wTitle */
+  0,                                                /* wRefCon */
+  {0,0,0,0},                                        /* ZoomRect */
+  nil,                                              /* wColor ID */
+  {0,0},                                            /* Origin */
+  {1,1},                                            /* data size */
+  {0,0},                                            /* max height-width */
+  {8,8},                                            /* scroll ver hors */
+  {0,0},                                            /* page ver horiz */
+  0,                                                /* winfoRefcon */
+  0,                                                /* wInfoHeight */
+  {0,0,200,320},                                    /* wposition */
+  infront,                                          /* wPlane */
+  nil,                                              /* wStorage */
+  $0000                                             /* wInVerb */
 };
 
-resource rWindParam1 (1002) {
-  $2028,                      /* wFrameBits */
-  nil,                        /* wTitle */
-  0,                          /* wRefCon */
-  {0,0,0,0},                  /* ZoomRect */
-  nil,                        /* wColor ID */
-  {0,0},                      /* Origin */
-  {1,1},                      /* data size */
-  {0,0},                      /* max height-width */
-  {0,0},                      /* scroll ver hors */
-  {0,0},                      /* page ver horiz */
-  0,                          /* winfoRefcon */
-  0,                          /* wInfoHeight */
-  {33,20,180,300},            /* wposition */
-  infront,                    /* wPlane */
-  1001,                       /* wStorage */
-  $0809                       /* wInVerb */
+resource rWindParam1 (rez_window_GameOver) {
+  $2028,                                            /* wFrameBits */
+  nil,                                              /* wTitle */
+  0,                                                /* wRefCon */
+  {0,0,0,0},                                        /* ZoomRect */
+  nil,                                              /* wColor ID */
+  {0,0},                                            /* Origin */
+  {1,1},                                            /* data size */
+  {0,0},                                            /* max height-width */
+  {0,0},                                            /* scroll ver hors */
+  {0,0},                                            /* page ver horiz */
+  0,                                                /* winfoRefcon */
+  0,                                                /* wInfoHeight */
+  {33,20,180,300},                                  /* wposition */
+  infront,                                          /* wPlane */
+  rez_window_GameOver_ControlList,                  /* wStorage */
+  $0809                                             /* wInVerb */
 };
 
-resource rControlTemplate (1001) {
-  1,
-  {126,180,0,0},
-  SimpleButtonControl {{
-    $0001,
-    $3002,
-    0,
-    1001,
-    0,
-    {"\$0D","\$0D",0,0}
-  }};
-};
-
-resource rPString (1001) {"New Game"};
-
-resource rControlTemplate (1002) {
-  2,
-  {126,100,0,0},
-  SimpleButtonControl {{
-    $0000,
-    $3002,
-    0,
-    1002,
-    0,
-    {"\$1B","\$1B",0,0}
-  }};
-};
-
-resource rPString (1002) {"Close"};
-
-resource rControlList (1001) {
+resource rControlList (rez_window_GameOver_ControlList) {
   {
-    1001,
-    1002
+    rez_window_GameOver_NewGameButton,
+    rez_window_GameOver_CloseButton
   }
 };
+
+resource rControlTemplate (rez_window_GameOver_NewGameButton) {
+  rez_window_GameOver_NewGameButtonId,              /* control ID */
+  {126,180,0,0},                                    /* control Rect */
+  SimpleButtonControl {{
+    $0001,                                          /* flags */
+    $3002,                                          /* more flags */
+    0,                                              /* refcon */
+    rez_window_GameOver_NewGameButtonTitle,         /* Title Ref */
+    0,                                              /* color table ref */
+    {"\$0D","\$0D",0,0}                             /* key equivalents */
+  }};
+};
+
+resource rPString (rez_window_GameOver_NewGameButtonTitle) {"New Game"};
+
+resource rControlTemplate (rez_window_GameOver_CloseButton) {
+  rez_window_GameOver_CloseButtonId,                /* control ID */
+  {126,100,0,0},                                    /* control Rect */
+  SimpleButtonControl {{
+    $0000,                                          /* flags */
+    $3002,                                          /* more flags */
+    0,                                              /* refcon */
+    rez_window_GameOver_CloseButtonTitle,           /* Title Ref */
+    0,                                              /* color table ref */
+    {"\$1B","\$1B",0,0}                             /* key equivalents */
+  }};
+};
+
+resource rPString (rez_window_GameOver_CloseButtonTitle) {"Close"};
