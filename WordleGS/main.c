@@ -39,12 +39,16 @@
 #include "wgs_game_entities.h"
 #include "wgs_game_model.h"
 #include "wgs_render_system.h"
-#include "wgs_about_dialog.h"
 #include "wgs_dictionary.h"
 
 BOOLEAN done;
 EventRecord my_event;
 int menu_num, menu_item_num;
+
+
+void HandleAboutDialog(void) {
+  AlertWindow(awResource, NULL, rez_alert_About);
+}
 
 
 void HandleQuitGame(void) {

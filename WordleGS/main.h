@@ -29,12 +29,14 @@
  * Alerts
  * *****************************************************************************/
 
-#define rez_alert_UnknownWord                   1001
+#define rez_alert_About                         1001
 
-#define rez_alert_VerifyNewGame                 1002
+#define rez_alert_UnknownWord                   1002
+
+#define rez_alert_VerifyNewGame                 1003
 #define rez_alert_VerifyNewGame_Cancel             1
 
-#define rez_alert_VerifyQuitGame                1003
+#define rez_alert_VerifyQuitGame                1004
 #define rez_alert_VerifyNewGame_Cancel             1
 
 

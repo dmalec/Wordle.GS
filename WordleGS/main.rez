@@ -30,6 +30,24 @@
  * Alerts
  * *****************************************************************************/
 
+resource rAlertString (rez_alert_About) {
+  "90/"
+  "WORDLE GS v0.1\n"
+  "by Dan Malec\n"
+  "\n"
+  "Based on WORDLE\n"
+  "by Josh Wardle\n"
+  "\n"
+  "Contains libraries from ORCA C,\n"
+  "Copyright 1991, Byte Works Inc.\n"
+  "\n"
+  "Built using:\n"
+  "Golden Gate by Kelvin Sherlock\n"
+  "Apple2GSBuildPipeline by Jeremy Rand\n"
+  "/^#0"
+  $"00";
+};
+
 resource rAlertString (rez_alert_UnknownWord) {
   "33/"
   "I don't know the word:\n"
@@ -127,72 +145,5 @@ resource rControlList (1001) {
   {
     1001,
     1002
-  }
-};
-
-resource rWindParam1 (1101) {
-  $2028,                      /* wFrameBits */
-  nil,                        /* wTitle */
-  0,                          /* wRefCon */
-  {0,0,0,0},                  /* ZoomRect */
-  nil,                        /* wColor ID */
-  {0,0},                      /* Origin */
-  {1,1},                      /* data size */
-  {0,0},                      /* max height-width */
-  {0,0},                      /* scroll ver hors */
-  {0,0},                      /* page ver horiz */
-  0,                          /* winfoRefcon */
-  0,                          /* wInfoHeight */
-  {33,20,180,300},            /* wposition */
-  infront,                    /* wPlane */
-  1101,                       /* wStorage */
-  $0809                       /* wInVerb */
-};
-
-resource rControlTemplate (1101) {
-  1,
-  {126,226,0,0},
-  SimpleButtonControl {{
-    $0001,
-    $3002,
-    0,
-    1101,
-    0,
-    {"\$0D","\$0D",0,0}
-  }};
-};
-
-resource rPString (1101) {"OK"};
-
-resource rControlTemplate (1102) {
-  2,
-  {5,5,200,300},
-  statTextControl {{
-    $0000,
-    $1002,
-    0,
-    1102
-  }};
-};
-
-resource rTextForLETextBox2 (1102) {
-  "WORDLE GS v0.1\n"
-  "by Dan Malec\n"
-  "\n"
-  "Based on WORDLE\n"
-  "by Josh Wardle\n"
-  "\n"
-  "Contains libraries from ORCA C,\n"
-  "Copyright 1991, Byte Works Inc.\n"
-  "\n"
-  "Built using:\n"
-  "Golden Gate by Kelvin Sherlock\n"
-  "Apple2GSBuildPipeline by Jeremy Rand\n"
-};
-
-resource rControlList (1101) {
-  {
-    1101,
-    1102
   }
 };
