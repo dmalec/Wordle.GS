@@ -2,6 +2,24 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/danmalec/Documents/IIGS/Wordle.GS/WordleGS/wgs_app_window.h">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/danmalec/Documents/IIGS/Wordle.GS/WordleGS/wgs_dictionary.h">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/danmalec/Documents/IIGS/Wordle.GS/WordleGS/wgs_game_entities.h">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/danmalec/Documents/IIGS/Wordle.GS/WordleGS/wgs_game_model.h">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/danmalec/Documents/IIGS/Wordle.GS/WordleGS/wgs_game_over_dialog.h">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/danmalec/Documents/IIGS/Wordle.GS/WordleGS/wgs_render_system.h">
+   </FileRef>
+   <FileRef
       location = "self:">
    </FileRef>
 </Workspace>
