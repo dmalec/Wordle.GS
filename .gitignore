@@ -53,3 +53,5 @@ dkms.conf
 
 # OSX
 .DS_Store
+WordleGS.xcodeproj/project.xcworkspace/xcuserdata/
+WordleGS.xcodeproj/xcuserdata/
