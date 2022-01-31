@@ -55,3 +55,7 @@ dkms.conf
 .DS_Store
 WordleGS.xcodeproj/project.xcworkspace/xcuserdata/
 WordleGS.xcodeproj/xcuserdata/
+
+# Emacs
+*~
+\#*\#

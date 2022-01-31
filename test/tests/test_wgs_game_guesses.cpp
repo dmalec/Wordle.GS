@@ -22,19 +22,25 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEwgs_dictionary_
-#define _GUARD_PROJECTWordleGS_FILEwgs_dictionary_
+#include "CppUTest/TestHarness.h"
 
-#include <types.h>
+extern "C" {
+#include "wgs_game_guesses.h"
+}
 
-/* Lifecycle Methods */
 
-void Dictionary_Create(void);
-void Dictionary_Destroy(void);
+TEST_GROUP(GameGuesses) {
+};
 
-/* Gameplay Methods */
 
-BOOLEAN IsValidGuess(char *word);
-void GetRandomWord(char *buffer);
+TEST(GameGuesses, CreateSetsState) {
+  GameGuesses_Create();
 
-#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_dictionary_ */
+  for (char letter='A'; letter<='Z'; letter++) {
+    wgs_letter_state state = GameGuesses_GetLetterStatus(letter);
+
+    LONGS_EQUAL(letter, state.letter);
+    ENUMS_EQUAL_INT(gtUnusedLetter, state.status);
+    LONGS_EQUAL(TRUE, state.changed);
+  }
+}

@@ -22,19 +22,28 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEwgs_dictionary_
-#define _GUARD_PROJECTWordleGS_FILEwgs_dictionary_
+#ifndef _GUARD_PROJECTWordleGS_FILEwgs_game_types_
+#define _GUARD_PROJECTWordleGS_FILEwgs_game_types_
 
 #include <types.h>
 
-/* Lifecycle Methods */
+#define WGS_GAME_GUESSES_NUMBER_OF_ROWS       6
+#define WGS_GAME_GUESSES_NUMBER_OF_COLS       5
 
-void Dictionary_Create(void);
-void Dictionary_Destroy(void);
+#define WGS_GAME_GUESSES_NUMBER_OF_LETTERS   26
 
-/* Gameplay Methods */
 
-BOOLEAN IsValidGuess(char *word);
-void GetRandomWord(char *buffer);
+typedef enum {
+  gtUnusedLetter,
+  gtCorrectLetter,
+  gtWrongPlaceLetter,
+  gtIncorrectLetter
+} wgs_letter_status;
 
-#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_dictionary_ */
+typedef struct wgs_letter_state {
+  char letter;
+  wgs_letter_status status;
+  BOOLEAN changed;
+} wgs_letter_state;
+
+#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_types_ */

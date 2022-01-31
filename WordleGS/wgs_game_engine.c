@@ -25,12 +25,20 @@
 #include "wgs_game_engine.h"
 
 #include "wgs_dictionary.h"
+#include "wgs_game_guesses.h"
 
-void CreateGameEngine(void) {
-  CreateDictionary();
+void GameEngine_Create(void) {
+  Dictionary_Create();
+  GameGuesses_Create();
 }
 
 
-void DestroyGameEngine(void) {
-  DestroyDictionary();
+void GameEngine_NewGame(void) {
+  GameGuesses_NewGame();
+}
+
+
+void GameEngine_Destroy(void) {
+  Dictionary_Destroy();
+  GameGuesses_Destroy();
 }

@@ -22,19 +22,8 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEwgs_dictionary_
-#define _GUARD_PROJECTWordleGS_FILEwgs_dictionary_
+#include "CppUTest/CommandLineTestRunner.h"
 
-#include <types.h>
-
-/* Lifecycle Methods */
-
-void Dictionary_Create(void);
-void Dictionary_Destroy(void);
-
-/* Gameplay Methods */
-
-BOOLEAN IsValidGuess(char *word);
-void GetRandomWord(char *buffer);
-
-#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_dictionary_ */
+int main(int ac, char** av) {
+  return CommandLineTestRunner::RunAllTests(ac, av);
+}

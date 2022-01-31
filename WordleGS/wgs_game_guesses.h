@@ -22,19 +22,31 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEwgs_dictionary_
-#define _GUARD_PROJECTWordleGS_FILEwgs_dictionary_
+#ifndef _GUARD_PROJECTWordleGS_FILEwgs_game_guesses_
+#define _GUARD_PROJECTWordleGS_FILEwgs_game_guesses_
 
-#include <types.h>
+#include "wgs_game_types.h"
 
 /* Lifecycle Methods */
 
-void Dictionary_Create(void);
-void Dictionary_Destroy(void);
+void GameGuesses_Create(void);
+void GameGuesses_NewGame(void);
+void GameGuesses_Destroy(void);
 
-/* Gameplay Methods */
 
-BOOLEAN IsValidGuess(char *word);
-void GetRandomWord(char *buffer);
+/* Game Methods */
 
-#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_dictionary_ */
+void GameGuesses_AddLetterToGuess(char letter);
+void GameGuesses_RemoveLetterFromGuess(void);
+void GameGuesses_SubmitGuess(void);
+
+
+/* Accessors */
+
+int GameGuesses_GetRow(void);
+int GameGuesses_GetCol(void);
+
+wgs_letter_state GameGuesses_GetGuessLetterStatus(int row, int col);
+wgs_letter_state GameGuesses_GetLetterStatus(char c);
+
+#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_guesses_ */

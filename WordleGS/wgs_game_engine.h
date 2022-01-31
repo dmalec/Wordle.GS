@@ -27,8 +27,9 @@
 
 /* Lifecycle Methods */
 
-void CreateGameEngine(void);
-void DestroyGameEngine(void);
+void GameEngine_Create(void);
+void GameEngine_NewGame(void);
+void GameEngine_Destroy(void);
 
 
 

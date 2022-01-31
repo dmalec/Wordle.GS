@@ -144,7 +144,7 @@ int main (void) {
   
   CreateLetterGuessEntities();
   CreateLetterKeyEntites();
-  CreateGameEngine();
+  GameEngine_Create();
   CreateRenderSystem();
   
   CreateAppWindow();
@@ -175,7 +175,7 @@ int main (void) {
     AppTick();
   }
   
-  DestroyGameEngine();
+  GameEngine_Destroy();
   
   enddesk();
 }

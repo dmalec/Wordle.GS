@@ -128,7 +128,7 @@ void LoadFile(GSString255 *file_name, Handle *file_handle, LongWord *file_length
 #define SECRETS_FILENAME "secrets.txt"
 
 
-void CreateDictionary(void) {
+void Dictionary_Create(void) {
   GSString255 file_name;
   LongWord file_length;
   int i;
@@ -151,7 +151,7 @@ void CreateDictionary(void) {
 }
 
 
-void DestroyDictionary(void) {
+void Dictionary_Destroy(void) {
   if (wgs_dictionary_handle != NULL) {
     DisposeHandle(wgs_dictionary_handle);
   }
