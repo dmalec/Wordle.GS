@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-#include <gsos.h>
-#include <memory.h>
-#include <stdio.h>
-
 #include "wgs_dictionary.h"
 
+#include <gsos.h>
+#include <memory.h>
+#include <misctool.h>
+#include <stdio.h>
 
 LongWord wgs_dictionary_list_count = 0;
 Handle wgs_dictionary_handle;
@@ -73,13 +73,12 @@ BOOLEAN DoesListContainWord(LongWord list_len, char *list, char *word) {
 }
 
 
-
 void LoadFile(GSString255 *file_name, Handle *file_handle, LongWord *file_length) {
   BOOLEAN success = TRUE;
   OpenRecGS open_file_rec;
   Handle file_contents = NULL;
   IORecGS read_file_rec;
-  RefNumRecGS close_file_rev;
+  RefNumRecGS close_file_rec;
 
   *file_handle = NULL;
   *file_length = 0;
@@ -91,13 +90,15 @@ void LoadFile(GSString255 *file_name, Handle *file_handle, LongWord *file_length
   open_file_rec.optionList = NULL;
   OpenGS(&open_file_rec);
   if (toolerror() != 0) {
-    SysBeep(); //FlagError(4, toolerror());
+    // TODO: Handle error appropriately
+    SysBeep();
     return;
   }
   
   file_contents = NewHandle(open_file_rec.eof, userid(), 0xC010, NULL);
   if (toolerror() != 0) {
-    SysBeep(); SysBeep(); //FlagError(4, toolerror());
+    // TODO: Handle error appropriately
+    SysBeep();
     return;
   }
   
@@ -107,16 +108,17 @@ void LoadFile(GSString255 *file_name, Handle *file_handle, LongWord *file_length
   read_file_rec.requestCount = open_file_rec.eof;
   ReadGS(&read_file_rec);
   if (toolerror() != 0) {
-    SysBeep(); SysBeep(); SysBeep(); //FlagError(4, toolerror());
+    // TODO: Handle error appropriately
+    SysBeep();
     return;
   }
   
   *file_handle = file_contents;
   *file_length = open_file_rec.eof;
   
-  close_file_rev.pCount = 1;
-  close_file_rev.refNum = open_file_rec.refNum;
-  CloseGS(&close_file_rev);
+  close_file_rec.pCount = 1;
+  close_file_rec.refNum = open_file_rec.refNum;
+  CloseGS(&close_file_rec);
   
   HUnlock(file_contents);
 }

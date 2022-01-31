@@ -25,7 +25,7 @@
 #ifndef _GUARD_PROJECTWordleGS_FILEwgs_dictionary_
 #define _GUARD_PROJECTWordleGS_FILEwgs_dictionary_
 
-#include <misctool.h>
+#include <types.h>
 
 void LoadDictionary(void);
 void DestroyDictionary(void);
