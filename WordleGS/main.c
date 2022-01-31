@@ -41,6 +41,8 @@
 #include "wgs_render_system.h"
 #include "wgs_dictionary.h"
 
+#include "wgs_game_engine.h"
+
 BOOLEAN done;
 EventRecord my_event;
 int menu_num, menu_item_num;
@@ -142,7 +144,7 @@ int main (void) {
   
   CreateLetterGuessEntities();
   CreateLetterKeyEntites();
-  LoadDictionary();
+  CreateGameEngine();
   CreateRenderSystem();
   
   CreateAppWindow();
@@ -173,7 +175,7 @@ int main (void) {
     AppTick();
   }
   
-  DestroyDictionary();
+  DestroyGameEngine();
   
   enddesk();
 }

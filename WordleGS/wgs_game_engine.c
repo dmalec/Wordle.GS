@@ -22,19 +22,15 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEwgs_dictionary_
-#define _GUARD_PROJECTWordleGS_FILEwgs_dictionary_
+#include "wgs_game_engine.h"
 
-#include <types.h>
+#include "wgs_dictionary.h"
 
-/* Lifecycle Methods */
+void CreateGameEngine(void) {
+  CreateDictionary();
+}
 
-void CreateDictionary(void);
-void DestroyDictionary(void);
 
-/* Gameplay Methods */
-
-BOOLEAN IsValidGuess(char *word);
-void GetRandomWord(char *buffer);
-
-#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_dictionary_ */
+void DestroyGameEngine(void) {
+  DestroyDictionary();
+}

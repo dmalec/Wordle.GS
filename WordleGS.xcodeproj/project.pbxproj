@@ -29,6 +29,7 @@
 		367800A027A100E7002A9ACC /* tail.mk in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3678009F27A100E7002A9ACC /* tail.mk */; };
 		367800A327A100E7002A9ACC /* WordleGS.xcscheme in CopyFiles */ = {isa = PBXBuildFile; fileRef = 367800A227A100E7002A9ACC /* WordleGS.xcscheme */; };
 		367A911F27A75FD600CF6411 /* wgs_dictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 367A911E27A75FD600CF6411 /* wgs_dictionary.c */; };
+		367A913E27A76C2200CF6411 /* wgs_game_engine.c in Sources */ = {isa = PBXBuildFile; fileRef = 367A913D27A76C2200CF6411 /* wgs_game_engine.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -91,6 +92,8 @@
 		367800A227A100E7002A9ACC /* WordleGS.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = WordleGS.xcscheme; path = ../../WordleGS.xcodeproj/xcshareddata/xcschemes/WordleGS.xcscheme; sourceTree = "<group>"; };
 		367A911D27A75FCC00CF6411 /* wgs_dictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_dictionary.h; sourceTree = "<group>"; };
 		367A911E27A75FD600CF6411 /* wgs_dictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wgs_dictionary.c; sourceTree = "<group>"; };
+		367A913C27A76C2200CF6411 /* wgs_game_engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_game_engine.h; sourceTree = "<group>"; };
+		367A913D27A76C2200CF6411 /* wgs_game_engine.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wgs_game_engine.c; sourceTree = "<group>"; };
 		36B5FF0127A3A06D0097B2BD /* dictionary.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dictionary.txt; sourceTree = "<group>"; };
 		36B5FF0227A3A06D0097B2BD /* secrets.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = secrets.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -182,6 +185,8 @@
 			children = (
 				367A911D27A75FCC00CF6411 /* wgs_dictionary.h */,
 				367A911E27A75FD600CF6411 /* wgs_dictionary.c */,
+				367A913C27A76C2200CF6411 /* wgs_game_engine.h */,
+				367A913D27A76C2200CF6411 /* wgs_game_engine.c */,
 			);
 			name = "Game Engine";
 			sourceTree = "<group>";
@@ -325,6 +330,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				367A913E27A76C2200CF6411 /* wgs_game_engine.c in Sources */,
 				3630F8D727A5B2F60018042C /* wgs_render_system.c in Sources */,
 				3630F8D427A5B2F60018042C /* wgs_game_model.c in Sources */,
 				3630F8D527A5B2F60018042C /* wgs_game_over_dialog.c in Sources */,

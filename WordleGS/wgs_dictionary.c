@@ -128,7 +128,7 @@ void LoadFile(GSString255 *file_name, Handle *file_handle, LongWord *file_length
 #define SECRETS_FILENAME "secrets.txt"
 
 
-void LoadDictionary(void) {
+void CreateDictionary(void) {
   GSString255 file_name;
   LongWord file_length;
   int i;
