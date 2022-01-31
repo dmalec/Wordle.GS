@@ -1,0 +1,50 @@
+name: CI
+
+on: push
+
+jobs:
+  run_unit_tests:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Pull Submodules
+      run: |
+        git submodule update --init --recursive
+
+    - name: Cache cpputest
+      uses: actions/cache@v2
+      id: cpputest-lib-cache
+      with:
+        path: test/cpputest/lib
+        key: cpputest-01-${{ hashFiles('test/cpputest/src/**') }}
+
+    - name: Update Package Info
+      if: steps.cpputest-lib-cache.outputs.cache-hit != 'true'
+      run: |
+        sudo apt-get update
+
+    - name: Install Dependencies
+      if: steps.cpputest-lib-cache.outputs.cache-hit != 'true'
+      run: >
+        sudo apt-get install
+        autoconf-archive
+
+    - name: Build Cpputest
+      if: steps.cpputest-lib-cache.outputs.cache-hit != 'true'
+      timeout-minutes: 5
+      working-directory: test/cpputest
+      run: |
+        autoreconf . -i
+        ./configure
+        make tdd
+
+    - name: Run Tests
+      timeout-minutes: 2
+      working-directory: test
+      run: |
+        make
