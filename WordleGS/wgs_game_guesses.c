@@ -49,7 +49,6 @@ void GameGuesses_Create(void) {
   wgs_game_guesses_current_col = 0;
 }
 
-
 void GameGuesses_NewGame(void) {
   int row, col;
 
@@ -67,6 +66,15 @@ void GameGuesses_NewGame(void) {
   wgs_game_guesses_current_col = 0;
 }
 
+void GameGuesses_UpdateFinished(void) {
+  int row, col;
+
+  for (row=0; row<WGS_GAME_GUESSES_NUMBER_OF_ROWS; row++) {
+    for (col=0; col<WGS_GAME_GUESSES_NUMBER_OF_COLS; col++) {
+      wgs_game_guesses_word_state[row][col].changed = FALSE;
+    }
+  }
+}
 
 void GameGuesses_Destroy(void) {
 }

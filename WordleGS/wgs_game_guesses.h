@@ -31,6 +31,7 @@
 
 void GameGuesses_Create(void);
 void GameGuesses_NewGame(void);
+void GameGuesses_UpdateFinished(void);
 void GameGuesses_Destroy(void);
 
 

@@ -63,11 +63,7 @@ void AlphabetState_Destroy(void) {
 }
 
 
-/* Accessors */
-
-wgs_letter_state AlphabetState_GetLetterState(char c) {
-  return wgs_game_guesses_letter_state[c - 'A'];
-}
+/* Game Methods */
 
 void AlphabetState_MaybeUpdateLetterStatus(char c, wgs_letter_status status) {
   int letter = c - 'A';
@@ -79,4 +75,11 @@ void AlphabetState_MaybeUpdateLetterStatus(char c, wgs_letter_status status) {
 
   wgs_game_guesses_letter_state[letter].status = status;
   wgs_game_guesses_letter_state[letter].changed = TRUE;
+}
+
+
+/* Accessors */
+
+wgs_letter_state AlphabetState_GetLetterState(char c) {
+  return wgs_game_guesses_letter_state[c - 'A'];
 }

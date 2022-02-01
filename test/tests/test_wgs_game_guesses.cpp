@@ -51,37 +51,66 @@ TEST(GameGuesses, Create) {
 }
 
 
+TEST(GameGuesses, UpdateFinished) {
+  GameGuesses_Create();
+  GameGuesses_UpdateFinished();
+
+  for (int row=0; row<WGS_GAME_GUESSES_NUMBER_OF_ROWS; row++) {
+    for (int col=0; col<WGS_GAME_GUESSES_NUMBER_OF_COLS; col++) {
+      wgs_letter_state state = GameGuesses_GetGuessLetterState(row, col);
+
+      LONGS_EQUAL(FALSE, state.changed);
+    }
+  }
+}
+
+
 TEST(GameGuesses, AddLetterToGuess) {
   GameGuesses_Create();
+  GameGuesses_UpdateFinished();
 
   GameGuesses_AddLetterToGuess('R');
   LONGS_EQUAL('R', GameGuesses_GetGuessLetterState(0, 0).letter);
+  LONGS_EQUAL(TRUE, GameGuesses_GetGuessLetterState(0, 0).changed);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(1, GameGuesses_GetCol());
 
+  GameGuesses_UpdateFinished();
+
   GameGuesses_AddLetterToGuess('O');
   LONGS_EQUAL('O', GameGuesses_GetGuessLetterState(0, 1).letter);
+  LONGS_EQUAL(TRUE, GameGuesses_GetGuessLetterState(0, 1).changed);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(2, GameGuesses_GetCol());
 
+  GameGuesses_UpdateFinished();
+
   GameGuesses_AddLetterToGuess('B');
   LONGS_EQUAL('B', GameGuesses_GetGuessLetterState(0, 2).letter);
+  LONGS_EQUAL(TRUE, GameGuesses_GetGuessLetterState(0, 2).changed);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(3, GameGuesses_GetCol());
 
+  GameGuesses_UpdateFinished();
+
   GameGuesses_AddLetterToGuess('O');
   LONGS_EQUAL('O', GameGuesses_GetGuessLetterState(0, 3).letter);
+  LONGS_EQUAL(TRUE, GameGuesses_GetGuessLetterState(0, 3).changed);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(4, GameGuesses_GetCol());
 
+  GameGuesses_UpdateFinished();
+
   GameGuesses_AddLetterToGuess('T');
   LONGS_EQUAL('T', GameGuesses_GetGuessLetterState(0, 4).letter);
+  LONGS_EQUAL(TRUE, GameGuesses_GetGuessLetterState(0, 4).changed);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(5, GameGuesses_GetCol());
 }
 
 TEST(GameGuesses, RemoveLetterFromGuess) {
   GameGuesses_Create();
+  GameGuesses_UpdateFinished();
 
   GameGuesses_AddLetterToGuess('R');
   GameGuesses_AddLetterToGuess('O');
@@ -92,32 +121,53 @@ TEST(GameGuesses, RemoveLetterFromGuess) {
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(5, GameGuesses_GetCol());
 
+  GameGuesses_UpdateFinished();
+
   GameGuesses_RemoveLetterFromGuess();
   LONGS_EQUAL(' ', GameGuesses_GetGuessLetterState(0, 4).letter);
+  LONGS_EQUAL(TRUE, GameGuesses_GetGuessLetterState(0, 4).changed);
   LONGS_EQUAL('O', GameGuesses_GetGuessLetterState(0, 3).letter);
+  LONGS_EQUAL(FALSE, GameGuesses_GetGuessLetterState(0, 3).changed);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(4, GameGuesses_GetCol());
 
+  GameGuesses_UpdateFinished();
+
   GameGuesses_RemoveLetterFromGuess();
   LONGS_EQUAL(' ', GameGuesses_GetGuessLetterState(0, 3).letter);
+  LONGS_EQUAL(TRUE, GameGuesses_GetGuessLetterState(0, 3).changed);
   LONGS_EQUAL('B', GameGuesses_GetGuessLetterState(0, 2).letter);
+  LONGS_EQUAL(FALSE, GameGuesses_GetGuessLetterState(0, 2).changed);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(3, GameGuesses_GetCol());
 
+  GameGuesses_UpdateFinished();
+
   GameGuesses_RemoveLetterFromGuess();
   LONGS_EQUAL(' ', GameGuesses_GetGuessLetterState(0, 2).letter);
+  LONGS_EQUAL(TRUE, GameGuesses_GetGuessLetterState(0, 2).changed);
   LONGS_EQUAL('O', GameGuesses_GetGuessLetterState(0, 1).letter);
+  LONGS_EQUAL(FALSE, GameGuesses_GetGuessLetterState(0, 1).changed);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(2, GameGuesses_GetCol());
 
+  GameGuesses_UpdateFinished();
+
   GameGuesses_RemoveLetterFromGuess();
   LONGS_EQUAL(' ', GameGuesses_GetGuessLetterState(0, 1).letter);
+  LONGS_EQUAL(TRUE, GameGuesses_GetGuessLetterState(0, 1).changed);
   LONGS_EQUAL('R', GameGuesses_GetGuessLetterState(0, 0).letter);
+  LONGS_EQUAL(FALSE, GameGuesses_GetGuessLetterState(0, 0).changed);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(1, GameGuesses_GetCol());
 
+  GameGuesses_UpdateFinished();
+
   GameGuesses_RemoveLetterFromGuess();
   LONGS_EQUAL(' ', GameGuesses_GetGuessLetterState(0, 0).letter);
+  LONGS_EQUAL(TRUE, GameGuesses_GetGuessLetterState(0, 0).changed);
+  LONGS_EQUAL(' ', GameGuesses_GetGuessLetterState(0, 1).letter);
+  LONGS_EQUAL(FALSE, GameGuesses_GetGuessLetterState(0, 1).changed);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(0, GameGuesses_GetCol());
 }
