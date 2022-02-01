@@ -36,17 +36,9 @@ TEST_GROUP(GameGuesses) {
 TEST(GameGuesses, Create) {
   GameGuesses_Create();
 
-  for (char letter='A'; letter<='Z'; letter++) {
-    wgs_letter_state state = GameGuesses_GetLetterStatus(letter);
-
-    LONGS_EQUAL(letter, state.letter);
-    ENUMS_EQUAL_INT(gtUnusedLetter, state.status);
-    LONGS_EQUAL(TRUE, state.changed);
-  }
-
   for (int row=0; row<WGS_GAME_GUESSES_NUMBER_OF_ROWS; row++) {
     for (int col=0; col<WGS_GAME_GUESSES_NUMBER_OF_COLS; col++) {
-      wgs_letter_state state = GameGuesses_GetGuessLetterStatus(row, col);
+      wgs_letter_state state = GameGuesses_GetGuessLetterState(row, col);
 
       LONGS_EQUAL(' ', state.letter);
       ENUMS_EQUAL_INT(gtUnusedLetter, state.status);
@@ -63,27 +55,27 @@ TEST(GameGuesses, AddLetterToGuess) {
   GameGuesses_Create();
 
   GameGuesses_AddLetterToGuess('R');
-  LONGS_EQUAL('R', GameGuesses_GetGuessLetterStatus(0, 0).letter);
+  LONGS_EQUAL('R', GameGuesses_GetGuessLetterState(0, 0).letter);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(1, GameGuesses_GetCol());
 
   GameGuesses_AddLetterToGuess('O');
-  LONGS_EQUAL('O', GameGuesses_GetGuessLetterStatus(0, 1).letter);
+  LONGS_EQUAL('O', GameGuesses_GetGuessLetterState(0, 1).letter);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(2, GameGuesses_GetCol());
 
   GameGuesses_AddLetterToGuess('B');
-  LONGS_EQUAL('B', GameGuesses_GetGuessLetterStatus(0, 2).letter);
+  LONGS_EQUAL('B', GameGuesses_GetGuessLetterState(0, 2).letter);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(3, GameGuesses_GetCol());
 
   GameGuesses_AddLetterToGuess('O');
-  LONGS_EQUAL('O', GameGuesses_GetGuessLetterStatus(0, 3).letter);
+  LONGS_EQUAL('O', GameGuesses_GetGuessLetterState(0, 3).letter);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(4, GameGuesses_GetCol());
 
   GameGuesses_AddLetterToGuess('T');
-  LONGS_EQUAL('T', GameGuesses_GetGuessLetterStatus(0, 4).letter);
+  LONGS_EQUAL('T', GameGuesses_GetGuessLetterState(0, 4).letter);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(5, GameGuesses_GetCol());
 }
@@ -96,36 +88,36 @@ TEST(GameGuesses, RemoveLetterFromGuess) {
   GameGuesses_AddLetterToGuess('B');
   GameGuesses_AddLetterToGuess('O');
   GameGuesses_AddLetterToGuess('T');
-  LONGS_EQUAL('T', GameGuesses_GetGuessLetterStatus(0, 4).letter);
+  LONGS_EQUAL('T', GameGuesses_GetGuessLetterState(0, 4).letter);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(5, GameGuesses_GetCol());
 
   GameGuesses_RemoveLetterFromGuess();
-  LONGS_EQUAL(' ', GameGuesses_GetGuessLetterStatus(0, 4).letter);
-  LONGS_EQUAL('O', GameGuesses_GetGuessLetterStatus(0, 3).letter);
+  LONGS_EQUAL(' ', GameGuesses_GetGuessLetterState(0, 4).letter);
+  LONGS_EQUAL('O', GameGuesses_GetGuessLetterState(0, 3).letter);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(4, GameGuesses_GetCol());
 
   GameGuesses_RemoveLetterFromGuess();
-  LONGS_EQUAL(' ', GameGuesses_GetGuessLetterStatus(0, 3).letter);
-  LONGS_EQUAL('B', GameGuesses_GetGuessLetterStatus(0, 2).letter);
+  LONGS_EQUAL(' ', GameGuesses_GetGuessLetterState(0, 3).letter);
+  LONGS_EQUAL('B', GameGuesses_GetGuessLetterState(0, 2).letter);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(3, GameGuesses_GetCol());
 
   GameGuesses_RemoveLetterFromGuess();
-  LONGS_EQUAL(' ', GameGuesses_GetGuessLetterStatus(0, 2).letter);
-  LONGS_EQUAL('O', GameGuesses_GetGuessLetterStatus(0, 1).letter);
+  LONGS_EQUAL(' ', GameGuesses_GetGuessLetterState(0, 2).letter);
+  LONGS_EQUAL('O', GameGuesses_GetGuessLetterState(0, 1).letter);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(2, GameGuesses_GetCol());
 
   GameGuesses_RemoveLetterFromGuess();
-  LONGS_EQUAL(' ', GameGuesses_GetGuessLetterStatus(0, 1).letter);
-  LONGS_EQUAL('R', GameGuesses_GetGuessLetterStatus(0, 0).letter);
+  LONGS_EQUAL(' ', GameGuesses_GetGuessLetterState(0, 1).letter);
+  LONGS_EQUAL('R', GameGuesses_GetGuessLetterState(0, 0).letter);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(1, GameGuesses_GetCol());
 
   GameGuesses_RemoveLetterFromGuess();
-  LONGS_EQUAL(' ', GameGuesses_GetGuessLetterStatus(0, 0).letter);
+  LONGS_EQUAL(' ', GameGuesses_GetGuessLetterState(0, 0).letter);
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(0, GameGuesses_GetCol());
 }

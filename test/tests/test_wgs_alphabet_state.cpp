@@ -22,30 +22,25 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEwgs_game_guesses_
-#define _GUARD_PROJECTWordleGS_FILEwgs_game_guesses_
+#include "CppUTest/TestHarness.h"
 
-#include "wgs_game_types.h"
-
-/* Lifecycle Methods */
-
-void GameGuesses_Create(void);
-void GameGuesses_NewGame(void);
-void GameGuesses_Destroy(void);
+extern "C" {
+#include "wgs_alphabet_state.h"
+}
 
 
-/* Game Methods */
-
-void GameGuesses_AddLetterToGuess(char letter);
-void GameGuesses_RemoveLetterFromGuess(void);
-void GameGuesses_SubmitGuess(void);
+TEST_GROUP(AlphabetState) {
+};
 
 
-/* Accessors */
+TEST(AlphabetState, Create) {
+  AlphabetState_Create();
 
-int GameGuesses_GetRow(void);
-int GameGuesses_GetCol(void);
+  for (char letter='A'; letter<='Z'; letter++) {
+    wgs_letter_state state = AlphabetState_GetLetterState(letter);
 
-wgs_letter_state GameGuesses_GetGuessLetterState(int row, int col);
-
-#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_guesses_ */
+    LONGS_EQUAL(letter, state.letter);
+    ENUMS_EQUAL_INT(gtUnusedLetter, state.status);
+    LONGS_EQUAL(TRUE, state.changed);
+  }
+}

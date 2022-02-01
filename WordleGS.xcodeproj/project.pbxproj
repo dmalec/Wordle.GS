@@ -31,6 +31,7 @@
 		367A911F27A75FD600CF6411 /* wgs_dictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 367A911E27A75FD600CF6411 /* wgs_dictionary.c */; };
 		367A913E27A76C2200CF6411 /* wgs_game_engine.c in Sources */ = {isa = PBXBuildFile; fileRef = 367A913D27A76C2200CF6411 /* wgs_game_engine.c */; };
 		367A914927A778F100CF6411 /* wgs_game_guesses.c in Sources */ = {isa = PBXBuildFile; fileRef = 367A914827A778F100CF6411 /* wgs_game_guesses.c */; };
+		36B6E25C27A94135002F9611 /* wgs_alphabet_state.c in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E25B27A94135002F9611 /* wgs_alphabet_state.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -100,6 +101,8 @@
 		367A915227A793E200CF6411 /* wgs_game_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_game_types.h; sourceTree = "<group>"; };
 		36B5FF0127A3A06D0097B2BD /* dictionary.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dictionary.txt; sourceTree = "<group>"; };
 		36B5FF0227A3A06D0097B2BD /* secrets.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = secrets.txt; sourceTree = "<group>"; };
+		36B6E25A27A94135002F9611 /* wgs_alphabet_state.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_alphabet_state.h; sourceTree = "<group>"; };
+		36B6E25B27A94135002F9611 /* wgs_alphabet_state.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wgs_alphabet_state.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +190,8 @@
 		367A911C27A75FBA00CF6411 /* Game Engine */ = {
 			isa = PBXGroup;
 			children = (
+				36B6E25A27A94135002F9611 /* wgs_alphabet_state.h */,
+				36B6E25B27A94135002F9611 /* wgs_alphabet_state.c */,
 				367A911D27A75FCC00CF6411 /* wgs_dictionary.h */,
 				367A911E27A75FD600CF6411 /* wgs_dictionary.c */,
 				367A913C27A76C2200CF6411 /* wgs_game_engine.h */,
@@ -339,6 +344,7 @@
 			files = (
 				367A913E27A76C2200CF6411 /* wgs_game_engine.c in Sources */,
 				3630F8D727A5B2F60018042C /* wgs_render_system.c in Sources */,
+				36B6E25C27A94135002F9611 /* wgs_alphabet_state.c in Sources */,
 				3630F8D427A5B2F60018042C /* wgs_game_model.c in Sources */,
 				3630F8D527A5B2F60018042C /* wgs_game_over_dialog.c in Sources */,
 				3630F8D227A5B2F60018042C /* wgs_game_entities.c in Sources */,

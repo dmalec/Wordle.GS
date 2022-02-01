@@ -22,30 +22,18 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEwgs_game_guesses_
-#define _GUARD_PROJECTWordleGS_FILEwgs_game_guesses_
+#ifndef _GUARD_PROJECTWordleGS_FILEwgs_alphabet_state_
+#define _GUARD_PROJECTWordleGS_FILEwgs_alphabet_state_
 
 #include "wgs_game_types.h"
 
 /* Lifecycle Methods */
 
-void GameGuesses_Create(void);
-void GameGuesses_NewGame(void);
-void GameGuesses_Destroy(void);
+void AlphabetState_Create(void);
+void AlphabetState_NewGame(void);
+void AlphabetState_Destroy(void);
 
 
-/* Game Methods */
+#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_alphabet_state_ */
 
-void GameGuesses_AddLetterToGuess(char letter);
-void GameGuesses_RemoveLetterFromGuess(void);
-void GameGuesses_SubmitGuess(void);
-
-
-/* Accessors */
-
-int GameGuesses_GetRow(void);
-int GameGuesses_GetCol(void);
-
-wgs_letter_state GameGuesses_GetGuessLetterState(int row, int col);
-
-#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_guesses_ */
+wgs_letter_state AlphabetState_GetLetterState(char c);

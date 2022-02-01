@@ -22,30 +22,41 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEwgs_game_guesses_
-#define _GUARD_PROJECTWordleGS_FILEwgs_game_guesses_
+#include "wgs_alphabet_state.h"
 
-#include "wgs_game_types.h"
+
+static wgs_letter_state wgs_game_guesses_letter_state[WGS_GAME_GUESSES_NUMBER_OF_LETTERS];
+
 
 /* Lifecycle Methods */
 
-void GameGuesses_Create(void);
-void GameGuesses_NewGame(void);
-void GameGuesses_Destroy(void);
+void AlphabetState_Create(void) {
+  int letter;
 
+  for (letter=0; letter<WGS_GAME_GUESSES_NUMBER_OF_LETTERS; letter++) {
+    wgs_game_guesses_letter_state[letter].letter = (char)('A' + letter);
+    wgs_game_guesses_letter_state[letter].status = gtUnusedLetter;
+    wgs_game_guesses_letter_state[letter].changed = TRUE;
+  }
+}
 
-/* Game Methods */
+void AlphabetState_NewGame(void) {
+  int letter;
 
-void GameGuesses_AddLetterToGuess(char letter);
-void GameGuesses_RemoveLetterFromGuess(void);
-void GameGuesses_SubmitGuess(void);
+  for (letter=0; letter<WGS_GAME_GUESSES_NUMBER_OF_LETTERS; letter++) {
+    if (wgs_game_guesses_letter_state[letter].status != gtUnusedLetter) {
+      wgs_game_guesses_letter_state[letter].status = gtUnusedLetter;
+      wgs_game_guesses_letter_state[letter].changed = TRUE;
+    }
+  }
+}
+
+void AlphabetState_Destroy(void) {
+}
 
 
 /* Accessors */
 
-int GameGuesses_GetRow(void);
-int GameGuesses_GetCol(void);
-
-wgs_letter_state GameGuesses_GetGuessLetterState(int row, int col);
-
-#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_guesses_ */
+wgs_letter_state AlphabetState_GetLetterState(char c) {
+  return wgs_game_guesses_letter_state[c - 'A'];
+}
