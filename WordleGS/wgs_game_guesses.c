@@ -51,6 +51,9 @@ void GameGuesses_Create(void) {
     wgs_game_guesses_letter_state[letter].status = gtUnusedLetter;
     wgs_game_guesses_letter_state[letter].changed = TRUE;
   }
+
+  wgs_game_guesses_current_row = 0;
+  wgs_game_guesses_current_col = 0;
 }
 
 
