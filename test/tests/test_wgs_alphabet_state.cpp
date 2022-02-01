@@ -44,3 +44,63 @@ TEST(AlphabetState, Create) {
     LONGS_EQUAL(TRUE, state.changed);
   }
 }
+
+
+TEST(AlphabetState, UpdateFinished) {
+  AlphabetState_Create();
+  AlphabetState_UpdateFinished();
+
+  for (char letter='A'; letter<='Z'; letter++) {
+    wgs_letter_state state = AlphabetState_GetLetterState(letter);
+
+    LONGS_EQUAL(FALSE, state.changed);
+  }
+}
+
+
+TEST(AlphabetState, MaybeUpdateLetterStatus) {
+  wgs_letter_state state;
+
+  AlphabetState_Create();
+  AlphabetState_UpdateFinished();
+
+  AlphabetState_MaybeUpdateLetterStatus('B', gtWrongPlaceLetter);
+
+  state = AlphabetState_GetLetterState('B');
+  LONGS_EQUAL('B', state.letter);
+  ENUMS_EQUAL_INT(gtWrongPlaceLetter, state.status);
+  LONGS_EQUAL(TRUE, state.changed);
+}
+
+
+TEST(AlphabetState, MaybeUpdateLetterStatus_Sequence) {
+  wgs_letter_state state;
+
+  AlphabetState_Create();
+  AlphabetState_UpdateFinished();
+
+
+  AlphabetState_MaybeUpdateLetterStatus('B', gtWrongPlaceLetter);
+
+  state = AlphabetState_GetLetterState('B');
+  ENUMS_EQUAL_INT(gtWrongPlaceLetter, state.status);
+  LONGS_EQUAL(TRUE, state.changed);
+
+  AlphabetState_UpdateFinished();
+
+
+  AlphabetState_MaybeUpdateLetterStatus('B', gtCorrectLetter);
+
+  state = AlphabetState_GetLetterState('B');
+  ENUMS_EQUAL_INT(gtCorrectLetter, state.status);
+  LONGS_EQUAL(TRUE, state.changed);
+
+  AlphabetState_UpdateFinished();
+
+
+  AlphabetState_MaybeUpdateLetterStatus('B', gtWrongPlaceLetter);
+
+  state = AlphabetState_GetLetterState('B');
+  ENUMS_EQUAL_INT(gtCorrectLetter, state.status);
+  LONGS_EQUAL(FALSE, state.changed);
+}

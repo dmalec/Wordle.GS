@@ -31,9 +31,14 @@
 
 void AlphabetState_Create(void);
 void AlphabetState_NewGame(void);
+void AlphabetState_UpdateFinished(void);
 void AlphabetState_Destroy(void);
 
 
-#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_alphabet_state_ */
+/* Accessors */
 
 wgs_letter_state AlphabetState_GetLetterState(char c);
+
+void AlphabetState_MaybeUpdateLetterStatus(char c, wgs_letter_status status);
+
+#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_alphabet_state_ */

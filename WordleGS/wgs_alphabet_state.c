@@ -51,6 +51,14 @@ void AlphabetState_NewGame(void) {
   }
 }
 
+void AlphabetState_UpdateFinished(void) {
+  int letter;
+
+  for (letter=0; letter<WGS_GAME_GUESSES_NUMBER_OF_LETTERS; letter++) {
+    wgs_game_guesses_letter_state[letter].changed = FALSE;
+  }
+}
+
 void AlphabetState_Destroy(void) {
 }
 
@@ -59,4 +67,16 @@ void AlphabetState_Destroy(void) {
 
 wgs_letter_state AlphabetState_GetLetterState(char c) {
   return wgs_game_guesses_letter_state[c - 'A'];
+}
+
+void AlphabetState_MaybeUpdateLetterStatus(char c, wgs_letter_status status) {
+  int letter = c - 'A';
+
+  if (wgs_game_guesses_letter_state[letter].status == gtCorrectLetter) {
+    // Once a letter has been guessed in the correct place, don't change.
+    return;
+  }
+
+  wgs_game_guesses_letter_state[letter].status = status;
+  wgs_game_guesses_letter_state[letter].changed = TRUE;
 }
