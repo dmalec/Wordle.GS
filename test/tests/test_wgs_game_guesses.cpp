@@ -87,3 +87,45 @@ TEST(GameGuesses, AddLetterToGuess) {
   LONGS_EQUAL(0, GameGuesses_GetRow());
   LONGS_EQUAL(5, GameGuesses_GetCol());
 }
+
+TEST(GameGuesses, RemoveLetterFromGuess) {
+  GameGuesses_Create();
+
+  GameGuesses_AddLetterToGuess('R');
+  GameGuesses_AddLetterToGuess('O');
+  GameGuesses_AddLetterToGuess('B');
+  GameGuesses_AddLetterToGuess('O');
+  GameGuesses_AddLetterToGuess('T');
+  LONGS_EQUAL('T', GameGuesses_GetGuessLetterStatus(0, 4).letter);
+  LONGS_EQUAL(0, GameGuesses_GetRow());
+  LONGS_EQUAL(5, GameGuesses_GetCol());
+
+  GameGuesses_RemoveLetterFromGuess();
+  LONGS_EQUAL(' ', GameGuesses_GetGuessLetterStatus(0, 4).letter);
+  LONGS_EQUAL('O', GameGuesses_GetGuessLetterStatus(0, 3).letter);
+  LONGS_EQUAL(0, GameGuesses_GetRow());
+  LONGS_EQUAL(4, GameGuesses_GetCol());
+
+  GameGuesses_RemoveLetterFromGuess();
+  LONGS_EQUAL(' ', GameGuesses_GetGuessLetterStatus(0, 3).letter);
+  LONGS_EQUAL('B', GameGuesses_GetGuessLetterStatus(0, 2).letter);
+  LONGS_EQUAL(0, GameGuesses_GetRow());
+  LONGS_EQUAL(3, GameGuesses_GetCol());
+
+  GameGuesses_RemoveLetterFromGuess();
+  LONGS_EQUAL(' ', GameGuesses_GetGuessLetterStatus(0, 2).letter);
+  LONGS_EQUAL('O', GameGuesses_GetGuessLetterStatus(0, 1).letter);
+  LONGS_EQUAL(0, GameGuesses_GetRow());
+  LONGS_EQUAL(2, GameGuesses_GetCol());
+
+  GameGuesses_RemoveLetterFromGuess();
+  LONGS_EQUAL(' ', GameGuesses_GetGuessLetterStatus(0, 1).letter);
+  LONGS_EQUAL('R', GameGuesses_GetGuessLetterStatus(0, 0).letter);
+  LONGS_EQUAL(0, GameGuesses_GetRow());
+  LONGS_EQUAL(1, GameGuesses_GetCol());
+
+  GameGuesses_RemoveLetterFromGuess();
+  LONGS_EQUAL(' ', GameGuesses_GetGuessLetterStatus(0, 0).letter);
+  LONGS_EQUAL(0, GameGuesses_GetRow());
+  LONGS_EQUAL(0, GameGuesses_GetCol());
+}
