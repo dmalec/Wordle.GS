@@ -29,8 +29,13 @@
 
 void GameEngine_Create(void);
 void GameEngine_NewGame(void);
+void GameEngine_UpdateFinished(void);
 void GameEngine_Destroy(void);
 
+
+/* Game Methods */
+
+void GameEngine_GuessCurrentWord(void);
 
 
 #endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_engine_ */

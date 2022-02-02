@@ -27,12 +27,10 @@
 
 #include <misctool.h>
 
+#include "wgs_game_types.h"
+
 
 typedef enum { Unknown, Correct, WrongPlace, UnusedLetter } wgs_square_state;
-
-typedef enum { InProgress, Won, Lost } wgs_game_state;
-
-typedef enum { WordFilled, MaxGuesses, InvalidWord, ValidGuess } wgs_guess_status;
 
 void NewGame(void);
 

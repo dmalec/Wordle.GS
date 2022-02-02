@@ -96,7 +96,22 @@ void GameGuesses_RemoveLetterFromGuess(void) {
   wgs_game_guesses_word_state[wgs_game_guesses_current_row][wgs_game_guesses_current_col].changed = TRUE;
 }
 
-void GameGuesses_SubmitGuess(void) {
+void GameGuesses_UpdateGuessLetterStatus(wgs_letter_status status[]) {
+  int i;
+
+  for (i=0; i<5; i++) {
+    GameGuesses_MaybeUpdateGuessLetterStatus(i, status[i]);
+  }
+}
+
+void GameGuesses_MaybeUpdateGuessLetterStatus(int col, wgs_letter_status status) {
+  if (wgs_game_guesses_word_state[wgs_game_guesses_current_row][col].status != status) {
+    wgs_game_guesses_word_state[wgs_game_guesses_current_row][col].status = status;
+    wgs_game_guesses_word_state[wgs_game_guesses_current_row][col].changed = TRUE;
+  }
+}
+
+void GameGuesses_NextGuess(void) {
   assert(wgs_game_guesses_current_row < WGS_GAME_GUESSES_NUMBER_OF_ROWS);
 
   wgs_game_guesses_current_row++;
@@ -116,4 +131,22 @@ int GameGuesses_GetCol(void) {
 
 wgs_letter_state GameGuesses_GetGuessLetterState(int row, int col) {
   return wgs_game_guesses_word_state[row][col];
+}
+
+wgs_guess_status GameGuesses_GetGuessStatus(void) {
+
+  if (wgs_game_guesses_current_row >= 6) return MaxGuesses;
+
+  if (wgs_game_guesses_current_col < 5) return WordIncomplete;
+
+  return WordFilled;
+}
+
+void GameGuesses_GetGuessWord(char *word) {
+  int i;
+
+  // TODO: factor out word copy
+  for (i=0; i<5; i++) {
+    word[i] = wgs_game_guesses_word_state[wgs_game_guesses_current_row][i].letter;
+  }
 }

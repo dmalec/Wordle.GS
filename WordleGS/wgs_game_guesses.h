@@ -39,7 +39,9 @@ void GameGuesses_Destroy(void);
 
 void GameGuesses_AddLetterToGuess(char letter);
 void GameGuesses_RemoveLetterFromGuess(void);
-void GameGuesses_SubmitGuess(void);
+void GameGuesses_UpdateGuessLetterStatus(wgs_letter_status status[]);
+void GameGuesses_MaybeUpdateGuessLetterStatus(int col, wgs_letter_status status);
+void GameGuesses_NextGuess(void);
 
 
 /* Accessors */
@@ -48,5 +50,8 @@ int GameGuesses_GetRow(void);
 int GameGuesses_GetCol(void);
 
 wgs_letter_state GameGuesses_GetGuessLetterState(int row, int col);
+
+wgs_guess_status GameGuesses_GetGuessStatus(void);
+void GameGuesses_GetGuessWord(char *word);
 
 #endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_guesses_ */

@@ -40,6 +40,10 @@ typedef enum {
   gtIncorrectLetter
 } wgs_letter_status;
 
+typedef enum { WordIncomplete, WordFilled, MaxGuesses, InvalidWord, ValidGuess } wgs_guess_status;
+
+typedef enum { InProgress, Won, Lost } wgs_game_state;
+
 typedef struct wgs_letter_state {
   char letter;
   wgs_letter_status status;
