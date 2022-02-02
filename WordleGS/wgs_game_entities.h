@@ -27,7 +27,7 @@
 
 #include <quickdraw.h>
 
-#include "wgs_game_types.h"
+#include "wgs_engine/wgs_game_types.h"
 
 #define WGS_LETTERS_IN_WORD            5
 #define WGS_NUMBER_OF_GUESSES          6

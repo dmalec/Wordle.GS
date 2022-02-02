@@ -26,7 +26,7 @@
 #define _GUARD_PROJECTWordleGS_FILEwgs_alphabet_state_
 
 
-#include "wgs_game_types.h"
+#include "wgs_engine/wgs_game_types.h"
 
 /* Lifecycle Methods */
 

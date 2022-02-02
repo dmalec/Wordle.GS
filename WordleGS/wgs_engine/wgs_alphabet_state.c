@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-#include "wgs_alphabet_state.h"
+#include "wgs_engine/wgs_alphabet_state.h"
 
 
 static wgs_letter_state wgs_game_guesses_letter_state[WGS_GAME_GUESSES_NUMBER_OF_LETTERS];

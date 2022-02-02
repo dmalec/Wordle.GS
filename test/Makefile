@@ -25,8 +25,8 @@ COMPONENT_NAME = wordle_gs
 PROJECT_HOME_DIR = ..
 CPPUTEST_HOME = ./cpputest
 
-SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_alphabet_state.c
-SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_game_guesses.c
+SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_engine/wgs_alphabet_state.c
+SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_engine/wgs_game_guesses.c
 
 TEST_SRC_DIRS += tests
 

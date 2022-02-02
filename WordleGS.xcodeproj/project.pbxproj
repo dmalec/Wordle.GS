@@ -28,10 +28,6 @@
 		3678009E27A100E7002A9ACC /* tar in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3678009D27A100E7002A9ACC /* tar */; };
 		367800A027A100E7002A9ACC /* tail.mk in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3678009F27A100E7002A9ACC /* tail.mk */; };
 		367800A327A100E7002A9ACC /* WordleGS.xcscheme in CopyFiles */ = {isa = PBXBuildFile; fileRef = 367800A227A100E7002A9ACC /* WordleGS.xcscheme */; };
-		367A911F27A75FD600CF6411 /* wgs_dictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 367A911E27A75FD600CF6411 /* wgs_dictionary.c */; };
-		367A913E27A76C2200CF6411 /* wgs_game_engine.c in Sources */ = {isa = PBXBuildFile; fileRef = 367A913D27A76C2200CF6411 /* wgs_game_engine.c */; };
-		367A914927A778F100CF6411 /* wgs_game_guesses.c in Sources */ = {isa = PBXBuildFile; fileRef = 367A914827A778F100CF6411 /* wgs_game_guesses.c */; };
-		36B6E25C27A94135002F9611 /* wgs_alphabet_state.c in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E25B27A94135002F9611 /* wgs_alphabet_state.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -92,17 +88,17 @@
 		3678009D27A100E7002A9ACC /* tar */ = {isa = PBXFileReference; lastKnownFileType = file; path = tar; sourceTree = "<group>"; };
 		3678009F27A100E7002A9ACC /* tail.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = tail.mk; sourceTree = "<group>"; };
 		367800A227A100E7002A9ACC /* WordleGS.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = WordleGS.xcscheme; path = ../../WordleGS.xcodeproj/xcshareddata/xcschemes/WordleGS.xcscheme; sourceTree = "<group>"; };
-		367A911D27A75FCC00CF6411 /* wgs_dictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_dictionary.h; sourceTree = "<group>"; };
-		367A911E27A75FD600CF6411 /* wgs_dictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wgs_dictionary.c; sourceTree = "<group>"; };
-		367A913C27A76C2200CF6411 /* wgs_game_engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_game_engine.h; sourceTree = "<group>"; };
-		367A913D27A76C2200CF6411 /* wgs_game_engine.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wgs_game_engine.c; sourceTree = "<group>"; };
-		367A914727A778F100CF6411 /* wgs_game_guesses.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_game_guesses.h; sourceTree = "<group>"; };
-		367A914827A778F100CF6411 /* wgs_game_guesses.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wgs_game_guesses.c; sourceTree = "<group>"; };
-		367A915227A793E200CF6411 /* wgs_game_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_game_types.h; sourceTree = "<group>"; };
 		36B5FF0127A3A06D0097B2BD /* dictionary.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dictionary.txt; sourceTree = "<group>"; };
 		36B5FF0227A3A06D0097B2BD /* secrets.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = secrets.txt; sourceTree = "<group>"; };
-		36B6E25A27A94135002F9611 /* wgs_alphabet_state.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_alphabet_state.h; sourceTree = "<group>"; };
-		36B6E25B27A94135002F9611 /* wgs_alphabet_state.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wgs_alphabet_state.c; sourceTree = "<group>"; };
+		36B6E27E27AB470A002F9611 /* wgs_dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wgs_dictionary.h; sourceTree = "<group>"; };
+		36B6E27F27AB470A002F9611 /* wgs_dictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wgs_dictionary.c; sourceTree = "<group>"; };
+		36B6E28027AB470A002F9611 /* wgs_game_engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wgs_game_engine.h; sourceTree = "<group>"; };
+		36B6E28127AB470A002F9611 /* wgs_game_engine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wgs_game_engine.c; sourceTree = "<group>"; };
+		36B6E28227AB470A002F9611 /* wgs_alphabet_state.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wgs_alphabet_state.c; sourceTree = "<group>"; };
+		36B6E28327AB470A002F9611 /* wgs_game_guesses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wgs_game_guesses.h; sourceTree = "<group>"; };
+		36B6E28427AB470A002F9611 /* wgs_game_guesses.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wgs_game_guesses.c; sourceTree = "<group>"; };
+		36B6E28527AB470A002F9611 /* wgs_game_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wgs_game_types.h; sourceTree = "<group>"; };
+		36B6E28627AB470A002F9611 /* wgs_alphabet_state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wgs_alphabet_state.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,7 +134,7 @@
 		3678008027A100E7002A9ACC /* WordleGS */ = {
 			isa = PBXGroup;
 			children = (
-				367A911C27A75FBA00CF6411 /* Game Engine */,
+				36B6E27D27AB4695002F9611 /* wgs_engine */,
 				3678008327A100E7002A9ACC /* main.h */,
 				3678008127A100E7002A9ACC /* main.c */,
 				3678008427A100E7002A9ACC /* main.rez */,
@@ -187,22 +183,6 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		367A911C27A75FBA00CF6411 /* Game Engine */ = {
-			isa = PBXGroup;
-			children = (
-				36B6E25A27A94135002F9611 /* wgs_alphabet_state.h */,
-				36B6E25B27A94135002F9611 /* wgs_alphabet_state.c */,
-				367A911D27A75FCC00CF6411 /* wgs_dictionary.h */,
-				367A911E27A75FD600CF6411 /* wgs_dictionary.c */,
-				367A913C27A76C2200CF6411 /* wgs_game_engine.h */,
-				367A913D27A76C2200CF6411 /* wgs_game_engine.c */,
-				367A914727A778F100CF6411 /* wgs_game_guesses.h */,
-				367A914827A778F100CF6411 /* wgs_game_guesses.c */,
-				367A915227A793E200CF6411 /* wgs_game_types.h */,
-			);
-			name = "Game Engine";
-			sourceTree = "<group>";
-		};
 		36B5FF0027A3A06D0097B2BD /* data */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +190,22 @@
 				36B5FF0227A3A06D0097B2BD /* secrets.txt */,
 			);
 			path = data;
+			sourceTree = "<group>";
+		};
+		36B6E27D27AB4695002F9611 /* wgs_engine */ = {
+			isa = PBXGroup;
+			children = (
+				36B6E28227AB470A002F9611 /* wgs_alphabet_state.c */,
+				36B6E28627AB470A002F9611 /* wgs_alphabet_state.h */,
+				36B6E27F27AB470A002F9611 /* wgs_dictionary.c */,
+				36B6E27E27AB470A002F9611 /* wgs_dictionary.h */,
+				36B6E28127AB470A002F9611 /* wgs_game_engine.c */,
+				36B6E28027AB470A002F9611 /* wgs_game_engine.h */,
+				36B6E28427AB470A002F9611 /* wgs_game_guesses.c */,
+				36B6E28327AB470A002F9611 /* wgs_game_guesses.h */,
+				36B6E28527AB470A002F9611 /* wgs_game_types.h */,
+			);
+			path = wgs_engine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -342,17 +338,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				367A913E27A76C2200CF6411 /* wgs_game_engine.c in Sources */,
 				3630F8D727A5B2F60018042C /* wgs_render_system.c in Sources */,
-				36B6E25C27A94135002F9611 /* wgs_alphabet_state.c in Sources */,
 				3630F8D427A5B2F60018042C /* wgs_game_model.c in Sources */,
 				3630F8D527A5B2F60018042C /* wgs_game_over_dialog.c in Sources */,
 				3630F8D227A5B2F60018042C /* wgs_game_entities.c in Sources */,
-				367A914927A778F100CF6411 /* wgs_game_guesses.c in Sources */,
 				3630F8D327A5B2F60018042C /* wgs_app_window.c in Sources */,
 				3678008727A100E7002A9ACC /* Makefile in Sources */,
 				3678008227A100E7002A9ACC /* main.c in Sources */,
-				367A911F27A75FD600CF6411 /* wgs_dictionary.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

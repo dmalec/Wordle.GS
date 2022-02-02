@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-#include "wgs_dictionary.h"
+#include "wgs_engine/wgs_dictionary.h"
 
 #include <gsos.h>
 #include <memory.h>

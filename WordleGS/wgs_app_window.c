@@ -31,7 +31,7 @@
 
 #include "main.h"
 #include "wgs_app_window.h"
-#include "wgs_dictionary.h"
+#include "wgs_engine/wgs_dictionary.h"
 #include "wgs_game_entities.h"
 #include "wgs_game_model.h"
 #include "wgs_game_over_dialog.h"

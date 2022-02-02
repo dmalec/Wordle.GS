@@ -25,7 +25,7 @@
 #include "CppUTest/TestHarness.h"
 
 extern "C" {
-#include "wgs_game_guesses.h"
+#include "wgs_engine/wgs_game_guesses.h"
 }
 
 

@@ -46,7 +46,7 @@ TARGETTYPE=desktop
 
 # Add any other directories where you are putting C or assembly source
 # files to this list:
-# SRCDIRS+=
+SRCDIRS+=wgs_engine
 
 # If you put your main entry point for your project in a file called main.c
 # Then you don't need to change this value.  If you want to call your entry

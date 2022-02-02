@@ -25,7 +25,7 @@
 #include "CppUTest/TestHarness.h"
 
 extern "C" {
-#include "wgs_alphabet_state.h"
+#include "wgs_engine/wgs_alphabet_state.h"
 }
 
 
