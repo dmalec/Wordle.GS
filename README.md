@@ -24,3 +24,17 @@ This project is currently developed in [Xcode](https://developer.apple.com/xcode
 * [ORCA](https://juiced.gs/vendor/byteworks/) C compiler and libraries by The Byte Works
 
 and tested on [GSplus](https://apple2.gs/plus/) and a physical ROM03 machine
+
+## Unit Test Environment
+
+Wordle.GS uses [Cpputest](https://cpputest.github.io/index.html) for unit testing. After cloning, run the following starting from the root directory to run the unit tests:
+
+```bash
+git submodule update --init --recursive
+cd test/cpputest
+autoreconf . -i
+./configure
+make tdd
+cd ..
+make
+```

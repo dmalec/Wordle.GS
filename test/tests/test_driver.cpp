@@ -22,40 +22,8 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEwgs_game_model_
-#define _GUARD_PROJECTWordleGS_FILEwgs_game_model_
+#include "CppUTest/CommandLineTestRunner.h"
 
-#include <misctool.h>
-
-
-typedef enum { Unknown, Correct, WrongPlace, UnusedLetter } wgs_square_state;
-
-typedef enum { InProgress, Won, Lost } wgs_game_state;
-
-typedef enum { WordFilled, MaxGuesses, InvalidWord, ValidGuess } wgs_guess_status;
-
-void NewGame(void);
-
-void AddLetterToGuess(char letter);
-void RemoveLetterFromGuess(void);
-
-wgs_guess_status GuessCurrentWord(void);
-
-char GetGuessSquareLetter(int row, int col);
-wgs_square_state GetGuessSquareStatus(int row, int col);
-
-wgs_square_state GetLetterStatus(char c);
-
-wgs_game_state GetGameState(void);
-BOOLEAN IsGameInProgress(void);
-int GetGuessRow(void);
-int GetGuessCol(void);
-char *GetSecretWord(void);
-char *GetGuessWord(void);
-void NewSecretWord(char *word);
-
-int GetGamesWon(void);
-
-int IndexOfLetter(char* word, char letter);
-
-#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_model_ */
+int main(int ac, char** av) {
+  return CommandLineTestRunner::RunAllTests(ac, av);
+}
