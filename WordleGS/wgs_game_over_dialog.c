@@ -29,8 +29,6 @@
 
 #include "main.h"
 #include "wgs_game_over_dialog.h"
-#include "wgs_game_model.h"
-
 #include "wgs_game_engine.h"
 
 
@@ -68,7 +66,7 @@ void GameOverDialogDrawContents (void) {
     MoveTo(8, 50 + i * 14);
     printf("%d", i);
     
-    stat = GetGuessNumberWon(i);
+    stat = GameEngine_GetGuessNumberWonStat(i);
     if (stat > max_wins) {
       max_wins = stat;
     }
@@ -77,7 +75,7 @@ void GameOverDialogDrawContents (void) {
   SetSolidPenPat(5);
 
   for (i=0; i<6; i++) {
-    stat = GetGuessNumberWon(i);
+    stat = GameEngine_GetGuessNumberWonStat(i);
     if (stat == 0) {
       offset = 0;
     } else {
@@ -97,7 +95,7 @@ void GameOverDialogDrawContents (void) {
   SetBackColor(5);
 
   for (i=0; i<6; i++) {
-    stat = GetGuessNumberWon(i);
+    stat = GameEngine_GetGuessNumberWonStat(i);
     if (stat == 0) {
       offset = 0;
     } else {

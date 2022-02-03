@@ -78,6 +78,11 @@ void GameEngine_GetSecretWord(char *word) {
   }
 }
 
+int GameEngine_GetGuessNumberWonStat(int guess_num) {
+  return wgs_game_engine_stats[guess_num];
+}
+
+
 int GameEngine_IndexOfLetter(char* word, char letter) {
   int i;
   
@@ -143,7 +148,7 @@ void GameEngine_GuessCurrentWord(void) {
 
   if (matches >= 5) {
     wgs_game_engine_game_state = Won;
-    wgs_game_engine_stats[GameGuesses_GetRow]++;
+    wgs_game_engine_stats[GameGuesses_GetRow()]++;
   } else if (GameGuesses_GetGuessStatus() == MaxGuesses) {
     wgs_game_engine_game_state = Lost;
   } else {
