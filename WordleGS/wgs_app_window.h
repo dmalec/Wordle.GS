@@ -27,6 +27,10 @@
 
 #include <window.h>
 
+/* Lifecycle Methods */
+
+void AppWindow_NewGame(void);
+
 
 GrafPortPtr CreateAppWindow(void);
 void HandleNewGame(void);

@@ -52,6 +52,28 @@ void HandleAboutDialog(void) {
   AlertWindow(awResource, NULL, rez_alert_About);
 }
 
+void HandleNewGame(void) {
+  char word[16];
+  Word alert_result;
+
+  if (IsGameInProgress()) {
+    alert_result = AlertWindow(awResource, NULL, rez_alert_VerifyNewGame);
+    if (alert_result == rez_alert_VerifyNewGame_Cancel) {
+      return;
+    }
+  }
+
+  GameEngine_NewGame();
+  AppWindow_NewGame();
+
+
+  ResetLetterGuessEntities();
+  ResetLetterKeyEntites();
+
+  GetRandomWord(word);
+  NewSecretWord(word);
+  NewGame();
+}
 
 void HandleQuitGame(void) {
   Word alert_result;
@@ -76,7 +98,6 @@ void HandleMenu (void) {
       break;
       
     case 255:
-      GameEngine_NewGame();
       HandleNewGame();
       break;
       
@@ -149,7 +170,6 @@ int main (void) {
   CreateRenderSystem();
   
   CreateAppWindow();
-  GameEngine_NewGame();
   HandleNewGame();
   
   PenNormal();

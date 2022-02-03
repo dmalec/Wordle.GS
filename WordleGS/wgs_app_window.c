@@ -54,6 +54,14 @@ wgs_announce_state announce_status = NoAnnouncement;
 GrafPortPtr app_graf_port;
 GrafPort offscreen_graf_port;
 
+void InvalidateWindow(void);
+
+
+void AppWindow_NewGame(void) {
+  announce_status = NoAnnouncement;
+
+  InvalidateWindow();
+}
 
 void InvalidateWindow(void) {
   GrafPortPtr curr_port = GetPort();
@@ -64,30 +72,6 @@ void InvalidateWindow(void) {
   InvalRect(&r);
   SetPort(curr_port);
 }
-
-
-void HandleNewGame(void) {
-  char word[16];
-  Word alert_result;
-
-  if (IsGameInProgress()) {
-    alert_result = AlertWindow(awResource, NULL, rez_alert_VerifyNewGame);
-    if (alert_result == rez_alert_VerifyNewGame_Cancel) {
-      return;
-    }
-  }
-
-  announce_status = NoAnnouncement;
-
-  ResetLetterGuessEntities();
-  ResetLetterKeyEntites();
-
-  GetRandomWord(word);
-  NewSecretWord(word);
-  NewGame();
-  InvalidateWindow();
-}
-
 
 void HandleKeyPress (EventRecord event)
 {
