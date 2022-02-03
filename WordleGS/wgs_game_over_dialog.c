@@ -40,6 +40,7 @@ void GameOverDialogDrawContents (void) {
   int i, h, offset;
   int max_wins = 0;
   int stat;
+  char secret_word[] = "     ";
   Rect r;
   
   // Erase Background
@@ -59,7 +60,8 @@ void GameOverDialogDrawContents (void) {
     MoveTo(8, 10);
     DrawCString("The word was:\0");
     MoveTo(8, 28);
-    DrawCString(GetSecretWord());
+    GameEngine_GetSecretWord(secret_word);
+    DrawCString(secret_word);
   }
   
   for (i=0; i<6; i++) {

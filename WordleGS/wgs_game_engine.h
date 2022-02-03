@@ -38,6 +38,7 @@ void GameEngine_Destroy(void);
 /* Game Methods */
 
 wgs_game_state GameEngine_GetGameState(void);
+void GameEngine_GetSecretWord(char *word);
 
 void GameEngine_GuessCurrentWord(void);
 

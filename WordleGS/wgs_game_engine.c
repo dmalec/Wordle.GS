@@ -70,6 +70,14 @@ wgs_game_state GameEngine_GetGameState(void) {
   return wgs_game_engine_game_state;
 }
 
+void GameEngine_GetSecretWord(char *word) {
+  int i;
+
+  for (i=0; i<5; i++) {
+    word[i] = wgs_game_engine_secret_word[i];
+  }
+}
+
 int GameEngine_IndexOfLetter(char* word, char letter) {
   int i;
   
