@@ -155,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				366F801127AB5BC1006239DB /* Game Engine */,
+				36CA6EB127AB6875008F1581 /* UI */,
 				3678008327A100E7002A9ACC /* main.h */,
 				3678008127A100E7002A9ACC /* main.c */,
 				3678008427A100E7002A9ACC /* main.rez */,
@@ -164,8 +165,6 @@
 				3630F8CC27A5B2F60018042C /* wgs_game_entities.c */,
 				3630F8C927A5B2EB0018042C /* wgs_game_model.h */,
 				3630F8CE27A5B2F60018042C /* wgs_game_model.c */,
-				3630F8C727A5B2EB0018042C /* wgs_game_over_dialog.h */,
-				3630F8CF27A5B2F60018042C /* wgs_game_over_dialog.c */,
 				3630F8C627A5B2EA0018042C /* wgs_render_system.h */,
 				3630F8D127A5B2F60018042C /* wgs_render_system.c */,
 				36B5FF0027A3A06D0097B2BD /* data */,
@@ -210,6 +209,15 @@
 				36B5FF0227A3A06D0097B2BD /* secrets.txt */,
 			);
 			path = data;
+			sourceTree = "<group>";
+		};
+		36CA6EB127AB6875008F1581 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				3630F8C727A5B2EB0018042C /* wgs_game_over_dialog.h */,
+				3630F8CF27A5B2F60018042C /* wgs_game_over_dialog.c */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
