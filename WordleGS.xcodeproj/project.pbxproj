@@ -12,6 +12,10 @@
 		3630F8D427A5B2F60018042C /* wgs_game_model.c in Sources */ = {isa = PBXBuildFile; fileRef = 3630F8CE27A5B2F60018042C /* wgs_game_model.c */; };
 		3630F8D527A5B2F60018042C /* wgs_game_over_dialog.c in Sources */ = {isa = PBXBuildFile; fileRef = 3630F8CF27A5B2F60018042C /* wgs_game_over_dialog.c */; };
 		3630F8D727A5B2F60018042C /* wgs_render_system.c in Sources */ = {isa = PBXBuildFile; fileRef = 3630F8D127A5B2F60018042C /* wgs_render_system.c */; };
+		366F800127AB5942006239DB /* wgs_alphabet_state.c in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E28227AB470A002F9611 /* wgs_alphabet_state.c */; };
+		366F800227AB5942006239DB /* wgs_dictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E27F27AB470A002F9611 /* wgs_dictionary.c */; };
+		366F800327AB5942006239DB /* wgs_game_guesses.c in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E28427AB470A002F9611 /* wgs_game_guesses.c */; };
+		366F800427AB5942006239DB /* wgs_game_engine.c in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E28127AB470A002F9611 /* wgs_game_engine.c */; };
 		3678008227A100E7002A9ACC /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 3678008127A100E7002A9ACC /* main.c */; };
 		3678008527A100E7002A9ACC /* main.rez in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3678008427A100E7002A9ACC /* main.rez */; };
 		3678008727A100E7002A9ACC /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 3678008627A100E7002A9ACC /* Makefile */; };
@@ -112,6 +116,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		366F801127AB5BC1006239DB /* Game Engine */ = {
+			isa = PBXGroup;
+			children = (
+				36B6E28227AB470A002F9611 /* wgs_alphabet_state.c */,
+				36B6E28627AB470A002F9611 /* wgs_alphabet_state.h */,
+				36B6E27F27AB470A002F9611 /* wgs_dictionary.c */,
+				36B6E27E27AB470A002F9611 /* wgs_dictionary.h */,
+				36B6E28127AB470A002F9611 /* wgs_game_engine.c */,
+				36B6E28027AB470A002F9611 /* wgs_game_engine.h */,
+				36B6E28427AB470A002F9611 /* wgs_game_guesses.c */,
+				36B6E28327AB470A002F9611 /* wgs_game_guesses.h */,
+				36B6E28527AB470A002F9611 /* wgs_game_types.h */,
+			);
+			name = "Game Engine";
+			sourceTree = "<group>";
+		};
 		3678006E27A100E7002A9ACC = {
 			isa = PBXGroup;
 			children = (
@@ -134,7 +154,7 @@
 		3678008027A100E7002A9ACC /* WordleGS */ = {
 			isa = PBXGroup;
 			children = (
-				36B6E27D27AB4695002F9611 /* wgs_engine */,
+				366F801127AB5BC1006239DB /* Game Engine */,
 				3678008327A100E7002A9ACC /* main.h */,
 				3678008127A100E7002A9ACC /* main.c */,
 				3678008427A100E7002A9ACC /* main.rez */,
@@ -190,22 +210,6 @@
 				36B5FF0227A3A06D0097B2BD /* secrets.txt */,
 			);
 			path = data;
-			sourceTree = "<group>";
-		};
-		36B6E27D27AB4695002F9611 /* wgs_engine */ = {
-			isa = PBXGroup;
-			children = (
-				36B6E28227AB470A002F9611 /* wgs_alphabet_state.c */,
-				36B6E28627AB470A002F9611 /* wgs_alphabet_state.h */,
-				36B6E27F27AB470A002F9611 /* wgs_dictionary.c */,
-				36B6E27E27AB470A002F9611 /* wgs_dictionary.h */,
-				36B6E28127AB470A002F9611 /* wgs_game_engine.c */,
-				36B6E28027AB470A002F9611 /* wgs_game_engine.h */,
-				36B6E28427AB470A002F9611 /* wgs_game_guesses.c */,
-				36B6E28327AB470A002F9611 /* wgs_game_guesses.h */,
-				36B6E28527AB470A002F9611 /* wgs_game_types.h */,
-			);
-			path = wgs_engine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -342,8 +346,12 @@
 				3630F8D427A5B2F60018042C /* wgs_game_model.c in Sources */,
 				3630F8D527A5B2F60018042C /* wgs_game_over_dialog.c in Sources */,
 				3630F8D227A5B2F60018042C /* wgs_game_entities.c in Sources */,
+				366F800427AB5942006239DB /* wgs_game_engine.c in Sources */,
+				366F800227AB5942006239DB /* wgs_dictionary.c in Sources */,
+				366F800327AB5942006239DB /* wgs_game_guesses.c in Sources */,
 				3630F8D327A5B2F60018042C /* wgs_app_window.c in Sources */,
 				3678008727A100E7002A9ACC /* Makefile in Sources */,
+				366F800127AB5942006239DB /* wgs_alphabet_state.c in Sources */,
 				3678008227A100E7002A9ACC /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

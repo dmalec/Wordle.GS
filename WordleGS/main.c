@@ -39,9 +39,9 @@
 #include "wgs_game_entities.h"
 #include "wgs_game_model.h"
 #include "wgs_render_system.h"
-#include "wgs_engine/wgs_dictionary.h"
+#include "wgs_dictionary.h"
 
-#include "wgs_engine/wgs_game_engine.h"
+#include "wgs_game_engine.h"
 
 BOOLEAN done;
 EventRecord my_event;

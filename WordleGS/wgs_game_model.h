@@ -27,7 +27,7 @@
 
 #include <misctool.h>
 
-#include "wgs_engine/wgs_game_types.h"
+#include "wgs_game_types.h"
 
 
 typedef enum { Unknown, Correct, WrongPlace, UnusedLetter } wgs_square_state;

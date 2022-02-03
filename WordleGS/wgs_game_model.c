@@ -24,7 +24,7 @@
 
 #include "wgs_game_model.h"
 
-#include "wgs_engine/wgs_dictionary.h"
+#include "wgs_dictionary.h"
 #include "wgs_game_entities.h"
 
 int current_guess_row = 0;

@@ -23,7 +23,7 @@
  */
 
 #include <assert.h>
-#include "wgs_engine/wgs_game_guesses.h"
+#include "wgs_game_guesses.h"
 
 
 static int wgs_game_guesses_current_row = 0;

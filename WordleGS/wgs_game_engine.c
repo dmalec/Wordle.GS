@@ -22,17 +22,17 @@
  * SOFTWARE.
  */
 
-#include "wgs_engine/wgs_game_engine.h"
+#include "wgs_game_engine.h"
 
-#include "wgs_engine/wgs_alphabet_state.h"
-#include "wgs_engine/wgs_dictionary.h"
-#include "wgs_engine/wgs_game_guesses.h"
+#include "wgs_alphabet_state.h"
+#include "wgs_dictionary.h"
+#include "wgs_game_guesses.h"
 
 static char wgs_game_engine_secret_word[] = "DEBUG";
 
 static wgs_game_state wgs_game_engine_game_state;
 
-static wgs_game_engine_stats[7] = { 0, 0, 0, 0, 0, 0, 0 };
+static int wgs_game_engine_stats[7] = { 0, 0, 0, 0, 0, 0, 0 };
 
 
 /* Lifecycle Methods */
