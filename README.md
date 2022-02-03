@@ -1,5 +1,5 @@
 # Wordle.GS
-A clone of Wordle for the Apple IIGS.
+A clone of Wordle for the Apple IIGS. Latest release is [Version 0.2](https://github.com/dmalec/Wordle.GS/releases/tag/v0.2)
 
 ## Screen Shots
 
