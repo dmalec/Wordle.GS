@@ -22,40 +22,29 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEwgs_game_model_
-#define _GUARD_PROJECTWordleGS_FILEwgs_game_model_
+#include "wgs_game_engine.h"
 
-#include <misctool.h>
+/* State */
+static int wgs_game_engine_win_stats[WGS_GAME_ENGINE_MAX_GUESSES];
 
 
-typedef enum { Unknown, Correct, WrongPlace, UnusedLetter } wgs_square_state;
+/* Lifecycle Methods */
 
-typedef enum { InProgress, Won, Lost } wgs_game_state;
+void GameEngine_Create(void) {
+  int guess_num;
 
-typedef enum { WordFilled, MaxGuesses, InvalidWord, ValidGuess } wgs_guess_status;
+  for (guess_num=0; guess_num<WGS_GAME_ENGINE_MAX_GUESSES; guess_num++) {
+    wgs_game_engine_win_stats[guess_num] = 0;
+  }
+}
 
-void NewGame(void);
 
-void AddLetterToGuess(char letter);
-void RemoveLetterFromGuess(void);
+/* Game Methods */
 
-wgs_guess_status GuessCurrentWord(void);
+void GameEngine_IncrementWinStat(int guess_num) {
+  wgs_game_engine_win_stats[guess_num]++;
+}
 
-char GetGuessSquareLetter(int row, int col);
-wgs_square_state GetGuessSquareStatus(int row, int col);
-
-wgs_square_state GetLetterStatus(char c);
-
-wgs_game_state GetGameState(void);
-BOOLEAN IsGameInProgress(void);
-int GetGuessRow(void);
-int GetGuessCol(void);
-char *GetSecretWord(void);
-char *GetGuessWord(void);
-void NewSecretWord(char *word);
-
-int GetGamesWon(void);
-
-int IndexOfLetter(char* word, char letter);
-
-#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_model_ */
+int GameEngine_GetWinStat(int guess_num) {
+  return wgs_game_engine_win_stats[guess_num];
+}

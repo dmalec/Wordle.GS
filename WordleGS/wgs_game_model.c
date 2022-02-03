@@ -24,6 +24,8 @@
 
 #include "wgs_game_model.h"
 
+#include "wgs_game_engine.h"
+
 #include "wgs_dictionary.h"
 #include "wgs_game_entities.h"
 
@@ -48,8 +50,6 @@ wgs_square_state letter_guesses[] = {
   Unknown, Unknown, Unknown, Unknown, Unknown, Unknown, Unknown, Unknown, Unknown, Unknown,
   Unknown, Unknown, Unknown, Unknown, Unknown, Unknown
 };
-
-int stats[7] = { 0, 0, 0, 0, 0, 0, 0 };
 
 wgs_square_state guess_square_status[][] = {
   { Unknown, Unknown, Unknown, Unknown, Unknown},
@@ -162,7 +162,7 @@ wgs_guess_status GuessCurrentWord(void) {
   }
   
   if (matches >= 5) {
-    stats[current_guess_row]++;
+    GameEngine_IncrementWinStat(current_guess_row);
     game_state = Won;
   } else if (current_guess_row >= 5) {
     game_state = Lost;
@@ -225,10 +225,6 @@ void NewSecretWord(char *word) {
     secret_word[i] = word[i];
   }
   secret_word[5] = '\0';
-}
-
-int GetGuessNumberWon(int guess_num) {
-  return stats[guess_num];
 }
 
 int IndexOfLetter(char* word, char letter) {

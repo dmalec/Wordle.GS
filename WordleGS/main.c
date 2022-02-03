@@ -35,6 +35,7 @@
 
 #include "main.h"
 
+#include "wgs_game_engine.h"
 #include "wgs_app_window.h"
 #include "wgs_game_entities.h"
 #include "wgs_game_model.h"
@@ -139,7 +140,7 @@ int main (void) {
   InitMenus();
   InitCursor();
   
-  
+  GameEngine_Create();
   CreateLetterGuessEntities();
   CreateLetterKeyEntites();
   LoadDictionary();
