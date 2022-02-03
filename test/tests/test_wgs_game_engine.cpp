@@ -29,17 +29,38 @@ extern "C" {
 }
 
 
+TEST_GROUP(GameEngine_Creation) {
+};
+
+TEST(GameEngine_Creation, Create) {
+  GameEngine_Create();
+
+  for (int guess_num=0; guess_num<WGS_GAME_ENGINE_MAX_GUESSES; guess_num++) {
+    LONGS_EQUAL_TEXT(0, GameEngine_GetWinStat(guess_num), "All win stats should start at zero");
+  }
+
+  ENUMS_EQUAL_INT_TEXT(InProgress, GameEngine_GetGameState(), "Game should start in 'InProgress'");
+}
+
+
 TEST_GROUP(GameEngine) {
   void setup() {
     GameEngine_Create();
   }
 };
 
+TEST(GameEngine, NewGame) {
+  GameEngine_SetGameState(Won);
 
-TEST(GameEngine, GetWinStat) {
-  for (int guess_num=0; guess_num<WGS_GAME_ENGINE_MAX_GUESSES; guess_num++) {
-    LONGS_EQUAL_TEXT(0, GameEngine_GetWinStat(guess_num), "Win stat should start at zero");
-  }
+  GameEngine_NewGame();
+
+  ENUMS_EQUAL_INT_TEXT(InProgress, GameEngine_GetGameState(), "Game should start in 'InProgress'");
+}
+
+TEST(GameEngine, SetGameState) {
+  GameEngine_SetGameState(Lost);
+
+  ENUMS_EQUAL_INT_TEXT(Lost, GameEngine_GetGameState(), "Game state should be set to 'Lost'");
 }
 
 TEST(GameEngine, GetWinStatIncrementWinStat) {

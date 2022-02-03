@@ -49,12 +49,12 @@ void GameOverDialogDrawContents (void) {
   SetForeColor(0);
   SetBackColor(15);
   
-  if (GetGameState() == Won) {
+  if (GameEngine_GetGameState() == Won) {
     MoveTo(8, 10);
     DrawCString("Congratulations!\0");
     MoveTo(8, 28);
     DrawCString("You guessed the word!\0");
-  } else if (GetGameState() == Lost) {
+  } else if (GameEngine_GetGameState() == Lost) {
     MoveTo(8, 10);
     DrawCString("The word was:\0");
     MoveTo(8, 28);
@@ -63,12 +63,43 @@ void GameOverDialogDrawContents (void) {
   
   for (i=0; i<6; i++) {
     MoveTo(8, 50 + i * 14);
-    printf("%d", i);
+    printf("%d", i+1);
     
     stat = GameEngine_GetWinStat(i);
     if (stat > max_wins) {
       max_wins = stat;
     }
+  }
+
+  SetSolidPenPat(0);
+
+  for (i=0; i<6; i++) {
+    r.h1 = 18;
+    r.v1 = 50 + i * 14 - 10;
+
+    r.h2 = r.h1 + 240;
+    r.v2 = r.v1 + 13;
+
+    FrameRect(&r);
+  }
+
+  SetSolidPenPat(10); // greem
+
+  for (i=0; i<6; i++) {
+    stat = GameEngine_GetWinStat(i);
+    if (stat == 0) {
+      offset = 0;
+    } else {
+      offset = 230 * ((float)stat / (float)max_wins) - 2;
+    }
+
+    r.h1 = 19;
+    r.v1 = 50 + i * 14 - 9;
+
+    r.h2 = r.h1 + 10 + offset;
+    r.v2 = r.v1 + 11;
+
+    FrameRect(&r);
   }
 
   SetSolidPenPat(5);
@@ -78,7 +109,7 @@ void GameOverDialogDrawContents (void) {
     if (stat == 0) {
       offset = 0;
     } else {
-      offset = 230 * ((float)stat / (float)max_wins);
+      offset = 230 * ((float)stat / (float)max_wins) - 2;
     }
     
     r.h1 = 20;
@@ -98,7 +129,7 @@ void GameOverDialogDrawContents (void) {
     if (stat == 0) {
       offset = 0;
     } else {
-      offset = 230 * ((float)stat / (float)max_wins);
+      offset = 230 * ((float)stat / (float)max_wins) - 2;
     }
     
     h = 20 + offset;

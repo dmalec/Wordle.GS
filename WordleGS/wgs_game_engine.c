@@ -25,6 +25,9 @@
 #include "wgs_game_engine.h"
 
 /* State */
+
+wgs_game_state wgs_game_engine_game_state;
+
 static int wgs_game_engine_win_stats[WGS_GAME_ENGINE_MAX_GUESSES];
 
 
@@ -38,8 +41,21 @@ void GameEngine_Create(void) {
   }
 }
 
+void GameEngine_NewGame(void) {
+  wgs_game_engine_game_state = InProgress;
+}
+
 
 /* Game Methods */
+
+wgs_game_state GameEngine_GetGameState(void) {
+  return wgs_game_engine_game_state;
+}
+
+void GameEngine_SetGameState(wgs_game_state game_state) {
+  wgs_game_engine_game_state = game_state;
+}
+
 
 void GameEngine_IncrementWinStat(int guess_num) {
   wgs_game_engine_win_stats[guess_num]++;

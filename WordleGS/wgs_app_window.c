@@ -31,6 +31,7 @@
 
 #include "main.h"
 #include "wgs_app_window.h"
+#include "wgs_game_engine.h"
 #include "wgs_dictionary.h"
 #include "wgs_game_entities.h"
 #include "wgs_game_model.h"
@@ -77,6 +78,8 @@ void HandleNewGame(void) {
     }
   }
 
+  GameEngine_NewGame();
+
   announce_status = NoAnnouncement;
 
   ResetLetterGuessEntities();
@@ -94,7 +97,7 @@ void HandleKeyPress (EventRecord event)
   BOOLEAN manual_update_needed = TRUE;
   char c = (char) event.message;
 
-  if (GetGameState() != InProgress) return;
+  if (GameEngine_GetGameState() != InProgress) return;
   
   if (isalpha(c)) {
     AddLetterToGuess(c);
@@ -187,7 +190,7 @@ void ShowEndGame(void) {
 void AppTick(void) {
 
   if (drawing_status == Pending) return;
-  if (GetGameState() == InProgress) return;
+  if (GameEngine_GetGameState() == InProgress) return;
   
   if (announce_status == NoAnnouncement) {
     wgs_game_over_response response = HandleGameOverDialog();

@@ -30,12 +30,22 @@
 #define WGS_GAME_ENGINE_MAX_GUESSES                    7
 
 
+/* Enums */
+
+typedef enum { InProgress, Won, Lost } wgs_game_state;
+
+
 /* Lifecycle Methods */
 
 void GameEngine_Create(void);
+void GameEngine_NewGame(void);
 
 
 /* Game Methods */
+
+wgs_game_state GameEngine_GetGameState(void);
+void GameEngine_SetGameState(wgs_game_state game_state);
+
 
 void GameEngine_IncrementWinStat(int guess_num);
 int GameEngine_GetWinStat(int guess_num);
