@@ -31,6 +31,9 @@
 #include "wgs_game_over_dialog.h"
 #include "wgs_game_model.h"
 
+#include "wgs_game_engine.h"
+
+
 GrafPortPtr game_over_dialog_ptr;
 
 void GameOverDialogDrawContents (void) {
@@ -47,12 +50,12 @@ void GameOverDialogDrawContents (void) {
   SetForeColor(0);
   SetBackColor(15);
   
-  if (GetGameState() == Won) {
+  if (GameEngine_GetGameState() == Won) {
     MoveTo(8, 10);
     DrawCString("Congratulations!\0");
     MoveTo(8, 28);
     DrawCString("You guessed the word!\0");
-  } else if (GetGameState() == Lost) {
+  } else if (GameEngine_GetGameState() == Lost) {
     MoveTo(8, 10);
     DrawCString("The word was:\0");
     MoveTo(8, 28);

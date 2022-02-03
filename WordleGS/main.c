@@ -76,6 +76,7 @@ void HandleMenu (void) {
       break;
       
     case 255:
+      GameEngine_NewGame();
       HandleNewGame();
       break;
       
@@ -148,6 +149,7 @@ int main (void) {
   CreateRenderSystem();
   
   CreateAppWindow();
+  GameEngine_NewGame();
   HandleNewGame();
   
   PenNormal();

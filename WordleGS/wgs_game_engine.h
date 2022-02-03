@@ -25,6 +25,8 @@
 #ifndef _GUARD_PROJECTWordleGS_FILEwgs_game_engine_
 #define _GUARD_PROJECTWordleGS_FILEwgs_game_engine_
 
+#include "wgs_game_types.h"
+
 /* Lifecycle Methods */
 
 void GameEngine_Create(void);
@@ -34,6 +36,8 @@ void GameEngine_Destroy(void);
 
 
 /* Game Methods */
+
+wgs_game_state GameEngine_GetGameState(void);
 
 void GameEngine_GuessCurrentWord(void);
 

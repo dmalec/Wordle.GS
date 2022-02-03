@@ -66,6 +66,10 @@ void GameEngine_Destroy(void) {
 
 /* Game Methods */
 
+wgs_game_state GameEngine_GetGameState(void) {
+  return wgs_game_engine_game_state;
+}
+
 int GameEngine_IndexOfLetter(char* word, char letter) {
   int i;
   
