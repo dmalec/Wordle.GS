@@ -30,8 +30,6 @@
 
 typedef enum { Unknown, Correct, WrongPlace, UnusedLetter } wgs_square_state;
 
-typedef enum { InProgress, Won, Lost } wgs_game_state;
-
 typedef enum { WordFilled, MaxGuesses, InvalidWord, ValidGuess } wgs_guess_status;
 
 void NewGame(void);
@@ -46,7 +44,6 @@ wgs_square_state GetGuessSquareStatus(int row, int col);
 
 wgs_square_state GetLetterStatus(char c);
 
-wgs_game_state GetGameState(void);
 BOOLEAN IsGameInProgress(void);
 int GetGuessRow(void);
 int GetGuessCol(void);

@@ -34,8 +34,6 @@ int current_guess_col = 0;
 
 char secret_word[6] = "ROBOT";
 
-wgs_game_state game_state = InProgress;
-
 char* guesses[] = {
   "     ",
   "     ",
@@ -66,7 +64,6 @@ void NewGame(void) {
 
   current_guess_row = 0;
   current_guess_col = 0;
-  game_state = InProgress;
 
   for (row=0; row<6; row++) {
     for (col=0; col<5; col++) {
@@ -163,9 +160,9 @@ wgs_guess_status GuessCurrentWord(void) {
   
   if (matches >= 5) {
     GameEngine_IncrementWinStat(current_guess_row);
-    game_state = Won;
+    GameEngine_SetGameState(Won);
   } else if (current_guess_row >= 5) {
-    game_state = Lost;
+    GameEngine_SetGameState(Lost);
   } else {
     current_guess_col = 0;
     current_guess_row++;
@@ -190,13 +187,8 @@ wgs_square_state GetLetterStatus(char c) {
 }
 
 
-wgs_game_state GetGameState(void) {
-  return game_state;
-}
-
-
 BOOLEAN IsGameInProgress(void) {
-  return game_state == InProgress && (current_guess_row > 0 || current_guess_col > 0);
+  return GameEngine_GetGameState() == InProgress && (current_guess_row > 0 || current_guess_col > 0);
 }
 
 
