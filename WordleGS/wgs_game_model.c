@@ -22,104 +22,42 @@
  * SOFTWARE.
  */
 
-#include "wgs_game_model.h"
-
-#include "wgs_game_engine.h"
 #include "wgs_alphabet_state.h"
-
 #include "wgs_dictionary.h"
-#include "wgs_game_entities.h"
+#include "wgs_game_engine.h"
+#include "wgs_game_model.h"
+#include "wgs_guess_state.h"
 
-int current_guess_row = 0;
-int current_guess_col = 0;
 
 char secret_word[6] = "ROBOT";
 
-char* guesses[] = {
-  "     ",
-  "     ",
-  "     ",
-  "     ",
-  "     ",
-  "     "
-};
-
-wgs_square_state letter_guesses[] = {
-  Unknown, Unknown, Unknown, Unknown, Unknown, Unknown, Unknown, Unknown, Unknown, Unknown,
-  Unknown, Unknown, Unknown, Unknown, Unknown, Unknown, Unknown, Unknown, Unknown, Unknown,
-  Unknown, Unknown, Unknown, Unknown, Unknown, Unknown
-};
-
-wgs_square_state guess_square_status[][] = {
-  { Unknown, Unknown, Unknown, Unknown, Unknown},
-  { Unknown, Unknown, Unknown, Unknown, Unknown},
-  { Unknown, Unknown, Unknown, Unknown, Unknown},
-  { Unknown, Unknown, Unknown, Unknown, Unknown},
-  { Unknown, Unknown, Unknown, Unknown, Unknown},
-  { Unknown, Unknown, Unknown, Unknown, Unknown}
-};
-
 
 void NewGame(void) {
-  int i, row, col;
-
-  current_guess_row = 0;
-  current_guess_col = 0;
-
-  for (row=0; row<6; row++) {
-    for (col=0; col<5; col++) {
-      guesses[row][col] = ' ';
-      guess_square_status[row][col] = Unknown;
-    }
-  }
-  
-  for (i=0; i<26; i++) {
-    letter_guesses[i] = Unknown;
-  }
-}
-
-
-void AddLetterToGuess(char letter) {
-  if (!isalpha(letter)) return;
-  
-  if (current_guess_col >= 5) return;
-  
-  guesses[current_guess_row][current_guess_col] = toupper(letter);
-  
-  wgs_letter_guess_entities[current_guess_row][current_guess_col].letter = toupper(letter);
-  wgs_letter_guess_entities[current_guess_row][current_guess_col].image_state = ImageDirty;
-  
-  current_guess_col++;
-}
-
-
-void RemoveLetterFromGuess(void) {
-  if (current_guess_col <= 0) return;
-  
-  current_guess_col--;
-  guesses[current_guess_row][current_guess_col] = ' ';
-
-  wgs_letter_guess_entities[current_guess_row][current_guess_col].letter = ' ';
-  wgs_letter_guess_entities[current_guess_row][current_guess_col].image_state = ImageDirty;
 }
 
 
 wgs_guess_status GuessCurrentWord(void) {
+  int current_guess_row = GuessState_GetRow();
   int i, letter_index;
   int matches = 0;
   char tmp_secret[5];
+  char guess_word[] = "     ";
   char c;
   
-  if (current_guess_col < 5) return WordFilled;
+  if (GuessState_GetCol() < 5) return WordFilled;
 
-  if (current_guess_row >= 6) return MaxGuesses;
+  if (GuessState_GetRow() >= 6) return MaxGuesses;
   
-  if (!IsValidGuess(guesses[current_guess_row])) return InvalidWord;
+  GuessState_GetGuessWord(guess_word);
+
+  if (!IsValidGuess(guess_word)) return InvalidWord;
   
   for (i=0; i<5; i++) {
+    wgs_letter_state letter_state = GuessState_GetLetterState(current_guess_row, i);
+
     // Mark matches in advance - this will help with properly
     // marking misplaced versus incorrect letters later.
-    if (guesses[current_guess_row][i] == secret_word[i]) {
+    if (letter_state.letter == secret_word[i]) {
       tmp_secret[i] = '+';
     } else {
       tmp_secret[i] = secret_word[i];
@@ -127,36 +65,30 @@ wgs_guess_status GuessCurrentWord(void) {
   }
 
   for (i=0; i<5; i++) {
-    c = guesses[current_guess_row][i];
+    wgs_letter_state letter_state = GuessState_GetLetterState(current_guess_row, i);
+
+    c = letter_state.letter;
     letter_index = c - 'A';
     
     if (tmp_secret[i] == '+') {
-      letter_guesses[letter_index] = Correct;
-      guess_square_status[current_guess_row][i] = Correct;
-      wgs_letter_guess_entities[current_guess_row][i].state = CorrectGuess;
+      GuessState_MaybeUpdateLetterStatus(i, gtCorrectLetter);
       AlphabetState_MaybeUpdateLetterStatus(c, gtCorrectLetter);
       matches++;
     } else {
       int letter_idx = IndexOfLetter(tmp_secret, c);
 
       if (letter_idx >= 0) {
-        letter_guesses[letter_index] = WrongPlace;
-        guess_square_status[current_guess_row][i] = WrongPlace;
-        wgs_letter_guess_entities[current_guess_row][i].state = WrongPlaceGuess;
+        GuessState_MaybeUpdateLetterStatus(i, gtWrongPlaceLetter);
         AlphabetState_MaybeUpdateLetterStatus(c, gtWrongPlaceLetter);
 
         // Clear the letter, so it won't be double counted
         // if it appears again in the guess.
         tmp_secret[letter_idx] = ' ';
       } else {
-        letter_guesses[letter_index] = UnusedLetter;
-        guess_square_status[current_guess_row][i] = UnusedLetter;
-        wgs_letter_guess_entities[current_guess_row][i].state = IncorrectGuess;
+        GuessState_MaybeUpdateLetterStatus(i, gtIncorrectLetter);
         AlphabetState_MaybeUpdateLetterStatus(c, gtIncorrectLetter);
       }
     }
-    
-    wgs_letter_guess_entities[current_guess_row][i].image_state = ImageDirty;
   }
   
   if (matches >= 5) {
@@ -165,41 +97,15 @@ wgs_guess_status GuessCurrentWord(void) {
   } else if (current_guess_row >= 5) {
     GameEngine_SetGameState(Lost);
   } else {
-    current_guess_col = 0;
-    current_guess_row++;
+    GuessState_NextGuess();
   }
   
   return ValidGuess;
 }
 
 
-char GetGuessSquareLetter(int row, int col) {
-  return guesses[row][col];
-}
-
-
-wgs_square_state GetGuessSquareStatus(int row, int col) {
-  return guess_square_status[row][col];
-}
-
-
-wgs_square_state GetLetterStatus(char c) {
-  return letter_guesses[c - 'A'];
-}
-
-
 BOOLEAN IsGameInProgress(void) {
-  return GameEngine_GetGameState() == InProgress && (current_guess_row > 0 || current_guess_col > 0);
-}
-
-
-int GetGuessRow(void) {
-  return current_guess_row;
-}
-
-
-int GetGuessCol(void) {
-  return current_guess_col;
+  return GameEngine_GetGameState() == InProgress && (GuessState_GetRow() > 0 || GuessState_GetCol() > 0);
 }
 
 
@@ -207,9 +113,6 @@ char *GetSecretWord(void) {
   return secret_word;
 }
 
-char *GetGuessWord(void) {
-  return guesses[current_guess_row];
-}
 
 void NewSecretWord(char *word) {
   int i;

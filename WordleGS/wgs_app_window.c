@@ -33,14 +33,16 @@
 
 #include "wgs_game_engine.h"
 #include "wgs_alphabet_state.h"
+#include "wgs_guess_state.h"
 
 #include "main.h"
 #include "wgs_dictionary.h"
-#include "wgs_game_entities.h"
 #include "wgs_game_model.h"
 #include "wgs_game_over_dialog.h"
 #include "wgs_render_system.h"
 
+#define WGS_LETTERS_IN_WORD            5
+#define WGS_NUMBER_OF_GUESSES          6
 
 #define SQUARE_SIZE 20
 #define SQUARE_INSET 2
@@ -85,8 +87,6 @@ void HandleNewGame(void) {
 
   announce_status = NoAnnouncement;
 
-  ResetLetterGuessEntities();
-
   GetRandomWord(word);
   NewSecretWord(word);
   NewGame();
@@ -102,15 +102,18 @@ void HandleKeyPress (EventRecord event)
   if (GameEngine_GetGameState() != InProgress) return;
   
   if (isalpha(c)) {
-    AddLetterToGuess(c);
+    GuessState_AddLetterToGuess(c);
   } else if (c == 0x08 || c == 0x7F) {
-    RemoveLetterFromGuess();
+    GuessState_RemoveLetterFromGuess();
   } else if (c == 0x0D) {
     wgs_guess_status status = GuessCurrentWord();
-    
+
     if (status == InvalidWord) {
-      char *guess_word = GetGuessWord();
-      AlertWindow(awCString+awResource, (Pointer) &guess_word, rez_alert_UnknownWord);
+      char guess_word[] = "     ";
+      char *ptr = guess_word;
+
+      GuessState_GetGuessWord(guess_word);
+      AlertWindow(awCString+awResource, (Pointer)&ptr, rez_alert_UnknownWord);
       manual_update_needed = false;
     }
   }
@@ -134,15 +137,13 @@ void DrawContents (void)
 
     for (row=0; row<WGS_NUMBER_OF_GUESSES; row++) {
       for (col=0; col<WGS_LETTERS_IN_WORD; col++) {
-        wgs_letter_guess *letter_guess = &(wgs_letter_guess_entities[row][col]);
+        wgs_letter_state letter_state = GuessState_GetLetterState(row, col);
 
-        if (letter_guess->image_state != ImageRendered) continue;
+        if (! letter_state.changed) continue;
         
-        PPToPort(&info, &letter_guess->box, letter_guess->box.h1, letter_guess->box.v1, modeCopy);
+        PPToPort(&info, &letter_state.render_box, letter_state.render_box.h1, letter_state.render_box.v1, modeCopy);
 
-        RenderSystemDrawLetterGuess(letter_guess);
-        
-        letter_guess->image_state = ImageStatic;
+        RenderSystemDrawLetterGuess(letter_state);
       }
     }
 

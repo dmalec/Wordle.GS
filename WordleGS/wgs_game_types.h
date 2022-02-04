@@ -34,6 +34,8 @@
 
 #define WGS_GAME_ENGINE_MAX_GUESSES                    7
 
+#define WGS_GAME_GUESSES_NUMBER_OF_ROWS                6
+#define WGS_GAME_GUESSES_NUMBER_OF_COLS                5
 
 /* Enums */
 
@@ -42,6 +44,14 @@ typedef enum {
   Won,
   Lost
 } wgs_game_state;
+
+typedef enum {
+  WordIncomplete,
+  WordFilled,
+  MaxGuesses,
+  InvalidWord,
+  ValidGuess
+} wgs_guess_status;
 
 typedef enum {
   gtUnusedLetter,
