@@ -22,27 +22,43 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEwgs_game_engine_
-#define _GUARD_PROJECTWordleGS_FILEwgs_game_engine_
+#ifndef _GUARD_PROJECTWordleGS_FILEwgs_game_types_
+#define _GUARD_PROJECTWordleGS_FILEwgs_game_types_
 
-#include "wgs_game_types.h"
-
-
-/* Lifecycle Methods */
-
-void GameEngine_Create(void);
-void GameEngine_NewGame(void);
-void GameEngine_UpdateFinished(void);
-void GameEngine_Destroy(void);
+#include <types.h>
 
 
-/* Game Methods */
+/* Constants */
 
-wgs_game_state GameEngine_GetGameState(void);
-void GameEngine_SetGameState(wgs_game_state game_state);
+#define WGS_GAME_GUESSES_NUMBER_OF_LETTERS            26
+
+#define WGS_GAME_ENGINE_MAX_GUESSES                    7
 
 
-void GameEngine_IncrementWinStat(int guess_num);
-int GameEngine_GetWinStat(int guess_num);
+/* Enums */
 
-#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_engine_ */
+typedef enum {
+  InProgress,
+  Won,
+  Lost
+} wgs_game_state;
+
+typedef enum {
+  gtUnusedLetter,
+  gtCorrectLetter,
+  gtWrongPlaceLetter,
+  gtIncorrectLetter
+} wgs_letter_status;
+
+
+/* Structs */
+
+typedef struct wgs_letter_state {
+  char letter;
+  wgs_letter_status status;
+  Rect render_box;
+  BOOLEAN changed;
+} wgs_letter_state;
+
+
+#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_types_ */

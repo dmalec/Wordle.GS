@@ -24,12 +24,7 @@
 
 #include "wgs_game_entities.h"
 
-const char* WGS_KEYBOARD_LETTERS[] = { "QWERTYUIOP", "ASDFGHJKL ", "ZXCVBNM   " };
-const int WGS_KEYBOARD_INSET[] = { 0, 4, 10};
-extern const int WGS_KEYBOARD_LEN[WGS_NUMBER_OF_KEY_ROWS] = { 10, 9, 7 };
-
 wgs_letter_guess wgs_letter_guess_entities[WGS_NUMBER_OF_GUESSES][WGS_LETTERS_IN_WORD];
-wgs_letter_key wgs_letter_key_entities[WGS_NUMBER_OF_KEY_ROWS][WGS_NUMBER_OF_KEY_COLUMNS];
 
 
 void CreateLetterGuessEntities(void) {
@@ -62,61 +57,6 @@ void ResetLetterGuessEntities(void) {
       letter_guess->state = UnusedGuess;
       letter_guess->letter = ' ';
       letter_guess->image_state = ImageDirty;
-    }
-  }
-}
-
-
-void CreateLetterKeyEntites(void) {
-  int row, col;
-  int grid_left = (320 / 2) - (WGS_NUMBER_OF_KEY_COLUMNS * WGS_LETTER_KEY_SQUARE_SIZE) / 2;
-
-  for (row=0; row<WGS_NUMBER_OF_KEY_ROWS; row++) {
-    for (col=0; col<WGS_NUMBER_OF_KEY_COLUMNS; col++) {
-      wgs_letter_key *letter_key = &(wgs_letter_key_entities[row][col]);
-
-      letter_key->box.h1 = grid_left + WGS_KEYBOARD_INSET[row] + col * WGS_LETTER_KEY_SQUARE_SIZE + WGS_LETTER_KEY_SQUARE_INSET;
-      letter_key->box.h2 = letter_key->box.h1 + WGS_LETTER_KEY_SQUARE_SIZE - (WGS_LETTER_KEY_SQUARE_INSET * 2);
-
-      letter_key->box.v1 = WGS_LETTER_KEY_SQUARE_TOP - WGS_LETTER_KEY_SQUARE_SIZE * WGS_NUMBER_OF_KEY_ROWS + row * WGS_LETTER_KEY_SQUARE_SIZE + WGS_LETTER_KEY_SQUARE_INSET;
-      letter_key->box.v2 = letter_key->box.v1 + WGS_LETTER_KEY_SQUARE_SIZE - (WGS_LETTER_KEY_SQUARE_INSET * 2);
-    }
-  }
-
-  ResetLetterKeyEntites();
-}
-
-
-void ResetLetterKeyEntites(void) {
-  int row, col;
-
-  for (row=0; row<WGS_NUMBER_OF_KEY_ROWS; row++) {
-    for (col=0; col<WGS_NUMBER_OF_KEY_COLUMNS; col++) {
-      wgs_letter_key *letter_key = &(wgs_letter_key_entities[row][col]);
-      
-      letter_key->state = UnusedKey;
-      letter_key->letter = WGS_KEYBOARD_LETTERS[row][col];
-      letter_key->image_state = ImageDirty;
-    }
-  }
-}
-
-
-void UpdateLetterKey(char letter, wgs_key_state state) {
-  int row, col;
-
-  for (row=0; row<WGS_NUMBER_OF_KEY_ROWS; row++) {
-    for (col=0; col<WGS_NUMBER_OF_KEY_COLUMNS; col++) {
-      wgs_letter_key *letter_key = &(wgs_letter_key_entities[row][col]);
-
-      if (letter_key->letter == letter) {
-        
-        if (letter_key->state == UnusedKey ||
-            (letter_key->state == WrongPlaceKey && state == CorrectKey)) {
-          letter_key->state = state;
-          letter_key->image_state = ImageDirty;
-        }
-      }
     }
   }
 }

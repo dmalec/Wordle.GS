@@ -24,9 +24,12 @@
 
 #include "wgs_game_engine.h"
 
+#include "wgs_alphabet_state.h"
+
+
 /* State */
 
-wgs_game_state wgs_game_engine_game_state;
+static wgs_game_state wgs_game_engine_game_state;
 
 static int wgs_game_engine_win_stats[WGS_GAME_ENGINE_MAX_GUESSES];
 
@@ -39,10 +42,22 @@ void GameEngine_Create(void) {
   for (guess_num=0; guess_num<WGS_GAME_ENGINE_MAX_GUESSES; guess_num++) {
     wgs_game_engine_win_stats[guess_num] = 0;
   }
+
+  AlphabetState_Create();
 }
 
 void GameEngine_NewGame(void) {
   wgs_game_engine_game_state = InProgress;
+
+  AlphabetState_NewGame();
+}
+
+void GameEngine_UpdateFinished(void) {
+  AlphabetState_UpdateFinished();
+}
+
+void GameEngine_Destroy(void) {
+  AlphabetState_Destroy();
 }
 
 

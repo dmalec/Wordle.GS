@@ -142,7 +142,6 @@ int main (void) {
   
   GameEngine_Create();
   CreateLetterGuessEntities();
-  CreateLetterKeyEntites();
   LoadDictionary();
   CreateRenderSystem();
   
@@ -175,6 +174,7 @@ int main (void) {
   }
   
   DestroyDictionary();
+  GameEngine_Destroy();
   
   enddesk();
 }

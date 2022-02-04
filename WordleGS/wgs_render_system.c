@@ -24,11 +24,15 @@
 
 #include <memory.h>
 
+#include "wgs_game_engine.h"
+#include "wgs_alphabet_state.h"
+
 #include "wgs_game_entities.h"
 #include "wgs_render_system.h"
 
 #define WGS_TITLE_TEXT             "WORDLE GS"
 #define WGS_LETTER_GUESS_INSET_H   4
+#define WGS_LETTER_KEY_INSET_H     2
 #define WGS_LETTER_GUESS_INSET_V   (WGS_LETTER_GUESS_SQUARE_SIZE - 8)
 
 
@@ -119,45 +123,43 @@ void RenderSystemDrawLetterGuess(wgs_letter_guess *letter_guess) {
 }
 
 
-void RenderSystemDrawLetterKey(wgs_letter_key *letter_key) {
+void RenderSystemDrawLetterKey(wgs_letter_state letter_state) {
   int fill_color = 1; // dark grey
   int line_color = 15; // white
   
-  if (letter_key->letter == ' ') return;
-
-  switch (letter_key->state) {
+  switch (letter_state.status) {
       
-    case CorrectKey:
+    case gtCorrectLetter:
       line_color = 10; // green
       fill_color = 5; // dark green
       break;
       
-    case WrongPlaceKey:
+    case gtWrongPlaceLetter:
       line_color = 9; // yellow
       fill_color = 6; // orange
       break;
       
-    case IncorrectKey:
+    case gtIncorrectLetter:
       line_color = 15; // white
       fill_color = 14; // light gray
       break;
   }
 
   SetSolidPenPat(fill_color);
-  PaintRect(&letter_key->box);
+  PaintRect(&letter_state.render_box);
   
   SetForeColor(15);
   SetBackColor(fill_color);
-  MoveTo(letter_key->box.h1 + WGS_LETTER_GUESS_INSET_H, letter_key->box.v1 + WGS_LETTER_GUESS_INSET_V);
-  putchar(letter_key->letter);
+  MoveTo(letter_state.render_box.h1 + WGS_LETTER_KEY_INSET_H, letter_state.render_box.v1 + WGS_LETTER_GUESS_INSET_V);
+  putchar(letter_state.letter);
   
   SetSolidPenPat(line_color);
-  FrameRect(&letter_key->box);
+  FrameRect(&letter_state.render_box);
 }
 
 
 void RenderSystemUpdate(void) {
-  int row, col;
+  int row, col, i;
   GrafPortPtr curr_port = GetPort();
 
   SetPort(&rs_offscreen_graf_port);
@@ -174,18 +176,14 @@ void RenderSystemUpdate(void) {
     }
   }
 
-  for (row=0; row<WGS_NUMBER_OF_KEY_ROWS; row++) {
-    for (col=0; col<WGS_KEYBOARD_LEN[row]; col++) {
-      wgs_letter_key *letter_key = &(wgs_letter_key_entities[row][col]);
+  for (i=0; i<WGS_GAME_GUESSES_NUMBER_OF_LETTERS; i++) {
+    wgs_letter_state letter_state = AlphabetState_GetLetterState((char)('A' + i));
+    
+    if (! letter_state.changed) continue;
 
-      if (letter_key->image_state != ImageDirty) continue;
-      
-      RenderSystemDrawLetterKey(letter_key);
-      
-      letter_key->image_state = ImageRendered;
-    }
+    RenderSystemDrawLetterKey(letter_state);
   }
-
+  
   SetPort(curr_port);
 }
 

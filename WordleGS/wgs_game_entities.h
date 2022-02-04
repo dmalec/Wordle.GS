@@ -34,14 +34,6 @@
 #define WGS_LETTER_GUESS_SQUARE_SIZE  20
 #define WGS_LETTER_GUESS_SQUARE_INSET  2
 
-#define WGS_NUMBER_OF_KEY_ROWS         3
-#define WGS_NUMBER_OF_KEY_COLUMNS     10
-
-extern const int WGS_KEYBOARD_LEN[WGS_NUMBER_OF_KEY_ROWS];
-
-#define WGS_LETTER_KEY_SQUARE_TOP    198
-#define WGS_LETTER_KEY_SQUARE_SIZE    16
-#define WGS_LETTER_KEY_SQUARE_INSET    1
 
 typedef enum {
   ImageDirty,
@@ -66,28 +58,7 @@ typedef struct wgs_letter_guess {
 
 extern wgs_letter_guess wgs_letter_guess_entities[WGS_NUMBER_OF_GUESSES][WGS_LETTERS_IN_WORD];
 
-typedef enum {
-  UnusedKey,
-  CorrectKey,
-  WrongPlaceKey,
-  IncorrectKey
-} wgs_key_state;
-
-typedef struct wgs_letter_key {
-  Rect box;
-  char letter;
-  wgs_key_state state;
-  wgs_image_state image_state;
-} wgs_letter_key;
-
-extern wgs_letter_key wgs_letter_key_entities[WGS_NUMBER_OF_KEY_ROWS][WGS_NUMBER_OF_KEY_COLUMNS];
-
 void CreateLetterGuessEntities(void);
 void ResetLetterGuessEntities(void);
-
-void CreateLetterKeyEntites(void);
-void ResetLetterKeyEntites(void);
-
-void UpdateLetterKey(char letter, wgs_key_state state);
 
 #endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_entities_ */
