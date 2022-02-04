@@ -27,6 +27,7 @@ CPPUTEST_HOME = ./cpputest
 
 SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_alphabet_state.c
 SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_game_engine.c
+SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_guess_state.c
 
 TEST_SRC_DIRS += tests
 

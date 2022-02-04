@@ -22,43 +22,35 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEwgs_game_entities_
-#define _GUARD_PROJECTWordleGS_FILEwgs_game_entities_
 
-#include <quickdraw.h>
+#ifndef _GUARD_PROJECTWordleGS_FILEwgs_guess_state_
+#define _GUARD_PROJECTWordleGS_FILEwgs_guess_state_
 
-#define WGS_LETTERS_IN_WORD            5
-#define WGS_NUMBER_OF_GUESSES          6
-
-#define WGS_LETTER_GUESS_SQUARE_TOP   25
-#define WGS_LETTER_GUESS_SQUARE_SIZE  20
-#define WGS_LETTER_GUESS_SQUARE_INSET  2
+#include "wgs_game_types.h"
 
 
-typedef enum {
-  ImageDirty,
-  ImageRendered,
-  ImageCopied,
-  ImageStatic
-} wgs_image_state;
+/* Lifecycle Methods */
 
-typedef enum {
-  UnusedGuess,
-  CorrectGuess,
-  WrongPlaceGuess,
-  IncorrectGuess
-} wgs_guess_state;
+void GuessState_Create(void);
+void GuessState_NewGame(void);
+void GuessState_UpdateFinished(void);
+void GuessState_Destroy(void);
 
-typedef struct wgs_letter_guess {
-  Rect box;
-  char letter;
-  wgs_guess_state state;
-  wgs_image_state image_state;
-} wgs_letter_guess;
 
-extern wgs_letter_guess wgs_letter_guess_entities[WGS_NUMBER_OF_GUESSES][WGS_LETTERS_IN_WORD];
+/* Game Methods */
 
-void CreateLetterGuessEntities(void);
-void ResetLetterGuessEntities(void);
+int GuessState_GetRow(void);
+int GuessState_GetCol(void);
 
-#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_entities_ */
+wgs_letter_state GuessState_GetLetterState(int row, int col);
+wgs_guess_status GuessState_GetGuessStatus(void);
+
+BOOLEAN GuessState_AddLetterToGuess(char letter);
+BOOLEAN GuessState_RemoveLetterFromGuess(void);
+void GuessState_MaybeUpdateLetterStatus(int col, wgs_letter_status status);
+void GuessState_NextGuess(void);
+
+void GuessState_GetGuessWord(char *word);
+
+
+#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_guess_state_ */

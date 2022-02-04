@@ -25,6 +25,7 @@
 #include "wgs_game_engine.h"
 
 #include "wgs_alphabet_state.h"
+#include "wgs_guess_state.h"
 
 
 /* State */
@@ -44,20 +45,24 @@ void GameEngine_Create(void) {
   }
 
   AlphabetState_Create();
+  GuessState_Create();
 }
 
 void GameEngine_NewGame(void) {
   wgs_game_engine_game_state = InProgress;
 
   AlphabetState_NewGame();
+  GuessState_NewGame();
 }
 
 void GameEngine_UpdateFinished(void) {
   AlphabetState_UpdateFinished();
+  GuessState_UpdateFinished();
 }
 
 void GameEngine_Destroy(void) {
   AlphabetState_Destroy();
+  GuessState_Destroy();
 }
 
 

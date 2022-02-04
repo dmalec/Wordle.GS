@@ -27,28 +27,21 @@
 
 #include <misctool.h>
 
+#include "wgs_game_types.h"
 
 typedef enum { Unknown, Correct, WrongPlace, UnusedLetter } wgs_square_state;
 
-typedef enum { WordFilled, MaxGuesses, InvalidWord, ValidGuess } wgs_guess_status;
-
 void NewGame(void);
-
-void AddLetterToGuess(char letter);
-void RemoveLetterFromGuess(void);
 
 wgs_guess_status GuessCurrentWord(void);
 
 char GetGuessSquareLetter(int row, int col);
 wgs_square_state GetGuessSquareStatus(int row, int col);
 
-wgs_square_state GetLetterStatus(char c);
-
 BOOLEAN IsGameInProgress(void);
 int GetGuessRow(void);
 int GetGuessCol(void);
 char *GetSecretWord(void);
-char *GetGuessWord(void);
 void NewSecretWord(char *word);
 
 int GetGamesWon(void);

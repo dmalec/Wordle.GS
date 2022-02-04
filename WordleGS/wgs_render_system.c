@@ -24,16 +24,17 @@
 
 #include <memory.h>
 
-#include "wgs_game_engine.h"
 #include "wgs_alphabet_state.h"
-
-#include "wgs_game_entities.h"
+#include "wgs_game_engine.h"
+#include "wgs_game_types.h"
+#include "wgs_guess_state.h"
 #include "wgs_render_system.h"
+
 
 #define WGS_TITLE_TEXT             "WORDLE GS"
 #define WGS_LETTER_GUESS_INSET_H   4
 #define WGS_LETTER_KEY_INSET_H     2
-#define WGS_LETTER_GUESS_INSET_V   (WGS_LETTER_GUESS_SQUARE_SIZE - 8)
+#define WGS_LETTER_GUESS_INSET_V   12
 
 
 GrafPort rs_offscreen_graf_port;
@@ -86,40 +87,40 @@ void CreateRenderSystem(void) {
   SetPort(curr_port);
 }
 
-void RenderSystemDrawLetterGuess(wgs_letter_guess *letter_guess) {
+void RenderSystemDrawLetterGuess(wgs_letter_state letter_state) {
   int fill_color = 1; // dark grey
   int line_color = 15; // white
 
-  switch (letter_guess->state) {
+  switch (letter_state.status) {
       
-    case CorrectGuess:
+    case gtCorrectLetter:
       line_color = 10; // green
       fill_color = 5; // dark green
       break;
       
-    case WrongPlaceGuess:
+    case gtWrongPlaceLetter:
       line_color = 9; // yellow
       fill_color = 6; // orange
       break;
       
-    case IncorrectGuess:
+    case gtIncorrectLetter:
       line_color = 15; // white
       fill_color = 14; // light gray
       break;
   }
 
   SetSolidPenPat(fill_color);
-  PaintRect(&letter_guess->box);
+  PaintRect(&letter_state.render_box);
   
-  if (letter_guess->letter != ' ') {
+  if (letter_state.letter != ' ') {
     SetForeColor(15);
     SetBackColor(fill_color);
-    MoveTo(letter_guess->box.h1 + WGS_LETTER_GUESS_INSET_H, letter_guess->box.v1 + WGS_LETTER_GUESS_INSET_V);
-    putchar(letter_guess->letter);
+    MoveTo(letter_state.render_box.h1 + WGS_LETTER_GUESS_INSET_H, letter_state.render_box.v1 + WGS_LETTER_GUESS_INSET_V);
+    putchar(letter_state.letter);
   }
   
   SetSolidPenPat(line_color);
-  FrameRect(&letter_guess->box);
+  FrameRect(&letter_state.render_box);
 }
 
 
@@ -164,15 +165,13 @@ void RenderSystemUpdate(void) {
 
   SetPort(&rs_offscreen_graf_port);
 
-  for (row=0; row<WGS_NUMBER_OF_GUESSES; row++) {
-    for (col=0; col<WGS_LETTERS_IN_WORD; col++) {
-      wgs_letter_guess *letter_guess = &(wgs_letter_guess_entities[row][col]);
+  for (row=0; row<WGS_GAME_GUESSES_NUMBER_OF_ROWS; row++) {
+    for (col=0; col<WGS_GAME_GUESSES_NUMBER_OF_COLS; col++) {
+      wgs_letter_state letter_state = GuessState_GetLetterState(row, col);
 
-      if (letter_guess->image_state != ImageDirty) continue;
+      if (! letter_state.changed) continue;
       
-      RenderSystemDrawLetterGuess(letter_guess);
-      
-      letter_guess->image_state = ImageRendered;
+      RenderSystemDrawLetterGuess(letter_state);
     }
   }
 
