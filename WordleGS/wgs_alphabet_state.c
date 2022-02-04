@@ -52,7 +52,7 @@ static const char* WGS_KEYBOARD_LETTERS[] = {
   "ZXCVBNM   "
 };
 
-static const short WGS_KEYBOARD_INSET[] = {
+static const int WGS_KEYBOARD_INSET[] = {
   0,
   4,
   10
@@ -84,13 +84,13 @@ void AlphabetState_Create(void) {
 }
 
 void AlphabetState_CreateRects(void) {
-  short row, col;
+  int row, col;
   char letter;
-  short letter_idx;
+  int letter_idx;
   wgs_letter_state *letter_state;
 
   for (row=0; row<WGS_NUMBER_OF_KEY_ROWS; row++) {
-    short row_inset = WGS_KEYBOARD_LEFT + WGS_KEYBOARD_INSET[row];
+    int row_inset = WGS_KEYBOARD_LEFT + WGS_KEYBOARD_INSET[row];
 
     for (col=0; col<WGS_NUMBER_OF_KEY_COLUMNS; col++) {
       letter = WGS_KEYBOARD_LETTERS[row][col];
@@ -99,11 +99,11 @@ void AlphabetState_CreateRects(void) {
       letter_idx = letter - 'A';
       letter_state = &(wgs_game_guesses_letter_state[letter_idx]);
       
-      letter_state->render_box.h1 = row_inset + (col * WGS_LETTER_KEY_SQUARE_SIZE) + WGS_LETTER_KEY_SQUARE_INSET;
-      letter_state->render_box.h2 = letter_state->render_box.h1 + WGS_LETTER_KEY_SQUARE_SIZE - (WGS_LETTER_KEY_SQUARE_INSET * 2);
+      letter_state->render_box.h1 = (short)(row_inset + (col * WGS_LETTER_KEY_SQUARE_SIZE) + WGS_LETTER_KEY_SQUARE_INSET);
+      letter_state->render_box.h2 = (short)(letter_state->render_box.h1 + WGS_LETTER_KEY_SQUARE_SIZE - (WGS_LETTER_KEY_SQUARE_INSET * 2));
 
-      letter_state->render_box.v1 = WGS_KEYBOARD_TOP + (row * WGS_LETTER_KEY_SQUARE_SIZE) + WGS_LETTER_KEY_SQUARE_INSET;
-      letter_state->render_box.v2 = letter_state->render_box.v1 + WGS_LETTER_KEY_SQUARE_SIZE - (WGS_LETTER_KEY_SQUARE_INSET * 2);
+      letter_state->render_box.v1 = (short)(WGS_KEYBOARD_TOP + (row * WGS_LETTER_KEY_SQUARE_SIZE) + WGS_LETTER_KEY_SQUARE_INSET);
+      letter_state->render_box.v2 = (short)(letter_state->render_box.v1 + WGS_LETTER_KEY_SQUARE_SIZE - (WGS_LETTER_KEY_SQUARE_INSET * 2));
     }
   }
 }
