@@ -25,6 +25,7 @@ COMPONENT_NAME = wordle_gs
 PROJECT_HOME_DIR = ..
 CPPUTEST_HOME = ./cpputest
 
+SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_alphabet_state.c
 SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_game_engine.c
 
 TEST_SRC_DIRS += tests
@@ -32,6 +33,7 @@ TEST_SRC_DIRS += tests
 INCLUDE_DIRS += $(CPPUTEST_HOME)/include
 INCLUDE_DIRS += $(CPPUTEST_HOME)/include/Platforms/Gcc
 
+INCLUDE_DIRS += shim
 INCLUDE_DIRS += $(PROJECT_HOME_DIR)/WordleGS
 
 # Some flags to quiet clang

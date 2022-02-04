@@ -22,27 +22,23 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEwgs_game_engine_
-#define _GUARD_PROJECTWordleGS_FILEwgs_game_engine_
-
-#include "wgs_game_types.h"
+#ifndef _GUARD_PROJECTWordleGS_FILEtest_shim_types_
+#define _GUARD_PROJECTWordleGS_FILEtest_shim_types_
 
 
-/* Lifecycle Methods */
+#define TRUE 1
+#define FALSE 0
 
-void GameEngine_Create(void);
-void GameEngine_NewGame(void);
-void GameEngine_UpdateFinished(void);
-void GameEngine_Destroy(void);
+typedef unsigned int BOOLEAN;
 
 
-/* Game Methods */
+struct Rect {
+  short v1;
+  short h1;
+  short v2;
+  short h2;
+};
+typedef struct Rect Rect;
 
-wgs_game_state GameEngine_GetGameState(void);
-void GameEngine_SetGameState(wgs_game_state game_state);
 
-
-void GameEngine_IncrementWinStat(int guess_num);
-int GameEngine_GetWinStat(int guess_num);
-
-#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_engine_ */
+#endif /* _GUARD_PROJECTWordleGS_FILEtest_shim_types_ */

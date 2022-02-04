@@ -29,9 +29,12 @@
 #include <stdio.h>
 #include <time.h>
 
-#include "main.h"
 #include "wgs_app_window.h"
+
 #include "wgs_game_engine.h"
+#include "wgs_alphabet_state.h"
+
+#include "main.h"
 #include "wgs_dictionary.h"
 #include "wgs_game_entities.h"
 #include "wgs_game_model.h"
@@ -83,7 +86,6 @@ void HandleNewGame(void) {
   announce_status = NoAnnouncement;
 
   ResetLetterGuessEntities();
-  ResetLetterKeyEntites();
 
   GetRandomWord(word);
   NewSecretWord(word);
@@ -128,7 +130,7 @@ void DrawContents (void)
   SetPort(app_graf_port);
 
   if (drawing_status == Pending) {
-    int row, col;
+    int row, col, i;
 
     for (row=0; row<WGS_NUMBER_OF_GUESSES; row++) {
       for (col=0; col<WGS_LETTERS_IN_WORD; col++) {
@@ -144,16 +146,14 @@ void DrawContents (void)
       }
     }
 
-    for (row=0; row<WGS_NUMBER_OF_KEY_ROWS; row++) {
-      for (col=0; col<WGS_KEYBOARD_LEN[row]; col++) {
-        wgs_letter_key *letter_key = &(wgs_letter_key_entities[row][col]);
+    for (i=0; i<WGS_GAME_GUESSES_NUMBER_OF_LETTERS; i++) {
+      wgs_letter_state letter_state = AlphabetState_GetLetterState((char)('A' + i));
 
-        if (letter_key->image_state != ImageRendered) continue;
-        
-        PPToPort(&info, &letter_key->box, letter_key->box.h1, letter_key->box.v1, modeCopy);
+      if (! letter_state.changed) continue;
 
-        letter_key->image_state = ImageStatic;
-      }
+      PPToPort(&info, &letter_state.render_box, letter_state.render_box.h1, letter_state.render_box.v1, modeCopy);
+
+      RenderSystemDrawLetterKey(letter_state);
     }
   } else {
     RegionHndl vis_region = GetVisHandle();
@@ -163,6 +163,7 @@ void DrawContents (void)
     PPToPort(&info, &(*vis_region)->rgnBBox, x, y, modeCopy);
   }
 
+  GameEngine_UpdateFinished();
   drawing_status = None;
 }
 

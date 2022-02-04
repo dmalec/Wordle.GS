@@ -22,27 +22,24 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEwgs_game_engine_
-#define _GUARD_PROJECTWordleGS_FILEwgs_game_engine_
+#ifndef _GUARD_PROJECTWordleGS_FILEwgs_alphabet_state_
+#define _GUARD_PROJECTWordleGS_FILEwgs_alphabet_state_
 
 #include "wgs_game_types.h"
 
 
 /* Lifecycle Methods */
 
-void GameEngine_Create(void);
-void GameEngine_NewGame(void);
-void GameEngine_UpdateFinished(void);
-void GameEngine_Destroy(void);
+void AlphabetState_Create(void);
+void AlphabetState_NewGame(void);
+void AlphabetState_UpdateFinished(void);
+void AlphabetState_Destroy(void);
 
 
 /* Game Methods */
 
-wgs_game_state GameEngine_GetGameState(void);
-void GameEngine_SetGameState(wgs_game_state game_state);
+wgs_letter_state AlphabetState_GetLetterState(char c);
+void AlphabetState_MaybeUpdateLetterStatus(char c, wgs_letter_status status);
 
 
-void GameEngine_IncrementWinStat(int guess_num);
-int GameEngine_GetWinStat(int guess_num);
-
-#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_engine_ */
+#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_alphabet_state_ */

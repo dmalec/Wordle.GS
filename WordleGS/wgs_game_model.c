@@ -25,6 +25,7 @@
 #include "wgs_game_model.h"
 
 #include "wgs_game_engine.h"
+#include "wgs_alphabet_state.h"
 
 #include "wgs_dictionary.h"
 #include "wgs_game_entities.h"
@@ -133,7 +134,7 @@ wgs_guess_status GuessCurrentWord(void) {
       letter_guesses[letter_index] = Correct;
       guess_square_status[current_guess_row][i] = Correct;
       wgs_letter_guess_entities[current_guess_row][i].state = CorrectGuess;
-      UpdateLetterKey(c, CorrectKey);
+      AlphabetState_MaybeUpdateLetterStatus(c, gtCorrectLetter);
       matches++;
     } else {
       int letter_idx = IndexOfLetter(tmp_secret, c);
@@ -142,7 +143,7 @@ wgs_guess_status GuessCurrentWord(void) {
         letter_guesses[letter_index] = WrongPlace;
         guess_square_status[current_guess_row][i] = WrongPlace;
         wgs_letter_guess_entities[current_guess_row][i].state = WrongPlaceGuess;
-        UpdateLetterKey(c, WrongPlaceKey);
+        AlphabetState_MaybeUpdateLetterStatus(c, gtWrongPlaceLetter);
 
         // Clear the letter, so it won't be double counted
         // if it appears again in the guess.
@@ -151,7 +152,7 @@ wgs_guess_status GuessCurrentWord(void) {
         letter_guesses[letter_index] = UnusedLetter;
         guess_square_status[current_guess_row][i] = UnusedLetter;
         wgs_letter_guess_entities[current_guess_row][i].state = IncorrectGuess;
-        UpdateLetterKey(c, IncorrectKey);
+        AlphabetState_MaybeUpdateLetterStatus(c, gtIncorrectLetter);
       }
     }
     
