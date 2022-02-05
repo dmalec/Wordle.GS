@@ -50,6 +50,10 @@ void Dictionary_Destroy(void) {
   mock().actualCall("Dictionary_Destroy");
 }
 
+void Dictionary_GetRandomWord(char *secret_word) {
+  mock().actualCall("Dictionary_GetRandomWord").withOutputParameter("secret_word", secret_word);
+}
+
 
 // Unit Tests
 
@@ -59,6 +63,7 @@ TEST_GROUP(GameEngine_Creation) {
   }
 
   void teardown() {
+    mock().checkExpectations();
     mock().clear();
   }
 };
@@ -83,12 +88,16 @@ TEST_GROUP(GameEngine) {
   }
 
   void teardown() {
+    mock().checkExpectations();
     mock().clear();
   }
 };
 
 TEST(GameEngine, NewGame) {
+  char secret_word[] = "     ";
+
   mock().expectOneCall("Dictionary_NewGame");
+  mock().expectOneCall("Dictionary_GetRandomWord").withOutputParameterReturning("secret_word", secret_word, 5);
 
   GameEngine_SetGameState(Won);
 
@@ -113,6 +122,18 @@ TEST(GameEngine, IsGameInProgress) {
   LONGS_EQUAL_TEXT(FALSE, GameEngine_IsGameInProgress(), "Game in progress when board is empty");
 }
 
+
+TEST(GameEngine, GetSecretWord) {
+  char expected_secret_word[] = "WORDS";
+  char actual_secret_word[] = "     ";
+
+  mock().expectOneCall("Dictionary_NewGame");
+  mock().expectOneCall("Dictionary_GetRandomWord").withOutputParameterReturning("secret_word", expected_secret_word, 5);
+
+  GameEngine_NewGame();
+  GameEngine_GetSecretWord(actual_secret_word);
+  STRNCMP_EQUAL_TEXT(expected_secret_word, actual_secret_word, 5, "Secret word should be returned unchanged");
+}
 
 
 TEST(GameEngine, GetWinStatIncrementWinStat) {

@@ -36,11 +36,12 @@
 GrafPortPtr game_over_dialog_ptr;
 
 void GameOverDialogDrawContents (void) {
+  char secret_word[] = "     ";
   int i, h, offset;
   int max_wins = 0;
   int stat;
   Rect r;
-  
+
   // Erase Background
   GetPortRect(&r);
   SetSolidPenPat(15);
@@ -58,7 +59,8 @@ void GameOverDialogDrawContents (void) {
     MoveTo(8, 10);
     DrawCString("The word was:\0");
     MoveTo(8, 28);
-    DrawCString(GetSecretWord());
+    GameEngine_GetSecretWord(secret_word);
+    DrawCString(secret_word);
   }
   
   for (i=0; i<6; i++) {

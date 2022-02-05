@@ -35,6 +35,13 @@ static wgs_game_state wgs_game_engine_game_state;
 
 static int wgs_game_engine_win_stats[WGS_GAME_ENGINE_MAX_GUESSES];
 
+static char wgs_game_engine_secret_word[6] = "ROBOT";
+
+
+/* Local Prototypes */
+
+void GameEngine_NewSecretWord(char *word);
+
 
 /* Lifecycle Methods */
 
@@ -51,11 +58,25 @@ void GameEngine_Create(void) {
 }
 
 void GameEngine_NewGame(void) {
-  wgs_game_engine_game_state = InProgress;
+  char secret_word[] = "     ";
 
   AlphabetState_NewGame();
   Dictionary_NewGame();
   GuessState_NewGame();
+
+  wgs_game_engine_game_state = InProgress;
+
+  Dictionary_GetRandomWord(secret_word);
+  GameEngine_NewSecretWord(secret_word);
+}
+
+void GameEngine_NewSecretWord(char *secret_word) {
+  int i;
+
+  for (i=0; i<5; i++) {
+    wgs_game_engine_secret_word[i] = secret_word[i];
+  }
+  wgs_game_engine_secret_word[5] = '\0';
 }
 
 void GameEngine_UpdateFinished(void) {
@@ -83,6 +104,15 @@ void GameEngine_SetGameState(wgs_game_state game_state) {
 
 BOOLEAN GameEngine_IsGameInProgress(void) {
   return wgs_game_engine_game_state == InProgress && (GuessState_GetRow() > 0 || GuessState_GetCol() > 0);
+}
+
+
+void GameEngine_GetSecretWord(char *word) {
+  int i;
+
+  for (i=0; i<5; i++) {
+    word[i] = wgs_game_engine_secret_word[i];
+  }
 }
 
 

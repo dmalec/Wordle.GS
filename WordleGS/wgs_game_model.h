@@ -38,8 +38,6 @@ wgs_square_state GetGuessSquareStatus(int row, int col);
 
 int GetGuessRow(void);
 int GetGuessCol(void);
-char *GetSecretWord(void);
-void NewSecretWord(char *word);
 
 int GetGamesWon(void);
 
