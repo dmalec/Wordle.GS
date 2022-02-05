@@ -73,11 +73,8 @@ void InvalidateWindow(void) {
 
 
 void HandleNewGame(void) {
-  char word[16];
-  Word alert_result;
-
   if (GameEngine_IsGameInProgress()) {
-    alert_result = AlertWindow(awResource, NULL, rez_alert_VerifyNewGame);
+    Word alert_result = AlertWindow(awResource, NULL, rez_alert_VerifyNewGame);
     if (alert_result == rez_alert_VerifyNewGame_Cancel) {
       return;
     }
@@ -86,9 +83,6 @@ void HandleNewGame(void) {
   GameEngine_NewGame();
 
   announce_status = NoAnnouncement;
-
-  Dictionary_GetRandomWord(word);
-  NewSecretWord(word);
   InvalidateWindow();
 }
 

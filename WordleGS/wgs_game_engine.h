@@ -42,6 +42,7 @@ wgs_game_state GameEngine_GetGameState(void);
 void GameEngine_SetGameState(wgs_game_state game_state);
 BOOLEAN GameEngine_IsGameInProgress(void);
 
+void GameEngine_GetSecretWord(char *word);
 
 void GameEngine_IncrementWinStat(int guess_num);
 int GameEngine_GetWinStat(int guess_num);

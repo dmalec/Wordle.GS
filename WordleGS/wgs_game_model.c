@@ -29,14 +29,12 @@
 #include "wgs_guess_state.h"
 
 
-char secret_word[6] = "ROBOT";
-
-
 wgs_guess_status GuessCurrentWord(void) {
   int current_guess_row = GuessState_GetRow();
   int i, letter_index;
   int matches = 0;
   char tmp_secret[5];
+  char secret_word[5];
   char guess_word[] = "     ";
   char c;
   
@@ -45,6 +43,7 @@ wgs_guess_status GuessCurrentWord(void) {
   if (GuessState_GetRow() >= 6) return MaxGuesses;
   
   GuessState_GetGuessWord(guess_word);
+  GameEngine_GetSecretWord(secret_word);
 
   if (!Dictionary_IsValidGuess(guess_word)) return InvalidWord;
   
@@ -97,21 +96,6 @@ wgs_guess_status GuessCurrentWord(void) {
   }
   
   return ValidGuess;
-}
-
-
-char *GetSecretWord(void) {
-  return secret_word;
-}
-
-
-void NewSecretWord(char *word) {
-  int i;
-  
-  for (i=0; i<5; i++) {
-    secret_word[i] = word[i];
-  }
-  secret_word[5] = '\0';
 }
 
 int IndexOfLetter(char* word, char letter) {
