@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3607BB6927AEF747007B9572 /* wgs_utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 3607BB6827AEF747007B9572 /* wgs_utils.c */; };
 		3630F8D327A5B2F60018042C /* wgs_app_window.c in Sources */ = {isa = PBXBuildFile; fileRef = 3630F8CD27A5B2F60018042C /* wgs_app_window.c */; };
 		3630F8D527A5B2F60018042C /* wgs_game_over_dialog.c in Sources */ = {isa = PBXBuildFile; fileRef = 3630F8CF27A5B2F60018042C /* wgs_game_over_dialog.c */; };
 		3630F8D627A5B2F60018042C /* wgs_dictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 3630F8D027A5B2F60018042C /* wgs_dictionary.c */; };
@@ -59,6 +60,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3607BB6727AEF747007B9572 /* wgs_utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_utils.h; sourceTree = "<group>"; };
+		3607BB6827AEF747007B9572 /* wgs_utils.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wgs_utils.c; sourceTree = "<group>"; };
 		3630F8C627A5B2EA0018042C /* wgs_render_system.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_render_system.h; sourceTree = "<group>"; };
 		3630F8C727A5B2EB0018042C /* wgs_game_over_dialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_game_over_dialog.h; sourceTree = "<group>"; };
 		3630F8C827A5B2EB0018042C /* wgs_dictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_dictionary.h; sourceTree = "<group>"; };
@@ -164,6 +167,8 @@
 				3678008327A100E7002A9ACC /* main.h */,
 				3678008127A100E7002A9ACC /* main.c */,
 				3678008427A100E7002A9ACC /* main.rez */,
+				3607BB6727AEF747007B9572 /* wgs_utils.h */,
+				3607BB6827AEF747007B9572 /* wgs_utils.c */,
 				3636743527AB8AC900582831 /* Game Engine */,
 				3607BB6227AEF080007B9572 /* UI */,
 				36B5FF0027A3A06D0097B2BD /* data */,
@@ -345,6 +350,7 @@
 				3630F8D527A5B2F60018042C /* wgs_game_over_dialog.c in Sources */,
 				3636744B27ACAE9500582831 /* wgs_alphabet_state.c in Sources */,
 				3630F8D327A5B2F60018042C /* wgs_app_window.c in Sources */,
+				3607BB6927AEF747007B9572 /* wgs_utils.c in Sources */,
 				3678008727A100E7002A9ACC /* Makefile in Sources */,
 				3630F8D627A5B2F60018042C /* wgs_dictionary.c in Sources */,
 				3678008227A100E7002A9ACC /* main.c in Sources */,

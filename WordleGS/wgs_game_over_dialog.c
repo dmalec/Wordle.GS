@@ -143,12 +143,14 @@ void GameOverDialogDrawContents (void) {
 wgs_game_over_response HandleGameOverDialog(void) {
   EventRecord dlg_event;
   LongWord dlg_part;
+  unsigned short modal_dialog_flags[] = {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0};
+  Word modal_dialog_mask = Utils_GetBitmask16(modal_dialog_flags);
 
   game_over_dialog_ptr = NewWindow2("\pGame Over", 0, GameOverDialogDrawContents, NULL, 0x02, rez_window_GameOver, rWindParam1);
   if (game_over_dialog_ptr == NULL) return;
   
   do {
-    dlg_part = DoModalWindow(&dlg_event, NULL, NULL, NULL, 0x401E);
+    dlg_part = DoModalWindow(&dlg_event, NULL, NULL, NULL, modal_dialog_mask);
   } while (dlg_part != rez_window_GameOver_NewGameButtonId && dlg_part != rez_window_GameOver_CloseButtonId);
   
   InitCursor();
