@@ -34,12 +34,9 @@
 #include <window.h>
 
 #include "main.h"
-
-#include "wgs_game_engine.h"
 #include "wgs_app_window.h"
-#include "wgs_game_model.h"
+#include "wgs_game_engine.h"
 #include "wgs_render_system.h"
-#include "wgs_dictionary.h"
 
 BOOLEAN done;
 EventRecord my_event;
@@ -54,7 +51,7 @@ void HandleAboutDialog(void) {
 void HandleQuitGame(void) {
   Word alert_result;
 
-  if (IsGameInProgress()) {
+  if (GameEngine_IsGameInProgress()) {
     alert_result = AlertWindow(awResource, NULL, rez_alert_VerifyQuitGame);
     if (alert_result == rez_alert_VerifyNewGame_Cancel) {
       return;

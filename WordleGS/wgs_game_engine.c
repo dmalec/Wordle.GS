@@ -81,6 +81,10 @@ void GameEngine_SetGameState(wgs_game_state game_state) {
   wgs_game_engine_game_state = game_state;
 }
 
+BOOLEAN GameEngine_IsGameInProgress(void) {
+  return wgs_game_engine_game_state == InProgress && (GuessState_GetRow() > 0 || GuessState_GetCol() > 0);
+}
+
 
 void GameEngine_IncrementWinStat(int guess_num) {
   wgs_game_engine_win_stats[guess_num]++;

@@ -38,7 +38,6 @@ wgs_guess_status GuessCurrentWord(void);
 char GetGuessSquareLetter(int row, int col);
 wgs_square_state GetGuessSquareStatus(int row, int col);
 
-BOOLEAN IsGameInProgress(void);
 int GetGuessRow(void);
 int GetGuessCol(void);
 char *GetSecretWord(void);

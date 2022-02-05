@@ -104,11 +104,6 @@ wgs_guess_status GuessCurrentWord(void) {
 }
 
 
-BOOLEAN IsGameInProgress(void) {
-  return GameEngine_GetGameState() == InProgress && (GuessState_GetRow() > 0 || GuessState_GetCol() > 0);
-}
-
-
 char *GetSecretWord(void) {
   return secret_word;
 }
