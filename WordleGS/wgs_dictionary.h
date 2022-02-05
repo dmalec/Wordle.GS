@@ -25,12 +25,21 @@
 #ifndef _GUARD_PROJECTWordleGS_FILEwgs_dictionary_
 #define _GUARD_PROJECTWordleGS_FILEwgs_dictionary_
 
-#include <misctool.h>
+#include <types.h>
 
-void LoadDictionary(void);
-void DestroyDictionary(void);
 
-BOOLEAN IsValidGuess(char *word);
-void GetRandomWord(char *buffer);
+/* Lifecycle Methods */
+
+void Dictionary_Create(void);
+void Dictionary_NewGame(void);
+void Dictionary_UpdateFinished(void);
+void Dictionary_Destroy(void);
+
+
+/* Game Methods */
+
+BOOLEAN Dictionary_IsValidGuess(char *word);
+void Dictionary_GetRandomWord(char *buffer);
+
 
 #endif /* define _GUARD_PROJECTWordleGS_FILEwgs_dictionary_ */

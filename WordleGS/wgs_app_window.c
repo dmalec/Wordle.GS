@@ -87,7 +87,7 @@ void HandleNewGame(void) {
 
   announce_status = NoAnnouncement;
 
-  GetRandomWord(word);
+  Dictionary_GetRandomWord(word);
   NewSecretWord(word);
   NewGame();
   InvalidateWindow();

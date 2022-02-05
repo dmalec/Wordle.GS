@@ -140,7 +140,6 @@ int main (void) {
   InitCursor();
   
   GameEngine_Create();
-  LoadDictionary();
   CreateRenderSystem();
   
   CreateAppWindow();
@@ -171,7 +170,6 @@ int main (void) {
     AppTick();
   }
   
-  DestroyDictionary();
   GameEngine_Destroy();
   
   enddesk();
