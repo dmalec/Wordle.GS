@@ -94,14 +94,29 @@ void HelpDialog_DrawWord(int x, int y, char *word, int highlight_idx, wgs_letter
 }
 
 void HelpDialog_DrawContents(void) {
-  HelpDialog_DrawWord(8, 44, "APPLE", 0, gtCorrectLetter);
-  HelpDialog_DrawWord(8, 80, "MOUSE", 1, gtWrongPlaceLetter);
-  HelpDialog_DrawWord(8, 116, "DRIVE", 2, gtIncorrectLetter);
+  Handle correct_example = HelpDialog_LoadCStringResourceOrNull(rez_window_Help_CorrectTextExample);
+  Handle wrong_place_example = HelpDialog_LoadCStringResourceOrNull(rez_window_Help_WrongPlaceTextExample);
+  Handle incorrect_example = HelpDialog_LoadCStringResourceOrNull(rez_window_Help_IncorrectTextExample);
+
+  if (correct_example != NULL) {
+    HelpDialog_DrawWord(8, 42, (char *)(*correct_example), 0, gtCorrectLetter);
+  }
+  if (wrong_place_example != NULL) {
+    HelpDialog_DrawWord(8, 78, (char *)(*wrong_place_example), 1, gtWrongPlaceLetter);
+  }
+  if (incorrect_example != NULL) {
+    HelpDialog_DrawWord(8, 114, (char *)(*incorrect_example), 2, gtIncorrectLetter);
+  }
 
   SetForeColor(0);
   SetBackColor(15);
 
   DrawControls(wgs_help_dialog_ptr);
+  
+  HelpDialog_ReleaseCStringResource(rez_window_Help_CorrectTextExample, correct_example);
+  HelpDialog_ReleaseCStringResource(rez_window_Help_WrongPlaceTextExample, wrong_place_example);
+  HelpDialog_ReleaseCStringResource(rez_window_Help_IncorrectTextExample, incorrect_example);
+
 }
 
 void HelpDialog_Show(void) {

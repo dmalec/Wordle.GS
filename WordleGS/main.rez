@@ -197,70 +197,33 @@ resource rControlList (rez_window_Help_ControlList) {
   {
     rez_window_Help_CloseButton,
     rez_window_Help_CorrectText,
-    rez_window_Help_ColorText,
-    rez_window_Help_GuessText,
+    rez_window_Help_HelpText,
     rez_window_Help_IncorrectText,
-    rez_window_Help_SubmitText,
-    rez_window_Help_TriesText,
     rez_window_Help_WrongPlaceText
   }
 };
 
-resource rControlTemplate (rez_window_Help_TriesText) {
-  rez_window_Help_TriesTextId,                      /* control ID */
-  {2,8,12,292},                                     /* control Rect */
+resource rControlTemplate (rez_window_Help_HelpText) {
+  rez_window_Help_HelpTextId,                       /* control ID */
+  {2,8,42,292},                                     /* control Rect */
   statTextControl {{
     $0000,                                          /* flags */
     $1002,                                          /* more flags */
     0,                                              /* refcon */
-    rez_window_Help_TriesTextTitle                  /* Title Ref */
+    rez_window_Help_HelpTextTitle                   /* Title Ref */
   }};
 };
 
-resource rTextForLETextBox2 (rez_window_Help_TriesTextTitle) {"You have 6 tries to guess the word."};
-
-resource rControlTemplate (rez_window_Help_GuessText) {
-  rez_window_Help_GuessTextId,                      /* control ID */
-  {12,8,22,292},                                    /* control Rect */
-  statTextControl {{
-    $0000,                                          /* flags */
-    $1002,                                          /* more flags */
-    0,                                              /* refcon */
-    rez_window_Help_GuessTextTitle                  /* Title Ref */
-  }};
+resource rTextForLETextBox2 (rez_window_Help_HelpTextTitle) {
+  "You have 6 tries to guess the word.\n"
+  "Guesses must be a known 5 letter word.\n"
+  "Press return to make a guess.\n"
+  "Color indicates how close you are."
 };
-
-resource rTextForLETextBox2 (rez_window_Help_GuessTextTitle) {"Guesses must be a known 5 letter word."};
-
-resource rControlTemplate (rez_window_Help_SubmitText) {
-  rez_window_Help_SubmitTextId,                     /* control ID */
-  {22,8,32,292},                                    /* control Rect */
-  statTextControl {{
-    $0000,                                          /* flags */
-    $1002,                                          /* more flags */
-    0,                                              /* refcon */
-    rez_window_Help_SubmitTextTitle                 /* Title Ref */
-  }};
-};
-
-resource rTextForLETextBox2 (rez_window_Help_SubmitTextTitle) {"Press return to make a guess."};
-
-resource rControlTemplate (rez_window_Help_ColorText) {
-  rez_window_Help_ColorTextId,                      /* control ID */
-  {32,8,42,292},                                    /* control Rect */
-  statTextControl {{
-    $0000,                                          /* flags */
-    $1002,                                          /* more flags */
-    0,                                              /* refcon */
-    rez_window_Help_ColorTextTitle                  /* Title Ref */
-  }};
-};
-
-resource rTextForLETextBox2 (rez_window_Help_ColorTextTitle) {"Color indicates how close you are."};
 
 resource rControlTemplate (rez_window_Help_CorrectText) {
   rez_window_Help_CorrectTextId,                    /* control ID */
-  {66,8,76,292},                                    /* control Rect */
+  {64,8,74,292},                                    /* control Rect */
   statTextControl {{
     $0000,                                          /* flags */
     $1002,                                          /* more flags */
@@ -271,9 +234,11 @@ resource rControlTemplate (rez_window_Help_CorrectText) {
 
 resource rTextForLETextBox2 (rez_window_Help_CorrectTextTitle) {"A is in the correct place"};
 
+resource rCString (rez_window_Help_CorrectTextExample) {"APPLE"};
+
 resource rControlTemplate (rez_window_Help_WrongPlaceText) {
   rez_window_Help_WrongPlaceTextId,                 /* control ID */
-  {102,8,112,300},                                  /* control Rect */
+  {100,8,110,300},                                  /* control Rect */
   statTextControl {{
     $0000,                                          /* flags */
     $1002,                                          /* more flags */
@@ -284,9 +249,11 @@ resource rControlTemplate (rez_window_Help_WrongPlaceText) {
 
 resource rTextForLETextBox2 (rez_window_Help_WrongPlaceTextTitle) {"O is in the wrong place"};
 
+resource rCString (rez_window_Help_WrongPlaceTextExample) {"MOUSE"};
+
 resource rControlTemplate (rez_window_Help_IncorrectText) {
   rez_window_Help_IncorrectTextId,                  /* control ID */
-  {138,8,148,300},                                  /* control Rect */
+  {136,8,146,300},                                  /* control Rect */
   statTextControl {{
     $0000,                                          /* flags */
     $1002,                                          /* more flags */
@@ -297,9 +264,11 @@ resource rControlTemplate (rez_window_Help_IncorrectText) {
 
 resource rTextForLETextBox2 (rez_window_Help_IncorrectTextTitle) {"I is not in the word"};
 
+resource rCString (rez_window_Help_IncorrectTextExample) {"DRIVE"};
+
 resource rControlTemplate (rez_window_Help_CloseButton) {
   rez_window_Help_CloseButtonId,                    /* control ID */
-  {155,120,0,0},                                    /* control Rect */
+  {153,115,0,0},                                    /* control Rect */
   SimpleButtonControl {{
     $0001,                                          /* flags */
     $3002,                                          /* more flags */

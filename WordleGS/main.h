@@ -73,33 +73,24 @@
 #define rez_window_Help_CloseButtonId              1
 #define rez_window_Help_CloseButtonTitle        1202
 
-#define rez_window_Help_TriesText               1203
-#define rez_window_Help_TriesTextId                3
-#define rez_window_Help_TriesTextTitle          1203
+#define rez_window_Help_HelpText                1203
+#define rez_window_Help_HelpTextId                 3
+#define rez_window_Help_HelpTextTitle           1203
 
-#define rez_window_Help_GuessText               1204
-#define rez_window_Help_GuessTextId                4
-#define rez_window_Help_GuessTextTitle          1204
+#define rez_window_Help_CorrectText             1204
+#define rez_window_Help_CorrectTextId              4
+#define rez_window_Help_CorrectTextTitle        1204
+#define rez_window_Help_CorrectTextExample      1204
 
-#define rez_window_Help_SubmitText              1205
-#define rez_window_Help_SubmitTextId               5
-#define rez_window_Help_SubmitTextTitle         1205
+#define rez_window_Help_WrongPlaceText          1205
+#define rez_window_Help_WrongPlaceTextId           5
+#define rez_window_Help_WrongPlaceTextTitle     1205
+#define rez_window_Help_WrongPlaceTextExample   1205
 
-#define rez_window_Help_ColorText               1206
-#define rez_window_Help_ColorTextId                6
-#define rez_window_Help_ColorTextTitle          1206
-
-#define rez_window_Help_CorrectText             1207
-#define rez_window_Help_CorrectTextId              7
-#define rez_window_Help_CorrectTextTitle        1207
-
-#define rez_window_Help_WrongPlaceText          1208
-#define rez_window_Help_WrongPlaceTextId           8
-#define rez_window_Help_WrongPlaceTextTitle     1208
-
-#define rez_window_Help_IncorrectText           1209
-#define rez_window_Help_IncorrectTextId            9
-#define rez_window_Help_IncorrectTextTitle      1209
+#define rez_window_Help_IncorrectText           1206
+#define rez_window_Help_IncorrectTextId            6
+#define rez_window_Help_IncorrectTextTitle      1206
+#define rez_window_Help_IncorrectTextExample    1206
 
 
 
