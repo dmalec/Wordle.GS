@@ -32,10 +32,6 @@
 char secret_word[6] = "ROBOT";
 
 
-void NewGame(void) {
-}
-
-
 wgs_guess_status GuessCurrentWord(void) {
   int current_guess_row = GuessState_GetRow();
   int i, letter_index;

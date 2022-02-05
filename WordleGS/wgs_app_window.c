@@ -89,7 +89,6 @@ void HandleNewGame(void) {
 
   Dictionary_GetRandomWord(word);
   NewSecretWord(word);
-  NewGame();
   InvalidateWindow();
 }
 
