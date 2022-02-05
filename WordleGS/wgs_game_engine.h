@@ -39,12 +39,12 @@ void GameEngine_Destroy(void);
 /* Game Methods */
 
 wgs_game_state GameEngine_GetGameState(void);
-void GameEngine_SetGameState(wgs_game_state game_state);
 BOOLEAN GameEngine_IsGameInProgress(void);
+
+wgs_guess_status GameEngine_GuessCurrentWord(void);
 
 void GameEngine_GetSecretWord(char *word);
 
-void GameEngine_IncrementWinStat(int guess_num);
 int GameEngine_GetWinStat(int guess_num);
 
 #endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_engine_ */

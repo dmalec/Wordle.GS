@@ -28,10 +28,8 @@
 #include <window.h>
 
 #include "main.h"
-#include "wgs_game_over_dialog.h"
-
 #include "wgs_game_engine.h"
-#include "wgs_game_model.h"
+#include "wgs_game_over_dialog.h"
 
 GrafPortPtr game_over_dialog_ptr;
 

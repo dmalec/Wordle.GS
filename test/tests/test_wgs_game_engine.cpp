@@ -54,6 +54,11 @@ void Dictionary_GetRandomWord(char *secret_word) {
   mock().actualCall("Dictionary_GetRandomWord").withOutputParameter("secret_word", secret_word);
 }
 
+BOOLEAN Dictionary_IsValidGuess(char *guess_word) {
+  mock().actualCall("Dictionary_IsValidGuess");
+
+  return (BOOLEAN)(mock().intReturnValue());
+}
 
 // Unit Tests
 
@@ -99,17 +104,9 @@ TEST(GameEngine, NewGame) {
   mock().expectOneCall("Dictionary_NewGame");
   mock().expectOneCall("Dictionary_GetRandomWord").withOutputParameterReturning("secret_word", secret_word, 5);
 
-  GameEngine_SetGameState(Won);
-
   GameEngine_NewGame();
 
   ENUMS_EQUAL_INT_TEXT(InProgress, GameEngine_GetGameState(), "Game should start in 'InProgress'");
-}
-
-TEST(GameEngine, SetGameState) {
-  GameEngine_SetGameState(Lost);
-
-  ENUMS_EQUAL_INT_TEXT(Lost, GameEngine_GetGameState(), "Game state should be set to 'Lost'");
 }
 
 TEST(GameEngine, IsGameInProgress) {
@@ -123,6 +120,27 @@ TEST(GameEngine, IsGameInProgress) {
 }
 
 
+TEST(GameEngine, GuessCurrentWord_GuardConditions_Guesses) {
+  ENUMS_EQUAL_INT_TEXT(WordFilled, GameEngine_GuessCurrentWord(), "Not enough characters returns expected enum");
+
+  for (int i=0; i<6; i++) {
+    GuessState_NextGuess();
+  }
+  ENUMS_EQUAL_INT_TEXT(MaxGuesses, GameEngine_GuessCurrentWord(), "No guesses left returns expected enum");
+}
+
+TEST(GameEngine, GuessCurrentWord_GuardConditions_Word) {
+  GuessState_AddLetterToGuess('Q');
+  GuessState_AddLetterToGuess('Q');
+  GuessState_AddLetterToGuess('Q');
+  GuessState_AddLetterToGuess('Q');
+  GuessState_AddLetterToGuess('Q');
+
+  mock().expectOneCall("Dictionary_IsValidGuess").andReturnValue(FALSE);
+  ENUMS_EQUAL_INT_TEXT(InvalidWord, GameEngine_GuessCurrentWord(), "Invalid word returns expected enum");
+}
+
+
 TEST(GameEngine, GetSecretWord) {
   char expected_secret_word[] = "WORDS";
   char actual_secret_word[] = "     ";
@@ -133,12 +151,4 @@ TEST(GameEngine, GetSecretWord) {
   GameEngine_NewGame();
   GameEngine_GetSecretWord(actual_secret_word);
   STRNCMP_EQUAL_TEXT(expected_secret_word, actual_secret_word, 5, "Secret word should be returned unchanged");
-}
-
-
-TEST(GameEngine, GetWinStatIncrementWinStat) {
-  LONGS_EQUAL_TEXT(0, GameEngine_GetWinStat(0), "Win stat should start at zero");
-
-  GameEngine_IncrementWinStat(0);
-  LONGS_EQUAL_TEXT(1, GameEngine_GetWinStat(0), "Win stat should increment by one");
 }

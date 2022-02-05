@@ -37,7 +37,6 @@
 
 #include "main.h"
 #include "wgs_dictionary.h"
-#include "wgs_game_model.h"
 #include "wgs_game_over_dialog.h"
 #include "wgs_render_system.h"
 
@@ -99,7 +98,7 @@ void HandleKeyPress (EventRecord event)
   } else if (c == 0x08 || c == 0x7F) {
     GuessState_RemoveLetterFromGuess();
   } else if (c == 0x0D) {
-    wgs_guess_status status = GuessCurrentWord();
+    wgs_guess_status status = GameEngine_GuessCurrentWord();
 
     if (status == InvalidWord) {
       char guess_word[] = "     ";
