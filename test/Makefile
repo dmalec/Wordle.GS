@@ -50,4 +50,6 @@ CPPUTEST_WARNINGFLAGS += -Wno-documentation
 CPPUTEST_WARNINGFLAGS += -Wno-missing-noreturn
 endif
 
+CPPUTEST_WARNINGFLAGS += -Wno-unused-parameter
+
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
