@@ -27,6 +27,7 @@
 
 extern "C" {
 #include "wgs_game_engine.h"
+#include "wgs_guess_state.h"
 #include "wgs_dictionary.h"
 }
 
@@ -101,6 +102,18 @@ TEST(GameEngine, SetGameState) {
 
   ENUMS_EQUAL_INT_TEXT(Lost, GameEngine_GetGameState(), "Game state should be set to 'Lost'");
 }
+
+TEST(GameEngine, IsGameInProgress) {
+  LONGS_EQUAL_TEXT(FALSE, GameEngine_IsGameInProgress(), "Game starts not in progress");
+
+  GuessState_AddLetterToGuess('Q');
+  LONGS_EQUAL_TEXT(TRUE, GameEngine_IsGameInProgress(), "Game in progress when words on board");
+
+  GuessState_RemoveLetterFromGuess();
+  LONGS_EQUAL_TEXT(FALSE, GameEngine_IsGameInProgress(), "Game in progress when board is empty");
+}
+
+
 
 TEST(GameEngine, GetWinStatIncrementWinStat) {
   LONGS_EQUAL_TEXT(0, GameEngine_GetWinStat(0), "Win stat should start at zero");

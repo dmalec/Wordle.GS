@@ -76,7 +76,7 @@ void HandleNewGame(void) {
   char word[16];
   Word alert_result;
 
-  if (IsGameInProgress()) {
+  if (GameEngine_IsGameInProgress()) {
     alert_result = AlertWindow(awResource, NULL, rez_alert_VerifyNewGame);
     if (alert_result == rez_alert_VerifyNewGame_Cancel) {
       return;
