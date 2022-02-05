@@ -110,6 +110,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3607BB6227AEF080007B9572 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				3630F8CA27A5B2EB0018042C /* wgs_app_window.h */,
+				3630F8CD27A5B2F60018042C /* wgs_app_window.c */,
+				3630F8C727A5B2EB0018042C /* wgs_game_over_dialog.h */,
+				3630F8CF27A5B2F60018042C /* wgs_game_over_dialog.c */,
+				3630F8C627A5B2EA0018042C /* wgs_render_system.h */,
+				3630F8D127A5B2F60018042C /* wgs_render_system.c */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		3636743527AB8AC900582831 /* Game Engine */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,16 +161,11 @@
 		3678008027A100E7002A9ACC /* WordleGS */ = {
 			isa = PBXGroup;
 			children = (
-				3636743527AB8AC900582831 /* Game Engine */,
 				3678008327A100E7002A9ACC /* main.h */,
 				3678008127A100E7002A9ACC /* main.c */,
 				3678008427A100E7002A9ACC /* main.rez */,
-				3630F8CA27A5B2EB0018042C /* wgs_app_window.h */,
-				3630F8CD27A5B2F60018042C /* wgs_app_window.c */,
-				3630F8C727A5B2EB0018042C /* wgs_game_over_dialog.h */,
-				3630F8CF27A5B2F60018042C /* wgs_game_over_dialog.c */,
-				3630F8C627A5B2EA0018042C /* wgs_render_system.h */,
-				3630F8D127A5B2F60018042C /* wgs_render_system.c */,
+				3636743527AB8AC900582831 /* Game Engine */,
+				3607BB6227AEF080007B9572 /* UI */,
 				36B5FF0027A3A06D0097B2BD /* data */,
 				3678008627A100E7002A9ACC /* Makefile */,
 				3678008827A100E7002A9ACC /* make */,
