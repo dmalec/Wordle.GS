@@ -50,7 +50,7 @@ wgs_guess_status GuessCurrentWord(void) {
   
   GuessState_GetGuessWord(guess_word);
 
-  if (!IsValidGuess(guess_word)) return InvalidWord;
+  if (!Dictionary_IsValidGuess(guess_word)) return InvalidWord;
   
   for (i=0; i<5; i++) {
     wgs_letter_state letter_state = GuessState_GetLetterState(current_guess_row, i);

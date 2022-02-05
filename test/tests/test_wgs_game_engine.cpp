@@ -23,14 +23,46 @@
  */
 
 #include "CppUTest/TestHarness.h"
+#include "CppUTestExt/MockSupport.h"
 
 extern "C" {
 #include "wgs_game_engine.h"
+#include "wgs_dictionary.h"
 }
 
 
+// Mock Dictionary Functions
+
+void Dictionary_Create(void) {
+  mock().actualCall("Dictionary_Create");
+}
+
+void Dictionary_NewGame(void) {
+  mock().actualCall("Dictionary_NewGame");
+}
+
+void Dictionary_UpdateFinished(void) {
+  mock().actualCall("Dictionary_UpdateFinished");
+}
+
+void Dictionary_Destroy(void) {
+  mock().actualCall("Dictionary_Destroy");
+}
+
+
+// Unit Tests
+
 TEST_GROUP(GameEngine_Creation) {
+  void setup() {
+    mock().expectOneCall("Dictionary_Create");
+  }
+
+  void teardown() {
+    mock().clear();
+  }
 };
+
+
 
 TEST(GameEngine_Creation, Create) {
   GameEngine_Create();
@@ -45,11 +77,18 @@ TEST(GameEngine_Creation, Create) {
 
 TEST_GROUP(GameEngine) {
   void setup() {
+    mock().expectOneCall("Dictionary_Create");
     GameEngine_Create();
+  }
+
+  void teardown() {
+    mock().clear();
   }
 };
 
 TEST(GameEngine, NewGame) {
+  mock().expectOneCall("Dictionary_NewGame");
+
   GameEngine_SetGameState(Won);
 
   GameEngine_NewGame();

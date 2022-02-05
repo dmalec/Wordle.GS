@@ -31,6 +31,9 @@ SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_guess_state.c
 
 TEST_SRC_DIRS += tests
 
+# Turn on CppUMock
+CPPUTEST_USE_EXTENSIONS = Y
+
 INCLUDE_DIRS += $(CPPUTEST_HOME)/include
 INCLUDE_DIRS += $(CPPUTEST_HOME)/include/Platforms/Gcc
 

@@ -24,10 +24,19 @@
 
 #include <gsos.h>
 #include <memory.h>
+#include <misctool.h>
 #include <stdio.h>
 
 #include "wgs_dictionary.h"
 
+
+/* Constants */
+
+#define DICTIONARY_FILENAME         "dictionary.txt"
+#define SECRETS_FILENAME            "secrets.txt"
+
+
+/* State */
 
 LongWord wgs_dictionary_list_count = 0;
 Handle wgs_dictionary_handle;
@@ -36,45 +45,16 @@ LongWord wgs_secret_word_list_count = 0;
 Handle wgs_secret_word_handle;
 
 
-void GetWordFromList(char *src, char *dst, LongWord index) {
-  int i;
-  
-  for (i=0; i<5; i++) {
-    dst[i] = src[index * 5 + i];
-  }
-  
-  dst[5] = '\0';
-}
+/* Local Prototypes */
+
+void Dictionary_GetWordFromList(char *src, char *dst, LongWord index);
+BOOLEAN Dictionary_DoesListContainWord(LongWord list_len, char *list, char *word);
+void Dictionary_LoadFile(GSString255 *file_name, Handle *file_handle, LongWord *file_length);
 
 
-BOOLEAN DoesListContainWord(LongWord list_len, char *list, char *word) {
-  LongWord low_idx = 0;
-  LongWord high_idx = list_len - 1;
-  LongWord mid_idx;
-  int compare_result;
-  char list_word[6];
-  
-  while (low_idx <= high_idx) {
-    mid_idx = (low_idx + high_idx) / 2;
-    
-    GetWordFromList(list, list_word, mid_idx);
-    compare_result = strcmp(word, list_word);
-    
-    if (compare_result == 0) {
-      return TRUE;
-    } else if (compare_result < 0) {
-      high_idx = mid_idx - 1;
-    } else {
-      low_idx = mid_idx + 1;
-    }
-  }
-  
-  return FALSE;
-}
+/* Lifecycle Methods */
 
-
-
-void LoadFile(GSString255 *file_name, Handle *file_handle, LongWord *file_length) {
+void Dictionary_LoadFile(GSString255 *file_name, Handle *file_handle, LongWord *file_length) {
   BOOLEAN success = TRUE;
   OpenRecGS open_file_rec;
   Handle file_contents = NULL;
@@ -94,13 +74,13 @@ void LoadFile(GSString255 *file_name, Handle *file_handle, LongWord *file_length
     SysBeep(); //FlagError(4, toolerror());
     return;
   }
-  
+
   file_contents = NewHandle(open_file_rec.eof, userid(), 0xC010, NULL);
   if (toolerror() != 0) {
     SysBeep(); SysBeep(); //FlagError(4, toolerror());
     return;
   }
-  
+
   read_file_rec.pCount = 4;
   read_file_rec.refNum = open_file_rec.refNum;
   read_file_rec.dataBuffer = *file_contents;
@@ -110,46 +90,46 @@ void LoadFile(GSString255 *file_name, Handle *file_handle, LongWord *file_length
     SysBeep(); SysBeep(); SysBeep(); //FlagError(4, toolerror());
     return;
   }
-  
+
   *file_handle = file_contents;
   *file_length = open_file_rec.eof;
-  
+
   close_file_rev.pCount = 1;
   close_file_rev.refNum = open_file_rec.refNum;
   CloseGS(&close_file_rev);
-  
+
   HUnlock(file_contents);
 }
 
-
-#define DICTIONARY_FILENAME "dictionary.txt"
-#define SECRETS_FILENAME "secrets.txt"
-
-
-void LoadDictionary(void) {
+void Dictionary_Create(void) {
   GSString255 file_name;
   LongWord file_length;
   int i;
-  
+
   file_name.length = 14;
   for (i=0; i<14; i++) {
     file_name.text[i] = DICTIONARY_FILENAME[i];
   }
-  
-  LoadFile(&file_name, &wgs_dictionary_handle, &file_length);
+
+  Dictionary_LoadFile(&file_name, &wgs_dictionary_handle, &file_length);
   wgs_dictionary_list_count = file_length / 5;
-  
+
   file_name.length = 11;
   for (i=0; i<11; i++) {
     file_name.text[i] = SECRETS_FILENAME[i];
   }
-  
-  LoadFile(&file_name, &wgs_secret_word_handle, &file_length);
+
+  Dictionary_LoadFile(&file_name, &wgs_secret_word_handle, &file_length);
   wgs_secret_word_list_count = file_length / 5;
 }
 
+void Dictionary_NewGame(void) {
+}
 
-void DestroyDictionary(void) {
+void Dictionary_UpdateFinished(void) {
+}
+
+void Dictionary_Destroy(void) {
   if (wgs_dictionary_handle != NULL) {
     DisposeHandle(wgs_dictionary_handle);
   }
@@ -159,29 +139,65 @@ void DestroyDictionary(void) {
 }
 
 
-BOOLEAN IsValidGuess(char *word) {
+/* Game Methods */
+
+void Dictionary_GetWordFromList(char *src, char *dst, LongWord index) {
+  int i;
+
+  for (i=0; i<5; i++) {
+    dst[i] = src[index * 5 + i];
+  }
+
+  dst[5] = '\0';
+}
+
+BOOLEAN Dictionary_DoesListContainWord(LongWord list_len, char *list, char *word) {
+  LongWord low_idx = 0;
+  LongWord high_idx = list_len - 1;
+  LongWord mid_idx;
+  int compare_result;
+  char list_word[6];
+
+  while (low_idx <= high_idx) {
+    mid_idx = (low_idx + high_idx) / 2;
+
+    Dictionary_GetWordFromList(list, list_word, mid_idx);
+    compare_result = strcmp(word, list_word);
+
+    if (compare_result == 0) {
+      return TRUE;
+    } else if (compare_result < 0) {
+      high_idx = mid_idx - 1;
+    } else {
+      low_idx = mid_idx + 1;
+    }
+  }
+
+  return FALSE;
+}
+
+BOOLEAN Dictionary_IsValidGuess(char *word) {
   BOOLEAN result;
 
   HLock(wgs_dictionary_handle);
-  result = DoesListContainWord(wgs_dictionary_list_count, *wgs_dictionary_handle, word);
+  result = Dictionary_DoesListContainWord(wgs_dictionary_list_count, *wgs_dictionary_handle, word);
   HUnlock(wgs_dictionary_handle);
-  
+
   if (result == TRUE) {
     return result;
   }
 
   HLock(wgs_secret_word_handle);
-  result = DoesListContainWord(wgs_secret_word_list_count, *wgs_secret_word_handle, word);
+  result = Dictionary_DoesListContainWord(wgs_secret_word_list_count, *wgs_secret_word_handle, word);
   HUnlock(wgs_secret_word_handle);
-  
+
   return result;
 }
 
-
-void GetRandomWord(char *buffer) {
+void Dictionary_GetRandomWord(char *buffer) {
   int i;
   LongWord random_index = rand() % wgs_secret_word_list_count;
-  
+
   HLock(wgs_secret_word_handle);
   for (i=0; i<5; i++) {
     buffer[i] = (*wgs_secret_word_handle)[random_index * 5 + i];
