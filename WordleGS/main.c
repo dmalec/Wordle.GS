@@ -36,6 +36,7 @@
 #include "main.h"
 #include "wgs_app_window.h"
 #include "wgs_game_engine.h"
+#include "wgs_help_dialog.h"
 #include "wgs_render_system.h"
 
 BOOLEAN done;
@@ -77,6 +78,10 @@ void HandleMenu (void) {
     case 257:
       HandleAboutDialog();
       break;
+
+    case 300:
+      HelpDialog_Show();
+      break;
       
   }
   
@@ -87,7 +92,7 @@ void HandleMenu (void) {
 void InitMenus (void) {
   int height;
   MenuRecHndl menu_hand;
-  
+
   menu_hand = NewMenu(
                      ">> Edit \\N3\r"
                      "--Undo\\N250*Zz\r"
@@ -98,7 +103,7 @@ void InitMenus (void) {
                      ".\r");
   
   InsertMenu(menu_hand, 0);
-  
+
   menu_hand = NewMenu(
                      ">> File \\N2\r"
                      "--New Game\\N255*Nn\r"
@@ -106,10 +111,11 @@ void InitMenus (void) {
                      ".\r");
   
   InsertMenu(menu_hand, 0);
-  
+
   menu_hand = NewMenu(
                      ">>@\\XN1\r"
                      "--About...\\N257\r"
+                     "--Help...\\N300*?/\r"
                      "---\\N258D\r"
                      ".\r");
   InsertMenu(menu_hand, 0);
