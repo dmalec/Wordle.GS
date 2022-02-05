@@ -31,8 +31,6 @@
 
 typedef enum { Unknown, Correct, WrongPlace, UnusedLetter } wgs_square_state;
 
-void NewGame(void);
-
 wgs_guess_status GuessCurrentWord(void);
 
 char GetGuessSquareLetter(int row, int col);
