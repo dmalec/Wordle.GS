@@ -36,6 +36,7 @@
 #include "main.h"
 #include "wgs_app_window.h"
 #include "wgs_game_engine.h"
+#include "wgs_gs_utils.h"
 #include "wgs_help_dialog.h"
 #include "wgs_render_system.h"
 
@@ -125,13 +126,12 @@ void InitMenus (void) {
   DrawMenuBar();
 }
 
-
 int main (void) {
   int event;
   int i;
   char time_string[21];
   unsigned seed = 0;
-  
+
   ReadAsciiTime(time_string);
   for (i=0; i<21; i++) {
     seed += time_string[i];
@@ -142,6 +142,8 @@ int main (void) {
   InitMenus();
   InitCursor();
   
+  GSUtils_Test();
+
   GameEngine_Create();
   CreateRenderSystem();
   
