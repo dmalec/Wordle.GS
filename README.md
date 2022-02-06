@@ -1,5 +1,5 @@
 # Wordle.GS
-A clone of Wordle for the Apple IIGS. Latest release is [Version 0.2](https://github.com/dmalec/Wordle.GS/releases/tag/v0.2)
+A clone of Wordle for the Apple IIGS. Latest release is [Version 0.3](https://github.com/dmalec/Wordle.GS/releases/tag/v0.3)
 
 ## Screen Shots
 
@@ -14,6 +14,10 @@ A clone of Wordle for the Apple IIGS. Latest release is [Version 0.2](https://gi
 ### Sample Win Screen
 
 ![WordleGS Play](docs/WordleGS_win.png)
+
+## As Seen On...
+
+Ron McAdams of Ron's Computer Videos played Wordle GS on [his livestream](https://youtu.be/fyzRyB9RvmM) - this is a great introduction to the game.
 
 ## Dev Environment
 
