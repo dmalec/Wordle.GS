@@ -2,7 +2,7 @@ objs
 gcov
 WordleGS
 
-lcov_report
+lcov.info
 WordleGS-HTML
 
 wordle_gs_tests
