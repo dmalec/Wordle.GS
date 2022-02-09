@@ -22,29 +22,16 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEtest_shim_types_
-#define _GUARD_PROJECTWordleGS_FILEtest_shim_types_
+#ifndef _GUARD_PROJECTWordleGS_FILEtest_shim_memory_
+#define _GUARD_PROJECTWordleGS_FILEtest_shim_memory_
+
+#include "types.h"
 
 
-#define TRUE 1
-#define FALSE 0
+void DisposeHandle(Handle handle);
 
-typedef unsigned int BOOLEAN;
-
-
-typedef unsigned int Word;
-typedef unsigned long LongWord;
-typedef char *Pointer;
-typedef Pointer *Handle;
+void HLock(Handle handle);
+void HUnlock(Handle handle);
 
 
-struct Rect {
-  short v1;
-  short h1;
-  short v2;
-  short h2;
-};
-typedef struct Rect Rect;
-
-
-#endif /* _GUARD_PROJECTWordleGS_FILEtest_shim_types_ */
+#endif /* _GUARD_PROJECTWordleGS_FILEtest_shim_memory_ */

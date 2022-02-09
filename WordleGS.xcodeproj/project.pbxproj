@@ -16,6 +16,7 @@
 		3636743827AB8AE800582831 /* wgs_game_engine.c in Sources */ = {isa = PBXBuildFile; fileRef = 3636743727AB8AE800582831 /* wgs_game_engine.c */; };
 		3636744B27ACAE9500582831 /* wgs_alphabet_state.c in Sources */ = {isa = PBXBuildFile; fileRef = 3636744A27ACAE9500582831 /* wgs_alphabet_state.c */; };
 		3636747D27AD4AFC00582831 /* wgs_guess_state.c in Sources */ = {isa = PBXBuildFile; fileRef = 3636747C27AD4AFC00582831 /* wgs_guess_state.c */; };
+		3669C9C627B356B400FC0D8A /* wgs_gs_shim.c in Sources */ = {isa = PBXBuildFile; fileRef = 3669C9C527B356B400FC0D8A /* wgs_gs_shim.c */; };
 		3678008227A100E7002A9ACC /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 3678008127A100E7002A9ACC /* main.c */; };
 		3678008527A100E7002A9ACC /* main.rez in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3678008427A100E7002A9ACC /* main.rez */; };
 		3678008727A100E7002A9ACC /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 3678008627A100E7002A9ACC /* Makefile */; };
@@ -80,6 +81,8 @@
 		3636745027ACAF2300582831 /* wgs_game_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_game_types.h; sourceTree = "<group>"; };
 		3636747B27AD4AFC00582831 /* wgs_guess_state.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_guess_state.h; sourceTree = "<group>"; };
 		3636747C27AD4AFC00582831 /* wgs_guess_state.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wgs_guess_state.c; sourceTree = "<group>"; };
+		3669C9C427B356B400FC0D8A /* wgs_gs_shim.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_gs_shim.h; sourceTree = "<group>"; };
+		3669C9C527B356B400FC0D8A /* wgs_gs_shim.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wgs_gs_shim.c; sourceTree = "<group>"; };
 		3678007527A100E7002A9ACC /* WordleGS */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WordleGS; sourceTree = BUILT_PRODUCTS_DIR; };
 		3678007827A100E7002A9ACC /* WordleGS.2mg */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WordleGS.2mg; sourceTree = BUILT_PRODUCTS_DIR; };
 		3678007A27A100E7002A9ACC /* WordleGS.shk */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WordleGS.shk; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +145,8 @@
 				3636743727AB8AE800582831 /* wgs_game_engine.c */,
 				3636747B27AD4AFC00582831 /* wgs_guess_state.h */,
 				3636747C27AD4AFC00582831 /* wgs_guess_state.c */,
+				3669C9C427B356B400FC0D8A /* wgs_gs_shim.h */,
+				3669C9C527B356B400FC0D8A /* wgs_gs_shim.c */,
 				3636745027ACAF2300582831 /* wgs_game_types.h */,
 			);
 			name = "Game Engine";
@@ -358,6 +363,7 @@
 				3607BB6927AEF747007B9572 /* wgs_utils.c in Sources */,
 				3607BB8427AEFFCA007B9572 /* wgs_help_dialog.c in Sources */,
 				3678008727A100E7002A9ACC /* Makefile in Sources */,
+				3669C9C627B356B400FC0D8A /* wgs_gs_shim.c in Sources */,
 				3630F8D627A5B2F60018042C /* wgs_dictionary.c in Sources */,
 				3678008227A100E7002A9ACC /* main.c in Sources */,
 				3636747D27AD4AFC00582831 /* wgs_guess_state.c in Sources */,

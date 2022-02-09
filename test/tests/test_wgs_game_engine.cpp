@@ -31,40 +31,35 @@ extern "C" {
 #include "wgs_dictionary.h"
 }
 
+static char dictionary_memory[] = "BABELCRAMSROOTS";
+static Pointer dictionary_pointer = (Pointer)(&dictionary_memory);
+static Handle dictionary_handle = (Handle)(&dictionary_pointer);
+static LongWord dictionary_length = 15;
 
-// Mock Dictionary Functions
+static char secrets_memory[] = "APPLEROBOT";
+static Pointer secrets_pointer = (Pointer)(&secrets_memory);
+static Handle secrets_handle = (Handle)(&secrets_pointer);
+static LongWord secrets_length = 10;
 
-void Dictionary_Create(void) {
-  mock().actualCall("Dictionary_Create");
+
+void setupFileMocks(void) {
+  mock()
+    .expectOneCall("GsShim_LoadFile")
+    .withStringParameter("c_str_file_name", "dictionary.txt")
+    .withOutputParameterReturning("file_handle", &dictionary_handle, sizeof(Handle))
+    .withOutputParameterReturning("file_length", &dictionary_length, sizeof(LongWord));
+
+  mock()
+    .expectOneCall("GsShim_LoadFile")
+    .withStringParameter("c_str_file_name", "secrets.txt")
+    .withOutputParameterReturning("file_handle", &secrets_handle, sizeof(Handle))
+    .withOutputParameterReturning("file_length", &secrets_length, sizeof(LongWord));
 }
 
-void Dictionary_NewGame(void) {
-  mock().actualCall("Dictionary_NewGame");
-}
-
-void Dictionary_UpdateFinished(void) {
-  mock().actualCall("Dictionary_UpdateFinished");
-}
-
-void Dictionary_Destroy(void) {
-  mock().actualCall("Dictionary_Destroy");
-}
-
-void Dictionary_GetRandomWord(char *secret_word) {
-  mock().actualCall("Dictionary_GetRandomWord").withOutputParameter("secret_word", secret_word);
-}
-
-BOOLEAN Dictionary_IsValidGuess(char *guess_word) {
-  mock().actualCall("Dictionary_IsValidGuess");
-
-  return (BOOLEAN)(mock().intReturnValue());
-}
-
-// Unit Tests
 
 TEST_GROUP(GameEngine_Creation) {
   void setup() {
-    mock().expectOneCall("Dictionary_Create");
+    setupFileMocks();
   }
 
   void teardown() {
@@ -88,7 +83,7 @@ TEST(GameEngine_Creation, Create) {
 
 TEST_GROUP(GameEngine) {
   void setup() {
-    mock().expectOneCall("Dictionary_Create");
+    setupFileMocks();
     GameEngine_Create();
   }
 
@@ -99,10 +94,8 @@ TEST_GROUP(GameEngine) {
 };
 
 TEST(GameEngine, NewGame) {
-  char secret_word[] = "     ";
-
-  mock().expectOneCall("Dictionary_NewGame");
-  mock().expectOneCall("Dictionary_GetRandomWord").withOutputParameterReturning("secret_word", secret_word, 5);
+  mock().expectOneCall("HLock").withPointerParameter("handle", secrets_handle);
+  mock().expectOneCall("HUnlock").withPointerParameter("handle", secrets_handle);
 
   GameEngine_NewGame();
 
@@ -136,19 +129,25 @@ TEST(GameEngine, GuessCurrentWord_GuardConditions_Word) {
   GuessState_AddLetterToGuess('Q');
   GuessState_AddLetterToGuess('Q');
 
-  mock().expectOneCall("Dictionary_IsValidGuess").andReturnValue(FALSE);
+  mock().expectOneCall("HLock").withPointerParameter("handle", dictionary_handle);
+  mock().expectOneCall("HUnlock").withPointerParameter("handle", dictionary_handle);
+
+  mock().expectOneCall("HLock").withPointerParameter("handle", secrets_handle);
+  mock().expectOneCall("HUnlock").withPointerParameter("handle", secrets_handle);
+
   ENUMS_EQUAL_INT_TEXT(InvalidWord, GameEngine_GuessCurrentWord(), "Invalid word returns expected enum");
 }
 
 
 TEST(GameEngine, GetSecretWord) {
-  char expected_secret_word[] = "WORDS";
+  char expected_secret_word[] = "ROBOT";
   char actual_secret_word[] = "     ";
 
-  mock().expectOneCall("Dictionary_NewGame");
-  mock().expectOneCall("Dictionary_GetRandomWord").withOutputParameterReturning("secret_word", expected_secret_word, 5);
+  mock().expectOneCall("HLock").withPointerParameter("handle", secrets_handle);
+  mock().expectOneCall("HUnlock").withPointerParameter("handle", secrets_handle);
 
   GameEngine_NewGame();
+
   GameEngine_GetSecretWord(actual_secret_word);
   STRNCMP_EQUAL_TEXT(expected_secret_word, actual_secret_word, 5, "Secret word should be returned unchanged");
 }

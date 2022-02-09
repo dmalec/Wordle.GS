@@ -22,29 +22,21 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEtest_shim_types_
-#define _GUARD_PROJECTWordleGS_FILEtest_shim_types_
+#include "CppUTestExt/MockSupport.h"
+
+extern "C" {
+#include "memory.h"
+}
 
 
-#define TRUE 1
-#define FALSE 0
+void DisposeHandle(Handle handle) {
+  mock().actualCall("DisposeHandle").withPointerParameter("handle", handle);
+}
 
-typedef unsigned int BOOLEAN;
+void HLock(Handle handle) {
+  mock().actualCall("HLock").withPointerParameter("handle", handle);
+}
 
-
-typedef unsigned int Word;
-typedef unsigned long LongWord;
-typedef char *Pointer;
-typedef Pointer *Handle;
-
-
-struct Rect {
-  short v1;
-  short h1;
-  short v2;
-  short h2;
-};
-typedef struct Rect Rect;
-
-
-#endif /* _GUARD_PROJECTWordleGS_FILEtest_shim_types_ */
+void HUnlock(Handle handle) {
+  mock().actualCall("HUnlock").withPointerParameter("handle", handle);
+}

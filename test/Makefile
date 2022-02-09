@@ -26,14 +26,19 @@ PROJECT_HOME_DIR = ..
 CPPUTEST_HOME = ./cpputest
 
 SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_alphabet_state.c
+SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_dictionary.c
 SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_game_engine.c
 SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_guess_state.c
 SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_utils.c
 
 TEST_SRC_DIRS += tests
 
+MOCKS_SRC_DIRS += mocks
+
 # Turn on CppUMock
 CPPUTEST_USE_EXTENSIONS = Y
+
+CPPUTEST_USE_GCOV=Y
 
 INCLUDE_DIRS += $(CPPUTEST_HOME)/include
 INCLUDE_DIRS += $(CPPUTEST_HOME)/include/Platforms/Gcc
