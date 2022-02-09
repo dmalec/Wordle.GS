@@ -60,3 +60,9 @@ jobs:
       working-directory: test
       run: |
         make lcov
+
+    - name: Archive Coverage
+      uses: actions/upload-artifact@v2
+      with:
+        name: WordleGS-Coverage
+        path: test/WordleGS-HTML
