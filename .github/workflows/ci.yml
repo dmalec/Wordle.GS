@@ -54,4 +54,4 @@ jobs:
       timeout-minutes: 2
       working-directory: test
       run: |
-        make
+        make lcov

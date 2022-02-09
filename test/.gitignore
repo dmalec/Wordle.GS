@@ -1,3 +1,9 @@
-wordle_gs_tests
-WordleGS/*
 objs
+gcov
+WordleGS
+
+lcov_report
+WordleGS-HTML
+
+wordle_gs_tests
+wordle_gs_tests.txt
