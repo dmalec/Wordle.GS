@@ -66,3 +66,9 @@ jobs:
       with:
         name: WordleGS-Coverage
         path: test/WordleGS-HTML
+        retention-days: 7
+
+    - name: Comment with Coverage
+      uses: romeovs/lcov-reporter-action@v0.2.17
+      with:
+        lcov-file: test/wordle_gs_tests
