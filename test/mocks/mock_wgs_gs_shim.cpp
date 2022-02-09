@@ -22,29 +22,17 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEtest_shim_types_
-#define _GUARD_PROJECTWordleGS_FILEtest_shim_types_
+#include "CppUTestExt/MockSupport.h"
+
+extern "C" {
+#include "wgs_gs_shim.h"
+}
 
 
-#define TRUE 1
-#define FALSE 0
-
-typedef unsigned int BOOLEAN;
-
-
-typedef unsigned int Word;
-typedef unsigned long LongWord;
-typedef char *Pointer;
-typedef Pointer *Handle;
-
-
-struct Rect {
-  short v1;
-  short h1;
-  short v2;
-  short h2;
-};
-typedef struct Rect Rect;
-
-
-#endif /* _GUARD_PROJECTWordleGS_FILEtest_shim_types_ */
+void GsShim_LoadFile(char *c_str_file_name, Handle *file_handle, LongWord *file_length) {
+  mock()
+    .actualCall("GsShim_LoadFile")
+    .withStringParameter("c_str_file_name", c_str_file_name)
+    .withOutputParameter("file_handle", file_handle)
+    .withOutputParameter("file_length", file_length);
+}

@@ -22,104 +22,42 @@
  * SOFTWARE.
  */
 
-#include <gsos.h>
 #include <memory.h>
-#include <misctool.h>
-#include <stdio.h>
 
 #include "wgs_dictionary.h"
+#include "wgs_gs_shim.h"
 
 
 /* Constants */
 
-#define DICTIONARY_FILENAME         "dictionary.txt"
-#define SECRETS_FILENAME            "secrets.txt"
+#define DICTIONARY_FILENAME         "dictionary.txt\0"
+#define SECRETS_FILENAME            "secrets.txt\0"
 
 
 /* State */
 
-LongWord wgs_dictionary_list_count = 0;
-Handle wgs_dictionary_handle;
+static LongWord wgs_dictionary_list_count = 0;
+static Handle wgs_dictionary_handle;
 
-LongWord wgs_secret_word_list_count = 0;
-Handle wgs_secret_word_handle;
+static LongWord wgs_secret_word_list_count = 0;
+static Handle wgs_secret_word_handle;
 
 
 /* Local Prototypes */
 
 void Dictionary_GetWordFromList(char *src, char *dst, LongWord index);
 BOOLEAN Dictionary_DoesListContainWord(LongWord list_len, char *list, char *word);
-void Dictionary_LoadFile(GSString255 *file_name, Handle *file_handle, LongWord *file_length);
 
 
 /* Lifecycle Methods */
 
-void Dictionary_LoadFile(GSString255 *file_name, Handle *file_handle, LongWord *file_length) {
-  BOOLEAN success = TRUE;
-  OpenRecGS open_file_rec;
-  Handle file_contents = NULL;
-  IORecGS read_file_rec;
-  RefNumRecGS close_file_rev;
-
-  *file_handle = NULL;
-  *file_length = 0;
-
-  open_file_rec.pCount = 12;
-  open_file_rec.pathname = file_name;
-  open_file_rec.requestAccess = 1;         // Read mode
-  open_file_rec.resourceNumber = 0;        // Read data fork
-  open_file_rec.optionList = NULL;
-  OpenGS(&open_file_rec);
-  if (toolerror() != 0) {
-    SysBeep(); //FlagError(4, toolerror());
-    return;
-  }
-
-  file_contents = NewHandle(open_file_rec.eof, userid(), 0xC010, NULL);
-  if (toolerror() != 0) {
-    SysBeep(); SysBeep(); //FlagError(4, toolerror());
-    return;
-  }
-
-  read_file_rec.pCount = 4;
-  read_file_rec.refNum = open_file_rec.refNum;
-  read_file_rec.dataBuffer = *file_contents;
-  read_file_rec.requestCount = open_file_rec.eof;
-  ReadGS(&read_file_rec);
-  if (toolerror() != 0) {
-    SysBeep(); SysBeep(); SysBeep(); //FlagError(4, toolerror());
-    return;
-  }
-
-  *file_handle = file_contents;
-  *file_length = open_file_rec.eof;
-
-  close_file_rev.pCount = 1;
-  close_file_rev.refNum = open_file_rec.refNum;
-  CloseGS(&close_file_rev);
-
-  HUnlock(file_contents);
-}
-
 void Dictionary_Create(void) {
-  GSString255 file_name;
   LongWord file_length;
-  int i;
 
-  file_name.length = 14;
-  for (i=0; i<14; i++) {
-    file_name.text[i] = DICTIONARY_FILENAME[i];
-  }
-
-  Dictionary_LoadFile(&file_name, &wgs_dictionary_handle, &file_length);
+  GsShim_LoadFile(DICTIONARY_FILENAME, &wgs_dictionary_handle, &file_length);
   wgs_dictionary_list_count = file_length / 5;
 
-  file_name.length = 11;
-  for (i=0; i<11; i++) {
-    file_name.text[i] = SECRETS_FILENAME[i];
-  }
-
-  Dictionary_LoadFile(&file_name, &wgs_secret_word_handle, &file_length);
+  GsShim_LoadFile(SECRETS_FILENAME, &wgs_secret_word_handle, &file_length);
   wgs_secret_word_list_count = file_length / 5;
 }
 
