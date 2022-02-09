@@ -50,13 +50,39 @@ TEST_GROUP(AlphabetState) {
     AlphabetState_Create();
     AlphabetState_UpdateFinished();
   }
+  void teardown() {
+    AlphabetState_Destroy();
+  }
 };
+
+TEST(AlphabetState, NewGame) {
+
+  AlphabetState_MaybeUpdateLetterStatus('A', gtCorrectLetter);
+  AlphabetState_MaybeUpdateLetterStatus('B', gtWrongPlaceLetter);
+  AlphabetState_MaybeUpdateLetterStatus('C', gtIncorrectLetter);
+
+  AlphabetState_NewGame();
+
+  for (char letter='A'; letter<='C'; letter++) {
+    wgs_letter_state state = AlphabetState_GetLetterState(letter);
+
+    ENUMS_EQUAL_INT_TEXT(gtUnusedLetter, state.status, "Status should be unused");
+    LONGS_EQUAL_TEXT(TRUE, state.changed, "Changed should be true for previously used letters");
+  }
+
+  for (char letter='D'; letter<='Z'; letter++) {
+    wgs_letter_state state = AlphabetState_GetLetterState(letter);
+
+    ENUMS_EQUAL_INT_TEXT(gtUnusedLetter, state.status, "Status should be unused");
+    LONGS_EQUAL_TEXT(FALSE, state.changed, "Changed should be false for unused letters");
+  }
+}
 
 TEST(AlphabetState, UpdateFinished) {
   for (char letter='A'; letter<='Z'; letter++) {
     wgs_letter_state state = AlphabetState_GetLetterState(letter);
 
-    LONGS_EQUAL_TEXT(FALSE, state.changed, "Changed should startbe false after update");
+    LONGS_EQUAL_TEXT(FALSE, state.changed, "Changed should be false after update");
   }
 }
 
