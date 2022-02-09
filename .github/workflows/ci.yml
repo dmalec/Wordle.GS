@@ -19,6 +19,11 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
+    - name: Install lcov
+      run: >
+        sudo apt-get install
+        lcov
+
     - name: Pull Submodules
       run: |
         git submodule update --init --recursive
@@ -35,7 +40,7 @@ jobs:
       run: |
         sudo apt-get update
 
-    - name: Install Dependencies
+    - name: Install Cpputest Build Dependencies
       if: steps.cpputest-lib-cache.outputs.cache-hit != 'true'
       run: >
         sudo apt-get install
@@ -54,4 +59,17 @@ jobs:
       timeout-minutes: 2
       working-directory: test
       run: |
-        make
+        make lcov
+
+    - name: Archive Coverage
+      uses: actions/upload-artifact@v2
+      with:
+        name: WordleGS-Coverage
+        path: test/WordleGS-HTML
+        retention-days: 7
+
+    - name: Comment with Coverage
+      uses: romeovs/lcov-reporter-action@v0.2.17
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        lcov-file: test/lcov.info
