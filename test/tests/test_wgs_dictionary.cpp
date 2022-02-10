@@ -74,6 +74,11 @@ TEST(Dictionary, UpdateFinished) {
 }
 
 
+TEST(Dictionary, GetNumberOfSecretWords) {
+  UNSIGNED_LONGS_EQUAL_TEXT(2, Dictionary_GetNumberOfSecretWords(), "Secret word size as expected");
+}
+
+
 TEST(Dictionary, IsValidGuess) {
   mock().expectNCalls(3, "HLock").withPointerParameter("handle", dictionary_handle);
   mock().expectNCalls(3, "HUnlock").withPointerParameter("handle", dictionary_handle);
@@ -85,4 +90,17 @@ TEST(Dictionary, IsValidGuess) {
   LONGS_EQUAL_TEXT(FALSE, Dictionary_IsValidGuess("RENTS"), "Unknown words are not valid guesses");
 }
 
+
+TEST(Dictionary, GetWord) {
+  char word[] = "     ";
+
+  mock().expectNCalls(2, "HLock").withPointerParameter("handle", secrets_handle);
+  mock().expectNCalls(2, "HUnlock").withPointerParameter("handle", secrets_handle);
+
+  Dictionary_GetWord(0, word);
+  STRNCMP_EQUAL_TEXT("APPLE", word, 5, "Secret word at 0 returned as expected");
+
+  Dictionary_GetWord(1, word);
+  STRNCMP_EQUAL_TEXT("ROBOT", word, 5, "Secret word at 0 returned as expected");
+}
 

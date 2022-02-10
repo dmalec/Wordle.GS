@@ -29,6 +29,16 @@ extern "C" {
 }
 
 
+Handle NewHandle(LongWord size, Word user_id, Word attributes, Pointer location) {
+  mock().actualCall("NewHandle")
+    .withUnsignedLongIntParameter("size", size)
+    .withUnsignedIntParameter("user_id", user_id)
+    .withUnsignedIntParameter("attributes", attributes)
+    .withPointerParameter("location", location);
+
+  return (Handle)mock().pointerReturnValue();
+}
+
 void DisposeHandle(Handle handle) {
   mock().actualCall("DisposeHandle").withPointerParameter("handle", handle);
 }

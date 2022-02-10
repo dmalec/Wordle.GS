@@ -38,8 +38,9 @@ void Dictionary_Destroy(void);
 
 /* Game Methods */
 
+unsigned int Dictionary_GetNumberOfSecretWords(void);
 BOOLEAN Dictionary_IsValidGuess(char *word);
-void Dictionary_GetRandomWord(char *buffer);
+void Dictionary_GetWord(unsigned int index, char *buffer);
 
 
 #endif /* define _GUARD_PROJECTWordleGS_FILEwgs_dictionary_ */

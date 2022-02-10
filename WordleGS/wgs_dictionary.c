@@ -79,6 +79,10 @@ void Dictionary_Destroy(void) {
 
 /* Game Methods */
 
+unsigned int Dictionary_GetNumberOfSecretWords(void) {
+  return wgs_secret_word_list_count;
+}
+
 void Dictionary_GetWordFromList(char *src, char *dst, LongWord index) {
   int i;
 
@@ -90,9 +94,9 @@ void Dictionary_GetWordFromList(char *src, char *dst, LongWord index) {
 }
 
 BOOLEAN Dictionary_DoesListContainWord(LongWord list_len, char *list, char *word) {
-  LongWord low_idx = 0;
-  LongWord high_idx = list_len - 1;
-  LongWord mid_idx;
+  long low_idx = 0;
+  long high_idx = list_len - 1;
+  long mid_idx;
   int compare_result;
   char list_word[6];
 
@@ -132,13 +136,12 @@ BOOLEAN Dictionary_IsValidGuess(char *word) {
   return result;
 }
 
-void Dictionary_GetRandomWord(char *buffer) {
+void Dictionary_GetWord(unsigned int index, char *buffer) {
   int i;
-  LongWord random_index = rand() % wgs_secret_word_list_count;
 
   HLock(wgs_secret_word_handle);
   for (i=0; i<5; i++) {
-    buffer[i] = (*wgs_secret_word_handle)[random_index * 5 + i];
+    buffer[i] = (*wgs_secret_word_handle)[index * 5 + i];
   }
   HUnlock(wgs_secret_word_handle);
 }
