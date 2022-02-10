@@ -22,17 +22,4 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEtest_shim_memory_
-#define _GUARD_PROJECTWordleGS_FILEtest_shim_memory_
-
-#include "types.h"
-
-
-Handle NewHandle(LongWord size, Word user_id, Word attributes, Pointer location);
-void DisposeHandle(Handle handle);
-
-void HLock(Handle handle);
-void HUnlock(Handle handle);
-
-
-#endif /* _GUARD_PROJECTWordleGS_FILEtest_shim_memory_ */
+int userid(void);

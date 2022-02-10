@@ -22,17 +22,15 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEtest_shim_memory_
-#define _GUARD_PROJECTWordleGS_FILEtest_shim_memory_
+#include "CppUTestExt/MockSupport.h"
 
-#include "types.h"
-
-
-Handle NewHandle(LongWord size, Word user_id, Word attributes, Pointer location);
-void DisposeHandle(Handle handle);
-
-void HLock(Handle handle);
-void HUnlock(Handle handle);
+extern "C" {
+#include "orca.h"
+}
 
 
-#endif /* _GUARD_PROJECTWordleGS_FILEtest_shim_memory_ */
+int userid(void) {
+  mock().actualCall("userid");
+
+  return mock().intReturnValue();
+}

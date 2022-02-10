@@ -26,6 +26,7 @@
 
 #include "wgs_alphabet_state.h"
 #include "wgs_dictionary.h"
+#include "wgs_game_sequence.h"
 #include "wgs_guess_state.h"
 
 
@@ -55,19 +56,23 @@ void GameEngine_Create(void) {
 
   AlphabetState_Create();
   Dictionary_Create();
+  GameSequence_Create(Dictionary_GetNumberOfSecretWords());
   GuessState_Create();
 }
 
 void GameEngine_NewGame(void) {
+  unsigned int secret_word_index;
   char secret_word[] = "     ";
 
   AlphabetState_NewGame();
   Dictionary_NewGame();
+  secret_word_index = GameSequence_GetSequenceValue();
+  GameSequence_NewGame();
   GuessState_NewGame();
 
   wgs_game_engine_game_state = InProgress;
 
-  Dictionary_GetRandomWord(secret_word);
+  Dictionary_GetWord(secret_word_index, secret_word);
   GameEngine_NewSecretWord(secret_word);
 }
 
@@ -83,12 +88,14 @@ void GameEngine_NewSecretWord(char *secret_word) {
 void GameEngine_UpdateFinished(void) {
   AlphabetState_UpdateFinished();
   Dictionary_UpdateFinished();
+  GameSequence_UpdateFinished();
   GuessState_UpdateFinished();
 }
 
 void GameEngine_Destroy(void) {
   AlphabetState_Destroy();
   Dictionary_Destroy();
+  GameSequence_Destroy();
   GuessState_Destroy();
 }
 

@@ -41,8 +41,15 @@ static Pointer secrets_pointer = (Pointer)(&secrets_memory);
 static Handle secrets_handle = (Handle)(&secrets_pointer);
 static LongWord secrets_length = 10;
 
+static unsigned int sequence_memory[] = { 0, 0 };
+static Pointer sequence_pointer = (Pointer)(&sequence_memory);
+static Handle sequence_handle = (Handle)(&sequence_pointer);
+static LongWord sequence_length = 2;
+
 
 void setupFileMocks(void) {
+  int user_id = 42;
+
   mock()
     .expectOneCall("GsShim_LoadFile")
     .withStringParameter("c_str_file_name", "dictionary.txt")
@@ -54,6 +61,18 @@ void setupFileMocks(void) {
     .withStringParameter("c_str_file_name", "secrets.txt")
     .withOutputParameterReturning("file_handle", &secrets_handle, sizeof(Handle))
     .withOutputParameterReturning("file_length", &secrets_length, sizeof(LongWord));
+
+  mock().expectOneCall("userid").andReturnValue(user_id);
+
+  mock()
+    .expectOneCall("NewHandle")
+    .withUnsignedLongIntParameter("size", sequence_length * sizeof(int))
+    .withUnsignedIntParameter("user_id", user_id)
+    .withUnsignedIntParameter("attributes", 0xC010)
+    .withPointerParameter("location", NULL)
+    .andReturnValue(sequence_handle);
+
+  mock().expectOneCall("HUnlock").withPointerParameter("handle", sequence_handle);
 }
 
 
@@ -90,6 +109,7 @@ TEST_GROUP(GameEngine) {
   void teardown() {
     mock().expectOneCall("DisposeHandle").withPointerParameter("handle", secrets_handle);
     mock().expectOneCall("DisposeHandle").withPointerParameter("handle", dictionary_handle);
+    mock().expectOneCall("DisposeHandle").withPointerParameter("handle", sequence_handle);
 
     GameEngine_Destroy();
 
@@ -99,6 +119,9 @@ TEST_GROUP(GameEngine) {
 };
 
 TEST(GameEngine, NewGame) {
+  mock().expectOneCall("HLock").withPointerParameter("handle", sequence_handle);
+  mock().expectOneCall("HUnlock").withPointerParameter("handle", sequence_handle);
+
   mock().expectOneCall("HLock").withPointerParameter("handle", secrets_handle);
   mock().expectOneCall("HUnlock").withPointerParameter("handle", secrets_handle);
 
@@ -108,6 +131,9 @@ TEST(GameEngine, NewGame) {
 }
 
 TEST(GameEngine, IsGameInProgress) {
+  mock().expectOneCall("HLock").withPointerParameter("handle", sequence_handle);
+  mock().expectOneCall("HUnlock").withPointerParameter("handle", sequence_handle);
+
   mock().expectOneCall("HLock").withPointerParameter("handle", secrets_handle);
   mock().expectOneCall("HUnlock").withPointerParameter("handle", secrets_handle);
 
@@ -179,9 +205,13 @@ TEST(GameEngine, GuessCurrentWord_AllNonMatch) {
   ENUMS_EQUAL_INT_TEXT(ValidGuess, GameEngine_GuessCurrentWord(), "All non-match returns expected enum");
 }
 
+
 TEST(GameEngine, GetSecretWord) {
-  char expected_secret_word[] = "ROBOT";
+  char expected_secret_word[] = "APPLE";
   char actual_secret_word[] = "     ";
+
+  mock().expectOneCall("HLock").withPointerParameter("handle", sequence_handle);
+  mock().expectOneCall("HUnlock").withPointerParameter("handle", sequence_handle);
 
   mock().expectOneCall("HLock").withPointerParameter("handle", secrets_handle);
   mock().expectOneCall("HUnlock").withPointerParameter("handle", secrets_handle);

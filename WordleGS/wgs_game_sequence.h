@@ -22,17 +22,19 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEtest_shim_memory_
-#define _GUARD_PROJECTWordleGS_FILEtest_shim_memory_
-
-#include "types.h"
+#ifndef _GUARD_PROJECTWordleGS_FILEwgs_game_sequence_
+#define _GUARD_PROJECTWordleGS_FILEwgs_game_sequence_
 
 
-Handle NewHandle(LongWord size, Word user_id, Word attributes, Pointer location);
-void DisposeHandle(Handle handle);
+/* Lifecycle Methods */
 
-void HLock(Handle handle);
-void HUnlock(Handle handle);
+void GameSequence_Create(unsigned int size);
+void GameSequence_NewGame(void);
+void GameSequence_UpdateFinished(void);
+void GameSequence_Destroy(void);
 
+/* Game Methods */
 
-#endif /* _GUARD_PROJECTWordleGS_FILEtest_shim_memory_ */
+unsigned int GameSequence_GetSequenceValue(void);
+
+#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_sequence_ */
