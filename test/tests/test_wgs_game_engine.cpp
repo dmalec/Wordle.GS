@@ -88,6 +88,11 @@ TEST_GROUP(GameEngine) {
   }
 
   void teardown() {
+    mock().expectOneCall("DisposeHandle").withPointerParameter("handle", secrets_handle);
+    mock().expectOneCall("DisposeHandle").withPointerParameter("handle", dictionary_handle);
+
+    GameEngine_Destroy();
+
     mock().checkExpectations();
     mock().clear();
   }
@@ -103,6 +108,11 @@ TEST(GameEngine, NewGame) {
 }
 
 TEST(GameEngine, IsGameInProgress) {
+  mock().expectOneCall("HLock").withPointerParameter("handle", secrets_handle);
+  mock().expectOneCall("HUnlock").withPointerParameter("handle", secrets_handle);
+
+  GameEngine_NewGame();
+
   LONGS_EQUAL_TEXT(FALSE, GameEngine_IsGameInProgress(), "Game starts not in progress");
 
   GuessState_AddLetterToGuess('Q');
@@ -138,6 +148,36 @@ TEST(GameEngine, GuessCurrentWord_GuardConditions_Word) {
   ENUMS_EQUAL_INT_TEXT(InvalidWord, GameEngine_GuessCurrentWord(), "Invalid word returns expected enum");
 }
 
+TEST(GameEngine, GuessCurrentWord_PerfectMatch) {
+  char actual_secret_word[] = "     ";
+
+  GameEngine_GetSecretWord(actual_secret_word);
+
+  for (int i=0; i<5; i++) {
+    GuessState_AddLetterToGuess(actual_secret_word[i]);
+  }
+
+  mock().expectOneCall("HLock").withPointerParameter("handle", dictionary_handle);
+  mock().expectOneCall("HUnlock").withPointerParameter("handle", dictionary_handle);
+
+  mock().expectOneCall("HLock").withPointerParameter("handle", secrets_handle);
+  mock().expectOneCall("HUnlock").withPointerParameter("handle", secrets_handle);
+
+  ENUMS_EQUAL_INT_TEXT(ValidGuess, GameEngine_GuessCurrentWord(), "Perfect match returns expected enum");
+}
+
+TEST(GameEngine, GuessCurrentWord_AllNonMatch) {
+  char guess_word[] = "CRAMS";
+
+  for (int i=0; i<5; i++) {
+    GuessState_AddLetterToGuess(guess_word[i]);
+  }
+
+  mock().expectOneCall("HLock").withPointerParameter("handle", dictionary_handle);
+  mock().expectOneCall("HUnlock").withPointerParameter("handle", dictionary_handle);
+
+  ENUMS_EQUAL_INT_TEXT(ValidGuess, GameEngine_GuessCurrentWord(), "All non-match returns expected enum");
+}
 
 TEST(GameEngine, GetSecretWord) {
   char expected_secret_word[] = "ROBOT";
