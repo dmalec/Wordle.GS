@@ -26,6 +26,70 @@
 #define _____PROJECTNAMEASIDENTIFIER________FILEBASENAMEASIDENTIFIER_____
 
 /* *****************************************************************************
+ * Menu
+ * *****************************************************************************/
+
+#define rez_menubar_Main                           1
+
+
+/* Apple Menu */
+
+#define rez_menu_Apple                             1
+#define rez_menu_AppleId                           1
+#define rez_menu_AppleTitle                        1
+
+#define rez_menuitem_About                       257
+#define rez_menuitem_AboutId                     257
+#define rez_menuitem_AboutTitle                  257
+
+#define rez_menuitem_Help                        300
+#define rez_menuitem_HelpId                      300
+#define rez_menuitem_HelpTitle                   300
+
+
+/* File Menu */
+
+#define rez_menu_File                              2
+#define rez_menu_FileId                            2
+#define rez_menu_FileTitle                         2
+
+#define rez_menuitem_NewGame                     255
+#define rez_menuitem_NewGameId                   255
+#define rez_menuitem_NewGameTitle                255
+
+#define rez_menuitem_Quit                        256
+#define rez_menuitem_QuitId                      256
+#define rez_menuitem_QuitTitle                   256
+
+
+/* Edit Menu */
+
+#define rez_menu_Edit                              3
+#define rez_menu_EditId                            3
+#define rez_menu_EditTitle                         3
+
+#define rez_menuitem_Undo                        250
+#define rez_menuitem_UndoId                      250
+#define rez_menuitem_UndoTitle                   250
+
+#define rez_menuitem_Cut                         251
+#define rez_menuitem_CutId                       251
+#define rez_menuitem_CutTitle                    251
+
+#define rez_menuitem_Copy                        252
+#define rez_menuitem_CopyId                      252
+#define rez_menuitem_CopyTitle                   252
+
+#define rez_menuitem_Paste                       253
+#define rez_menuitem_PasteId                     253
+#define rez_menuitem_PasteTitle                  253
+
+#define rez_menuitem_Clear                       254
+#define rez_menuitem_ClearId                     254
+#define rez_menuitem_ClearTitle                  254
+
+
+/* *****************************************************************************
  * Alerts
  * *****************************************************************************/
 
@@ -92,8 +156,5 @@
 #define rez_window_Help_IncorrectTextTitle      1206
 #define rez_window_Help_IncorrectTextExample    1206
 
-
-
-#define file_Quit       256
 
 #endif /* defined(_____PROJECTNAMEASIDENTIFIER________FILEBASENAMEASIDENTIFIER_____) */

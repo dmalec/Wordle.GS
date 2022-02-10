@@ -67,19 +67,19 @@ void HandleMenu (void) {
   int i;
   
   switch (menu_item_num) {
-    case file_Quit:
+    case rez_menuitem_QuitId:
       HandleQuitGame();
       break;
       
-    case 255:
+    case rez_menuitem_NewGameId:
       HandleNewGame();
       break;
       
-    case 257:
+    case rez_menuitem_AboutId:
       HandleAboutDialog();
       break;
 
-    case 300:
+    case rez_menuitem_HelpId:
       HelpDialog_Show();
       break;
       
@@ -91,36 +91,13 @@ void HandleMenu (void) {
 
 void InitMenus (void) {
   int height;
-  MenuRecHndl menu_hand;
+  MenuBarRecHndl menu_bar_handle;
 
-  menu_hand = NewMenu(
-                     ">> Edit \\N3\r"
-                     "--Undo\\N250*Zz\r"
-                     "--Cut\\N251*Xx\r"
-                     "--Copy\\N252*Cc\r"
-                     "--Paste\\N253*Pp\r"
-                     "--Clear\\N254\r"
-                     ".\r");
+  menu_bar_handle = NewMenuBar2(refIsResource, rez_menubar_Main, NULL);
+  SetSysBar(menu_bar_handle);
+  SetMenuBar(NULL);
   
-  InsertMenu(menu_hand, 0);
-
-  menu_hand = NewMenu(
-                     ">> File \\N2\r"
-                     "--New Game\\N255*Nn\r"
-                     "--Quit\\N256*Qq\r"
-                     ".\r");
-  
-  InsertMenu(menu_hand, 0);
-
-  menu_hand = NewMenu(
-                     ">>@\\XN1\r"
-                     "--About...\\N257\r"
-                     "--Help...\\N300*?/\r"
-                     "---\\N258D\r"
-                     ".\r");
-  InsertMenu(menu_hand, 0);
-  
-  FixAppleMenu(1);
+  FixAppleMenu(rez_menu_Apple);
   height = FixMenuBar();
   DrawMenuBar();
 }

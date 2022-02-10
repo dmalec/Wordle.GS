@@ -27,6 +27,166 @@
 
 
 /* *****************************************************************************
+ * Menu
+ * *****************************************************************************/
+
+resource rMenuBar (rez_menubar_Main) {
+  {
+    rez_menu_Apple,
+    rez_menu_File,
+    rez_menu_Edit
+  };
+};
+
+/* Apple Menu */
+
+resource rMenu (rez_menu_Apple) {
+  rez_menu_AppleId,
+  refIsResource*menuTitleRefShift
+  + refIsResource*itemRefShift
+  + fAllowCache,
+  rez_menu_AppleTitle,
+  {
+    rez_menuitem_About,
+    rez_menuitem_Help
+  };
+};
+
+resource rPString (rez_menu_AppleTitle, noCrossBank) {"@"};
+
+
+resource rMenuItem (rez_menuitem_About) {
+  rez_menuitem_AboutId,
+  "","",
+  0,
+  refIsResource*itemTitleRefShift,
+  rez_menuitem_AboutTitle
+};
+
+resource rPString (rez_menuitem_AboutTitle, noCrossBank) {"About WordleGS..."};
+
+resource rMenuItem (rez_menuitem_Help) {
+  rez_menuitem_HelpId,
+  "?","/",
+  0,
+  refIsResource*itemTitleRefShift
+  + fDivider,
+  rez_menuitem_HelpTitle
+};
+
+resource rPString (rez_menuitem_HelpTitle, noCrossBank) {"Help..."};
+
+
+/* File Menu */
+
+resource rMenu (rez_menu_File) {
+  rez_menu_FileId,
+  refIsResource*menuTitleRefShift
+  + refIsResource*itemRefShift
+  + fAllowCache,
+  rez_menu_FileTitle,
+  {
+    rez_menuitem_NewGame,
+    rez_menuitem_Quit
+  };
+};
+
+resource rPString (rez_menu_FileTitle, noCrossBank) {" File "};
+
+resource rMenuItem (rez_menuitem_NewGame) {
+  rez_menuitem_NewGameId,
+  "N","n",
+  0,
+  refIsResource*itemTitleRefShift
+  + fDivider,
+  rez_menuitem_NewGameTitle
+};
+
+resource rPString (rez_menuitem_NewGameTitle, noCrossBank) {"New Game"};
+
+resource rMenuItem (rez_menuitem_Quit) {
+  rez_menuitem_QuitId,
+  "Q","q",
+  0,
+  refIsResource*itemTitleRefShift,
+  rez_menuitem_QuitTitle
+};
+
+resource rPString (rez_menuitem_QuitTitle, noCrossBank) {"Quit"};
+
+
+/* Edit Menu */
+
+resource rMenu (rez_menu_Edit) {
+  rez_menu_EditId,
+  refIsResource*menuTitleRefShift
+  + refIsResource*itemRefShift
+  + fAllowCache,
+  rez_menu_EditTitle,
+  {
+    rez_menuitem_Undo,
+    rez_menuitem_Cut,
+    rez_menuitem_Copy,
+    rez_menuitem_Paste,
+    rez_menuitem_Clear
+  };
+};
+
+resource rPString (rez_menu_EditTitle, noCrossBank) {" Edit "};
+
+resource rMenuItem (rez_menuitem_Undo) {
+  rez_menuitem_UndoId,
+  "Z","z",
+  0,
+  refIsResource*itemTitleRefShift
+  + fDivider,
+  rez_menuitem_UndoTitle
+};
+
+resource rPString (rez_menuitem_UndoTitle, noCrossBank) {"Undo"};
+
+resource rMenuItem (rez_menuitem_Cut) {
+  rez_menuitem_CutId,
+  "X","x",
+  0,
+  refIsResource*itemTitleRefShift,
+  rez_menuitem_CutTitle
+};
+
+resource rPString (rez_menuitem_CutTitle, noCrossBank) {"Cut"};
+
+resource rMenuItem (rez_menuitem_Copy) {
+  rez_menuitem_CopyId,
+  "C","c",
+  0,
+  refIsResource*itemTitleRefShift,
+  rez_menuitem_CopyTitle
+};
+
+resource rPString (rez_menuitem_CopyTitle, noCrossBank) {"Copy"};
+
+resource rMenuItem (rez_menuitem_Paste) {
+  rez_menuitem_PasteId,
+  "P","p",
+  0,
+  refIsResource*itemTitleRefShift,
+  rez_menuitem_PasteTitle
+};
+
+resource rPString (rez_menuitem_PasteTitle, noCrossBank) {"Paste"};
+
+resource rMenuItem (rez_menuitem_Clear) {
+  rez_menuitem_ClearId,
+  "Z","z",
+  0,
+  refIsResource*itemTitleRefShift,
+  rez_menuitem_ClearTitle
+};
+
+resource rPString (rez_menuitem_ClearTitle, noCrossBank) {"Clear"};
+
+
+/* *****************************************************************************
  * Alerts
  * *****************************************************************************/
 
