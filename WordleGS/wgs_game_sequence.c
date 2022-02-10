@@ -36,7 +36,7 @@ static unsigned int wgs_game_sequence_index = 0;
 /* Lifecycle Methods */
 
 void GameSequence_Create(unsigned int size) {
-  unsigned int i;
+  unsigned int sequence_number;
   unsigned int *data;
 
   wgs_game_sequence_size = size;
@@ -45,29 +45,17 @@ void GameSequence_Create(unsigned int size) {
   wgs_game_sequence_memory = NewHandle(size * sizeof(unsigned int), userid(), 0xC010, 0);
   data = (unsigned int *)*wgs_game_sequence_memory;
 
-  for (i=0; i<wgs_game_sequence_size; i++) {
-    data[i] = 0;
-  }
+  // Use the "inside-out" variant of the Durstenfeld implemenmtation of a Fisher-Yates shuffle
+  // to reorder the list.
+  data[0] = 0;
+  for (sequence_number=1; sequence_number<wgs_game_sequence_size; sequence_number++) {
+    unsigned int random_index = rand() % sequence_number;
 
-  for (i=1; i<wgs_game_sequence_size; i++) {
-    unsigned int random_index = rand() % wgs_game_sequence_size;
-        
-    while (random_index < wgs_game_sequence_size && data[random_index] != 0) {
-      random_index++;
+    if (random_index != sequence_number) {
+      data[sequence_number] = data[random_index];
     }
 
-    if (random_index >= wgs_game_sequence_size) {
-      random_index = 0;
-    }
-
-    while (random_index < wgs_game_sequence_size && data[random_index] != 0) {
-      random_index++;
-    }
-
-    if (random_index < wgs_game_sequence_size) {
-      data[random_index] = i;
-    }
-    // TODO: else is an error that should not happen
+    data[random_index] = sequence_number;
   }
 
   HUnlock(wgs_game_sequence_memory);

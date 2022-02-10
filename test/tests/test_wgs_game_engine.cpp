@@ -78,6 +78,7 @@ void setupFileMocks(void) {
 
 TEST_GROUP(GameEngine_Creation) {
   void setup() {
+    srand(0x1234);
     setupFileMocks();
   }
 
@@ -102,6 +103,7 @@ TEST(GameEngine_Creation, Create) {
 
 TEST_GROUP(GameEngine) {
   void setup() {
+    srand(0x1234);
     setupFileMocks();
     GameEngine_Create();
   }
@@ -207,7 +209,7 @@ TEST(GameEngine, GuessCurrentWord_AllNonMatch) {
 
 
 TEST(GameEngine, GetSecretWord) {
-  char expected_secret_word[] = "APPLE";
+  char expected_secret_word[] = "ROBOT";
   char actual_secret_word[] = "     ";
 
   mock().expectOneCall("HLock").withPointerParameter("handle", sequence_handle);
