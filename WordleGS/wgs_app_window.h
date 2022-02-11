@@ -29,7 +29,7 @@
 
 
 GrafPortPtr CreateAppWindow(void);
-void HandleNewGame(void);
+void AppWindow_NextRound(void);
 void HandleKeyPress (EventRecord event);
 void AppTick(void);
 

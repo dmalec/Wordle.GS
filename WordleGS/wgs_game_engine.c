@@ -61,14 +61,19 @@ void GameEngine_Create(void) {
 }
 
 void GameEngine_NewGame(void) {
+  GameSequence_NewGame();
+  GameEngine_NextRound();
+}
+
+void GameEngine_NextRound(void) {
   unsigned int secret_word_index;
   char secret_word[] = "     ";
 
-  AlphabetState_NewGame();
-  Dictionary_NewGame();
+  AlphabetState_NextRound();
+  Dictionary_NextRound();
   secret_word_index = GameSequence_GetSequenceValue();
-  GameSequence_NewGame();
-  GuessState_NewGame();
+  GameSequence_NextRound();
+  GuessState_NextRound();
 
   wgs_game_engine_game_state = InProgress;
 

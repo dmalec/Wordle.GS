@@ -56,6 +56,11 @@ TEST_GROUP(GameSequence) {
     mock().expectOneCall("HUnlock").withPointerParameter("handle", sequence_handle);
 
     GameSequence_Create(5);
+
+    mock().expectOneCall("HLock").withPointerParameter("handle", sequence_handle);
+    mock().expectOneCall("HUnlock").withPointerParameter("handle", sequence_handle);
+
+    GameSequence_NewGame();
   }
 
   void teardown() {
@@ -82,17 +87,17 @@ TEST(GameSequence, GetSequenceValue) {
 
   UNSIGNED_LONGS_EQUAL_TEXT(sequence_memory[0], GameSequence_GetSequenceValue(), "Sequence value should be as expected");
 
-  GameSequence_NewGame();
+  GameSequence_NextRound();
 
   UNSIGNED_LONGS_EQUAL_TEXT(sequence_memory[1], GameSequence_GetSequenceValue(), "Sequence value should be as expected");
 
-  GameSequence_NewGame();
-  GameSequence_NewGame();
-  GameSequence_NewGame();
+  GameSequence_NextRound();
+  GameSequence_NextRound();
+  GameSequence_NextRound();
 
   UNSIGNED_LONGS_EQUAL_TEXT(sequence_memory[4], GameSequence_GetSequenceValue(), "Sequence value should be as expected");
 
-  GameSequence_NewGame();
+  GameSequence_NextRound();
 
   UNSIGNED_LONGS_EQUAL_TEXT(sequence_memory[0], GameSequence_GetSequenceValue(), "Sequence value should be as expected");
 }

@@ -108,7 +108,7 @@ void AlphabetState_CreateRects(void) {
   }
 }
 
-void AlphabetState_NewGame(void) {
+void AlphabetState_NextRound(void) {
   int letter;
 
   for (letter=0; letter<WGS_GAME_GUESSES_NUMBER_OF_LETTERS; letter++) {

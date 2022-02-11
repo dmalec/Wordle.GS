@@ -32,7 +32,7 @@
 /* Lifecycle Methods */
 
 void GuessState_Create(void);
-void GuessState_NewGame(void);
+void GuessState_NextRound(void);
 void GuessState_UpdateFinished(void);
 void GuessState_Destroy(void);
 

@@ -36,13 +36,16 @@ static unsigned int wgs_game_sequence_index = 0;
 /* Lifecycle Methods */
 
 void GameSequence_Create(unsigned int size) {
+  wgs_game_sequence_size = size;
+  wgs_game_sequence_memory = NewHandle(size * sizeof(unsigned int), userid(), 0xC010, 0);
+  HUnlock(wgs_game_sequence_memory);
+}
+
+void GameSequence_NewGame(void) {
   unsigned int sequence_number;
   unsigned int *data;
 
-  wgs_game_sequence_size = size;
-  wgs_game_sequence_index = 0;
-
-  wgs_game_sequence_memory = NewHandle(size * sizeof(unsigned int), userid(), 0xC010, 0);
+  HLock(wgs_game_sequence_memory);
   data = (unsigned int *)*wgs_game_sequence_memory;
 
   // Use the "inside-out" variant of the Durstenfeld implemenmtation of a Fisher-Yates shuffle
@@ -57,11 +60,12 @@ void GameSequence_Create(unsigned int size) {
 
     data[random_index] = sequence_number;
   }
-
   HUnlock(wgs_game_sequence_memory);
+
+  wgs_game_sequence_index = 0;
 }
 
-void GameSequence_NewGame(void) {
+void GameSequence_NextRound(void) {
   wgs_game_sequence_index++;
   
   if (wgs_game_sequence_index >= wgs_game_sequence_size) {

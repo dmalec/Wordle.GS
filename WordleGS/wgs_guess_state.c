@@ -93,7 +93,7 @@ void GuessState_CreateRects(void) {
   }
 }
 
-void GuessState_NewGame(void) {
+void GuessState_NextRound(void) {
   int row, col;
 
   for (row=0; row<WGS_GAME_GUESSES_NUMBER_OF_ROWS; row++) {

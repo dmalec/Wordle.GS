@@ -61,7 +61,7 @@ void Dictionary_Create(void) {
   wgs_secret_word_list_count = file_length / 5;
 }
 
-void Dictionary_NewGame(void) {
+void Dictionary_NextRound(void) {
 }
 
 void Dictionary_UpdateFinished(void) {
