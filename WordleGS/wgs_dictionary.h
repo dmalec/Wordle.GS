@@ -31,7 +31,7 @@
 /* Lifecycle Methods */
 
 void Dictionary_Create(void);
-void Dictionary_NewGame(void);
+void Dictionary_NextRound(void);
 void Dictionary_UpdateFinished(void);
 void Dictionary_Destroy(void);
 

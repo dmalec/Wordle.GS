@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+#include <control.h>
 #include <desk.h>
 #include <event.h>
 #include <menu.h>
@@ -37,6 +38,7 @@
 #include "wgs_app_window.h"
 #include "wgs_game_engine.h"
 #include "wgs_help_dialog.h"
+#include "wgs_new_game_dialog.h"
 #include "wgs_render_system.h"
 
 BOOLEAN done;
@@ -48,6 +50,37 @@ void HandleAboutDialog(void) {
   AlertWindow(awResource, NULL, rez_alert_About);
 }
 
+void HandleNewGame(void) {
+  Str255 code_buffer;
+  int i;
+  unsigned seed = 0;
+  
+  if (GameEngine_IsGameInProgress()) {
+    Word alert_result = AlertWindow(awResource, NULL, rez_alert_VerifyNewGame);
+    if (alert_result == rez_alert_VerifyNewGame_Cancel) {
+      return;
+    }
+  }
+
+  if (NewGameDialog_Show() == NewGameDialog_Cancel) {
+    return;
+  }
+
+  NewGameDialog_GetCode(&code_buffer);
+  
+  for (i=0; i<code_buffer.textLength; i++) {
+    seed += code_buffer.text[i];
+  }
+  srand(seed);
+  
+  GameEngine_NewGame();
+  AppWindow_NextRound();
+}
+
+void HandleNextRound(void) {
+  GameEngine_NextRound();
+  AppWindow_NextRound();
+}
 
 void HandleQuitGame(void) {
   Word alert_result;
@@ -120,10 +153,11 @@ int main (void) {
   InitCursor();
   
   GameEngine_Create();
-  CreateRenderSystem();
+  GameEngine_NewGame();
   
+  CreateRenderSystem();
   CreateAppWindow();
-  HandleNewGame();
+  AppWindow_NextRound();
   
   PenNormal();
   my_event.wmTaskMask = 0x001F7FFF;

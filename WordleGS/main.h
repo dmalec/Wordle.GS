@@ -156,5 +156,26 @@
 #define rez_window_Help_IncorrectTextTitle      1206
 #define rez_window_Help_IncorrectTextExample    1206
 
+/* New Game Dialog */
+
+#define rez_window_NewGame                      1301
+
+#define rez_window_NewGame_ControlList          1301
+
+#define rez_window_NewGame_OKButton             1301
+#define rez_window_NewGame_OKButtonId              1
+#define rez_window_NewGame_OKButtonTitle        1301
+
+#define rez_window_NewGame_CancelButton         1302
+#define rez_window_NewGame_CancelButtonId          2
+#define rez_window_NewGame_CancelButtonTitle    1302
+
+#define rez_window_NewGame_GameCodeLabel        1303
+#define rez_window_NewGame_GameCodeLabelId         3
+#define rez_window_NewGame_GameCodeLabelTitle   1303
+
+#define rez_window_NewGame_GameCode             1304
+#define rez_window_NewGame_GameCodeId              4
+
 
 #endif /* defined(_____PROJECTNAMEASIDENTIFIER________FILEBASENAMEASIDENTIFIER_____) */

@@ -71,16 +71,7 @@ void InvalidateWindow(void) {
 }
 
 
-void HandleNewGame(void) {
-  if (GameEngine_IsGameInProgress()) {
-    Word alert_result = AlertWindow(awResource, NULL, rez_alert_VerifyNewGame);
-    if (alert_result == rez_alert_VerifyNewGame_Cancel) {
-      return;
-    }
-  }
-
-  GameEngine_NewGame();
-
+void AppWindow_NextRound(void) {
   announce_status = NoAnnouncement;
   InvalidateWindow();
 }
@@ -176,7 +167,7 @@ void ShowEndGame(void) {
   CloseWindow(dlg_ptr);
   
   if (dlg_part == 1) {
-    HandleNewGame();
+    HandleNextRound();
   }
 }
 
@@ -191,7 +182,7 @@ void AppTick(void) {
     announce_status = ResultAnnounced;
     
     if (response == NewGameRequested) {
-      HandleNewGame();
+      HandleNextRound();
     }
   }
 }

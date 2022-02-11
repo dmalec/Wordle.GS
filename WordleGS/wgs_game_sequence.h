@@ -30,6 +30,7 @@
 
 void GameSequence_Create(unsigned int size);
 void GameSequence_NewGame(void);
+void GameSequence_NextRound(void);
 void GameSequence_UpdateFinished(void);
 void GameSequence_Destroy(void);
 

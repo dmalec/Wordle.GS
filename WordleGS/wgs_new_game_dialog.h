@@ -22,24 +22,16 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEwgs_alphabet_state_
-#define _GUARD_PROJECTWordleGS_FILEwgs_alphabet_state_
+#ifndef _GUARD_PROJECTWordleGS_FILEwgs_new_game_dialog_
+#define _GUARD_PROJECTWordleGS_FILEwgs_new_game_dialog_
 
-#include "wgs_game_types.h"
-
-
-/* Lifecycle Methods */
-
-void AlphabetState_Create(void);
-void AlphabetState_NextRound(void);
-void AlphabetState_UpdateFinished(void);
-void AlphabetState_Destroy(void);
+#include <types.h>
 
 
-/* Game Methods */
+typedef enum { NewGameDialog_NewGame, NewGameDialog_Cancel } wgs_new_game_dialog_response;
 
-wgs_letter_state AlphabetState_GetLetterState(char c);
-void AlphabetState_MaybeUpdateLetterStatus(char c, wgs_letter_status status);
+wgs_new_game_dialog_response NewGameDialog_Show(void);
 
+void NewGameDialog_GetCode(Str255 *code);
 
-#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_alphabet_state_ */
+#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_new_game_dialog_ */

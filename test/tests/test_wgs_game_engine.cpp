@@ -106,6 +106,13 @@ TEST_GROUP(GameEngine) {
     srand(0x1234);
     setupFileMocks();
     GameEngine_Create();
+
+    mock().expectNCalls(2, "HLock").withPointerParameter("handle", sequence_handle);
+    mock().expectNCalls(2, "HUnlock").withPointerParameter("handle", sequence_handle);
+    mock().expectOneCall("HLock").withPointerParameter("handle", secrets_handle);
+    mock().expectOneCall("HUnlock").withPointerParameter("handle", secrets_handle);
+
+    GameEngine_NewGame();
   }
 
   void teardown() {
@@ -120,14 +127,14 @@ TEST_GROUP(GameEngine) {
   }
 };
 
-TEST(GameEngine, NewGame) {
+TEST(GameEngine, NextRound) {
   mock().expectOneCall("HLock").withPointerParameter("handle", sequence_handle);
   mock().expectOneCall("HUnlock").withPointerParameter("handle", sequence_handle);
 
   mock().expectOneCall("HLock").withPointerParameter("handle", secrets_handle);
   mock().expectOneCall("HUnlock").withPointerParameter("handle", secrets_handle);
 
-  GameEngine_NewGame();
+  GameEngine_NextRound();
 
   ENUMS_EQUAL_INT_TEXT(InProgress, GameEngine_GetGameState(), "Game should start in 'InProgress'");
 }
@@ -139,7 +146,7 @@ TEST(GameEngine, IsGameInProgress) {
   mock().expectOneCall("HLock").withPointerParameter("handle", secrets_handle);
   mock().expectOneCall("HUnlock").withPointerParameter("handle", secrets_handle);
 
-  GameEngine_NewGame();
+  GameEngine_NextRound();
 
   LONGS_EQUAL_TEXT(FALSE, GameEngine_IsGameInProgress(), "Game starts not in progress");
 
@@ -209,7 +216,7 @@ TEST(GameEngine, GuessCurrentWord_AllNonMatch) {
 
 
 TEST(GameEngine, GetSecretWord) {
-  char expected_secret_word[] = "ROBOT";
+  char expected_secret_word[] = "APPLE";
   char actual_secret_word[] = "     ";
 
   mock().expectOneCall("HLock").withPointerParameter("handle", sequence_handle);
@@ -218,7 +225,7 @@ TEST(GameEngine, GetSecretWord) {
   mock().expectOneCall("HLock").withPointerParameter("handle", secrets_handle);
   mock().expectOneCall("HUnlock").withPointerParameter("handle", secrets_handle);
 
-  GameEngine_NewGame();
+  GameEngine_NextRound();
 
   GameEngine_GetSecretWord(actual_secret_word);
   STRNCMP_EQUAL_TEXT(expected_secret_word, actual_secret_word, 5, "Secret word should be returned unchanged");

@@ -18,6 +18,7 @@
 		3636747D27AD4AFC00582831 /* wgs_guess_state.c in Sources */ = {isa = PBXBuildFile; fileRef = 3636747C27AD4AFC00582831 /* wgs_guess_state.c */; };
 		3669C9C627B356B400FC0D8A /* wgs_gs_shim.c in Sources */ = {isa = PBXBuildFile; fileRef = 3669C9C527B356B400FC0D8A /* wgs_gs_shim.c */; };
 		3669C9F027B48F2400FC0D8A /* wgs_game_sequence.c in Sources */ = {isa = PBXBuildFile; fileRef = 3669C9EF27B48F2400FC0D8A /* wgs_game_sequence.c */; };
+		3669CA1E27B6891D00FC0D8A /* wgs_new_game_dialog.c in Sources */ = {isa = PBXBuildFile; fileRef = 3669CA1D27B6891D00FC0D8A /* wgs_new_game_dialog.c */; };
 		3678008227A100E7002A9ACC /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 3678008127A100E7002A9ACC /* main.c */; };
 		3678008527A100E7002A9ACC /* main.rez in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3678008427A100E7002A9ACC /* main.rez */; };
 		3678008727A100E7002A9ACC /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 3678008627A100E7002A9ACC /* Makefile */; };
@@ -86,6 +87,8 @@
 		3669C9C527B356B400FC0D8A /* wgs_gs_shim.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wgs_gs_shim.c; sourceTree = "<group>"; };
 		3669C9EE27B48F2400FC0D8A /* wgs_game_sequence.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_game_sequence.h; sourceTree = "<group>"; };
 		3669C9EF27B48F2400FC0D8A /* wgs_game_sequence.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wgs_game_sequence.c; sourceTree = "<group>"; };
+		3669CA1C27B6891D00FC0D8A /* wgs_new_game_dialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_new_game_dialog.h; sourceTree = "<group>"; };
+		3669CA1D27B6891D00FC0D8A /* wgs_new_game_dialog.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wgs_new_game_dialog.c; sourceTree = "<group>"; };
 		3678007527A100E7002A9ACC /* WordleGS */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WordleGS; sourceTree = BUILT_PRODUCTS_DIR; };
 		3678007827A100E7002A9ACC /* WordleGS.2mg */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WordleGS.2mg; sourceTree = BUILT_PRODUCTS_DIR; };
 		3678007A27A100E7002A9ACC /* WordleGS.shk */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WordleGS.shk; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +134,8 @@
 				3630F8CF27A5B2F60018042C /* wgs_game_over_dialog.c */,
 				3607BB8227AEFFCA007B9572 /* wgs_help_dialog.h */,
 				3607BB8327AEFFCA007B9572 /* wgs_help_dialog.c */,
+				3669CA1C27B6891D00FC0D8A /* wgs_new_game_dialog.h */,
+				3669CA1D27B6891D00FC0D8A /* wgs_new_game_dialog.c */,
 				3630F8C627A5B2EA0018042C /* wgs_render_system.h */,
 				3630F8D127A5B2F60018042C /* wgs_render_system.c */,
 			);
@@ -364,6 +369,7 @@
 				3630F8D727A5B2F60018042C /* wgs_render_system.c in Sources */,
 				3630F8D527A5B2F60018042C /* wgs_game_over_dialog.c in Sources */,
 				3636744B27ACAE9500582831 /* wgs_alphabet_state.c in Sources */,
+				3669CA1E27B6891D00FC0D8A /* wgs_new_game_dialog.c in Sources */,
 				3630F8D327A5B2F60018042C /* wgs_app_window.c in Sources */,
 				3607BB6927AEF747007B9572 /* wgs_utils.c in Sources */,
 				3607BB8427AEFFCA007B9572 /* wgs_help_dialog.c in Sources */,

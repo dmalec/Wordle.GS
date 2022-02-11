@@ -55,13 +55,13 @@ TEST_GROUP(AlphabetState) {
   }
 };
 
-TEST(AlphabetState, NewGame) {
+TEST(AlphabetState, NextRound) {
 
   AlphabetState_MaybeUpdateLetterStatus('A', gtCorrectLetter);
   AlphabetState_MaybeUpdateLetterStatus('B', gtWrongPlaceLetter);
   AlphabetState_MaybeUpdateLetterStatus('C', gtIncorrectLetter);
 
-  AlphabetState_NewGame();
+  AlphabetState_NextRound();
 
   for (char letter='A'; letter<='C'; letter++) {
     wgs_letter_state state = AlphabetState_GetLetterState(letter);
