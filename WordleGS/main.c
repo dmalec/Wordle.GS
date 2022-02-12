@@ -37,6 +37,7 @@
 #include "main.h"
 #include "wgs_app_window.h"
 #include "wgs_game_engine.h"
+#include "wgs_game_over_dialog.h"
 #include "wgs_help_dialog.h"
 #include "wgs_new_game_dialog.h"
 #include "wgs_render_system.h"
@@ -94,6 +95,14 @@ void HandleNextWord(void) {
   HandleNextRound();
 }
 
+void HandleViewStats(void) {
+  wgs_game_over_response response = HandleGameOverDialog();
+
+  if (response == NewGameRequested) {
+    HandleNextRound();
+  }
+}
+
 void HandleNextRound(void) {
   GameEngine_NextRound();
   AppWindow_NextRound();
@@ -136,7 +145,10 @@ void HandleMenu (void) {
     case rez_menuitem_NextWordId:
       HandleNextWord();
       break;
-      
+
+    case rez_menuitem_ViewStatsId:
+      HandleViewStats();
+      break;
   }
   
   HiliteMenu(FALSE, menu_num);
