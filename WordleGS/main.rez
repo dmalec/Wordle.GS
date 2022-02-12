@@ -77,7 +77,7 @@ resource rMenuItem (rez_menuitem_About) {
   rez_menuitem_AboutTitle
 };
 
-resource rPString (rez_menuitem_AboutTitle, noCrossBank) {"About WordleGS..."};
+resource rPString (rez_menuitem_AboutTitle, noCrossBank) {"About WORDLE GS..."};
 
 resource rMenuItem (rez_menuitem_Help) {
   rez_menuitem_HelpId,
@@ -207,7 +207,9 @@ resource rMenu (rez_menu_Game) {
   + fAllowCache,
   rez_menu_GameTitle,
   {
-    rez_menuitem_NextWord
+    rez_menuitem_NextWord,
+    rez_menuitem_Divider,
+    rez_menuitem_ViewStats
   };
 };
 
@@ -222,6 +224,16 @@ resource rMenuItem (rez_menuitem_NextWord) {
 };
 
 resource rPString (rez_menuitem_NextWordTitle, noCrossBank) {"Next Word"};
+
+resource rMenuItem (rez_menuitem_ViewStats) {
+  rez_menuitem_ViewStatsId,
+  "","",
+  0,
+  refIsResource*itemTitleRefShift,
+  rez_menuitem_ViewStatsTitle
+};
+
+resource rPString (rez_menuitem_ViewStatsTitle, noCrossBank) {"View Stats..."};
 
 /* *****************************************************************************
  * Alerts

@@ -60,6 +60,18 @@ void GameOverDialogDrawContents (void) {
     MoveTo(8, 28);
     GameEngine_GetSecretWord(secret_word);
     DrawCString(secret_word);
+  } else {
+    char code_word[] = "     ";
+    char buffer[128];
+
+    MoveTo(8, 10);
+    DrawCString("WORDLE GS!\0");
+
+    GameSequence_GetSequenceCode(code_word);
+    sprintf(buffer, "%s  %d  %d/6", code_word, GameSequence_GetSequenceIndex(), GuessState_GetRow() + 1);
+
+    MoveTo(8, 28);
+    DrawCString(buffer);
   }
   
   for (i=0; i<6; i++) {
@@ -150,6 +162,18 @@ wgs_game_over_response HandleGameOverDialog(void) {
   game_over_dialog_ptr = NewWindow2("\pGame Over", 0, GameOverDialogDrawContents, NULL, 0x02, rez_window_GameOver, rWindParam1);
   if (game_over_dialog_ptr == NULL) return;
   
+  if (GameEngine_GetGameState() == InProgress) {
+    CtlRecHndl share_game_button_handle = GetCtlHandleFromID(game_over_dialog_ptr, rez_window_GameOver_ShareGameButtonId);
+    CtlRecHndl new_game_button_handle = GetCtlHandleFromID(game_over_dialog_ptr, rez_window_GameOver_NewGameButtonId);
+
+    if (share_game_button_handle != NULL) {
+      HideControl(share_game_button_handle);
+    }
+    if (new_game_button_handle != NULL) {
+      HideControl(new_game_button_handle);
+    }
+  }
+
   do {
     dlg_part = DoModalWindow(&dlg_event, NULL, NULL, NULL, modal_dialog_mask);
     

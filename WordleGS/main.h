@@ -104,6 +104,9 @@
 #define rez_menuitem_NextWordId                  401
 #define rez_menuitem_NextWordTitle               401
 
+#define rez_menuitem_ViewStats                   402
+#define rez_menuitem_ViewStatsId                 402
+#define rez_menuitem_ViewStatsTitle              402
 
 /* *****************************************************************************
  * Alerts
