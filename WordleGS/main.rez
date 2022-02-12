@@ -34,7 +34,8 @@ resource rMenuBar (rez_menubar_Main) {
   {
     rez_menu_Apple,
     rez_menu_File,
-    rez_menu_Edit
+    rez_menu_Edit,
+    rez_menu_Game
   };
 };
 
@@ -197,6 +198,30 @@ resource rMenuItem (rez_menuitem_Clear) {
 
 resource rPString (rez_menuitem_ClearTitle, noCrossBank) {"Clear"};
 
+/* Game Menu */
+
+resource rMenu (rez_menu_Game) {
+  rez_menu_GameId,
+  refIsResource*menuTitleRefShift
+  + refIsResource*itemRefShift
+  + fAllowCache,
+  rez_menu_GameTitle,
+  {
+    rez_menuitem_NextWord
+  };
+};
+
+resource rPString (rez_menu_GameTitle, noCrossBank) {" Game "};
+
+resource rMenuItem (rez_menuitem_NextWord) {
+  rez_menuitem_NextWordId,
+  ">",".",
+  0,
+  refIsResource*itemTitleRefShift,
+  rez_menuitem_NextWordTitle
+};
+
+resource rPString (rez_menuitem_NextWordTitle, noCrossBank) {"Next Word"};
 
 /* *****************************************************************************
  * Alerts
@@ -241,6 +266,18 @@ resource rAlertString (rez_alert_VerifyNewGame) {
   "New Game will terminate the current game.\n"     /* text */
   "/"                                               /* divider */
   "New Game"                                        /* button */
+  "/"                                               /* divider */
+  "^#1"                                             /* button */
+  $"00";                                            /* terminator */
+};
+
+resource rAlertString (rez_alert_VerifyNextWord) {
+  "3"                                               /* size */
+  "4"                                               /* icon */
+  "/"                                               /* divider */
+  "Next Word will terminate the current word.\n"    /* text */
+  "/"                                               /* divider */
+  "Next Word"                                       /* button */
   "/"                                               /* divider */
   "^#1"                                             /* button */
   $"00";                                            /* terminator */
@@ -549,7 +586,7 @@ resource rControlTemplate (rez_window_NewGame_GameCode) {
     $0000,                                          /* flags */
     $7000,                                          /* more flags */
     0,                                              /* refcon */
-    6,                                              /* max size */
+    5,                                              /* max size */
     0                                               /* text Ref */
   }};
 };
