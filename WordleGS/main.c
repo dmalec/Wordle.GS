@@ -45,6 +45,12 @@ BOOLEAN done;
 EventRecord my_event;
 int menu_num, menu_item_num;
 
+/* Prototypes */
+
+void HandleNextRound(void);
+
+
+/* Implementation */
 
 void HandleAboutDialog(void) {
   AlertWindow(awResource, NULL, rez_alert_About);
@@ -75,6 +81,17 @@ void HandleNewGame(void) {
   
   GameEngine_NewGame(code_c_string);
   AppWindow_NextRound();
+}
+
+void HandleNextWord(void) {  
+  if (GameEngine_IsGameInProgress()) {
+    Word alert_result = AlertWindow(awResource, NULL, rez_alert_VerifyNextWord);
+    if (alert_result == rez_alert_VerifyNextWord_Cancel) {
+      return;
+    }
+  }
+
+  HandleNextRound();
 }
 
 void HandleNextRound(void) {
@@ -114,6 +131,10 @@ void HandleMenu (void) {
 
     case rez_menuitem_HelpId:
       HelpDialog_Show();
+      break;
+
+    case rez_menuitem_NextWordId:
+      HandleNextWord();
       break;
       
   }

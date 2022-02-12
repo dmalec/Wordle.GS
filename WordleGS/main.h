@@ -94,6 +94,16 @@
 #define rez_menuitem_ClearId                     254
 #define rez_menuitem_ClearTitle                  254
 
+/* Game Menu */
+
+#define rez_menu_Game                              4
+#define rez_menu_GameId                            4
+#define rez_menu_GameTitle                         4
+
+#define rez_menuitem_NextWord                    401
+#define rez_menuitem_NextWordId                  401
+#define rez_menuitem_NextWordTitle               401
+
 
 /* *****************************************************************************
  * Alerts
@@ -106,7 +116,10 @@
 #define rez_alert_VerifyNewGame                 1003
 #define rez_alert_VerifyNewGame_Cancel             1
 
-#define rez_alert_VerifyQuitGame                1004
+#define rez_alert_VerifyNextWord                1004
+#define rez_alert_VerifyNextWord_Cancel            1
+
+#define rez_alert_VerifyQuitGame                1005
 #define rez_alert_VerifyNewGame_Cancel             1
 
 /* *****************************************************************************
