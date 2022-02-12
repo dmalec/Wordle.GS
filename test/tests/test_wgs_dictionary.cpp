@@ -91,6 +91,18 @@ TEST(Dictionary, IsValidGuess) {
 }
 
 
+TEST(Dictionary, GetRandomWord) {
+  char word[] = "     ";
+
+  mock().expectOneCall("HLock").withPointerParameter("handle", secrets_handle);
+  mock().expectOneCall("HUnlock").withPointerParameter("handle", secrets_handle);
+  srand(0x12345);
+
+  Dictionary_GetRandomWord(word);
+  STRCMP_CONTAINS_TEXT(word, secrets_memory, "Random secret word in secret word list");
+}
+
+
 TEST(Dictionary, GetWord) {
   char word[] = "     ";
 
@@ -101,6 +113,6 @@ TEST(Dictionary, GetWord) {
   STRNCMP_EQUAL_TEXT("APPLE", word, 5, "Secret word at 0 returned as expected");
 
   Dictionary_GetWord(1, word);
-  STRNCMP_EQUAL_TEXT("ROBOT", word, 5, "Secret word at 0 returned as expected");
+  STRNCMP_EQUAL_TEXT("ROBOT", word, 5, "Secret word at 1 returned as expected");
 }
 

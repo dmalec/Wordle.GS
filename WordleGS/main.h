@@ -32,6 +32,12 @@
 #define rez_menubar_Main                           1
 
 
+/* Generic Menu Items */
+
+#define rez_menuitem_Divider                     999
+#define rez_menuitem_DividerId                   999
+#define rez_menuitem_DividerTitle                999
+
 /* Apple Menu */
 
 #define rez_menu_Apple                             1
@@ -122,9 +128,13 @@
 #define rez_window_GameOver_NewGameButtonId        1
 #define rez_window_GameOver_NewGameButtonTitle  1101
 
-#define rez_window_GameOver_CloseButton         1102
-#define rez_window_GameOver_CloseButtonId          2
-#define rez_window_GameOver_CloseButtonTitle    1102
+#define rez_window_GameOver_ShareGameButton      1102
+#define rez_window_GameOver_ShareGameButtonId       2
+#define rez_window_GameOver_ShareGameButtonTitle 1102
+
+#define rez_window_GameOver_CloseButton         1103
+#define rez_window_GameOver_CloseButtonId          3
+#define rez_window_GameOver_CloseButtonTitle    1103
 
 
 /* Help Dialog */
@@ -177,5 +187,15 @@
 #define rez_window_NewGame_GameCode             1304
 #define rez_window_NewGame_GameCodeId              4
 
+/* Share Game Dialog */
+
+#define rez_window_ShareGame                    1401
+
+#define rez_window_ShareGame_ControlList        1401
+
+#define rez_window_ShareGame_CloseButton        1401
+#define rez_window_ShareGame_CloseButtonId         1
+#define rez_window_ShareGame_CloseButtonTitle   1401
+#define rez_window_ShareGame_CloseButtonColorTable 1401
 
 #endif /* defined(_____PROJECTNAMEASIDENTIFIER________FILEBASENAMEASIDENTIFIER_____) */

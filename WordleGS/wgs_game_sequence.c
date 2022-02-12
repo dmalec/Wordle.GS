@@ -31,7 +31,7 @@
 static Handle wgs_game_sequence_memory = NULL;
 static unsigned int wgs_game_sequence_size = 0;
 static unsigned int wgs_game_sequence_index = 0;
-
+static char  wgs_game_sequence_code_word[] = "     ";
 
 /* Lifecycle Methods */
 
@@ -41,10 +41,18 @@ void GameSequence_Create(unsigned int size) {
   HUnlock(wgs_game_sequence_memory);
 }
 
-void GameSequence_NewGame(void) {
+void GameSequence_NewGame(char code_word[]) {
   unsigned int sequence_number;
+  int i;
   unsigned int *data;
+  unsigned seed = 0;
 
+  for (i=0; i<5; i++) {
+    wgs_game_sequence_code_word[i] = code_word[i];
+    seed += code_word[i];
+  }
+  srand(seed);
+  
   HLock(wgs_game_sequence_memory);
   data = (unsigned int *)*wgs_game_sequence_memory;
 
@@ -83,6 +91,18 @@ void GameSequence_Destroy(void) {
 }
 
 /* Game Methods */
+
+void GameSequence_GetSequenceCode(char code_word[]) {
+  int i;
+
+  for (i=0; i<5; i++) {
+    code_word[i] = wgs_game_sequence_code_word[i];
+  }
+}
+
+unsigned int GameSequence_GetSequenceIndex(void) {
+  return wgs_game_sequence_index;
+}
 
 unsigned int GameSequence_GetSequenceValue(void) {
   unsigned int result = 0;

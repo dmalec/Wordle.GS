@@ -136,6 +136,12 @@ BOOLEAN Dictionary_IsValidGuess(char *word) {
   return result;
 }
 
+void Dictionary_GetRandomWord(char *buffer) {
+  unsigned int random_index = rand() % wgs_secret_word_list_count;
+
+  Dictionary_GetWord(random_index, buffer);
+}
+
 void Dictionary_GetWord(unsigned int index, char *buffer) {
   int i;
 

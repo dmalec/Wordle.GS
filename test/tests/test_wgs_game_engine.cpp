@@ -46,6 +46,7 @@ static Pointer sequence_pointer = (Pointer)(&sequence_memory);
 static Handle sequence_handle = (Handle)(&sequence_pointer);
 static LongWord sequence_length = 2;
 
+static char sequence_code[] = "TESTS";
 
 void setupFileMocks(void) {
   int user_id = 42;
@@ -112,7 +113,7 @@ TEST_GROUP(GameEngine) {
     mock().expectOneCall("HLock").withPointerParameter("handle", secrets_handle);
     mock().expectOneCall("HUnlock").withPointerParameter("handle", secrets_handle);
 
-    GameEngine_NewGame();
+    GameEngine_NewGame(sequence_code);
   }
 
   void teardown() {

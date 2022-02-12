@@ -38,6 +38,8 @@ static Pointer sequence_pointer = (Pointer)(&sequence_memory);
 static Handle sequence_handle = (Handle)(&sequence_pointer);
 static LongWord sequence_length = 5;
 
+static char sequence_code[] = "TESTS";
+
 
 TEST_GROUP(GameSequence) {
   void setup() {
@@ -60,7 +62,7 @@ TEST_GROUP(GameSequence) {
     mock().expectOneCall("HLock").withPointerParameter("handle", sequence_handle);
     mock().expectOneCall("HUnlock").withPointerParameter("handle", sequence_handle);
 
-    GameSequence_NewGame();
+    GameSequence_NewGame(sequence_code);
   }
 
   void teardown() {
@@ -77,6 +79,21 @@ TEST_GROUP(GameSequence) {
 TEST(GameSequence, UpdateFinished) {
 
   GameSequence_UpdateFinished();
+}
+
+TEST(GameSequence, GetSequenceCode) {
+  char actual_sequence_code[5];
+
+  GameSequence_GetSequenceCode(actual_sequence_code);
+  STRNCMP_EQUAL_TEXT(sequence_code, actual_sequence_code, 5, "Sequence code returned as expected");
+}
+
+TEST(GameSequence, GetSequenceIndex) {
+  UNSIGNED_LONGS_EQUAL_TEXT(0, GameSequence_GetSequenceIndex(), "Sequence index returned as expected");
+
+  GameSequence_NextRound();
+
+  UNSIGNED_LONGS_EQUAL_TEXT(1, GameSequence_GetSequenceIndex(), "Sequence index returned as expected");
 }
 
 TEST(GameSequence, GetSequenceValue) {
