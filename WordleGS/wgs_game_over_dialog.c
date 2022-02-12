@@ -30,6 +30,7 @@
 #include "main.h"
 #include "wgs_game_engine.h"
 #include "wgs_game_over_dialog.h"
+#include "wgs_share_game_dialog.h"
 
 GrafPortPtr game_over_dialog_ptr;
 
@@ -151,6 +152,10 @@ wgs_game_over_response HandleGameOverDialog(void) {
   
   do {
     dlg_part = DoModalWindow(&dlg_event, NULL, NULL, NULL, modal_dialog_mask);
+    
+    if (dlg_part == rez_window_GameOver_ShareGameButtonId) {
+      ShareGameDialog_Show();
+    }
   } while (dlg_part != rez_window_GameOver_NewGameButtonId && dlg_part != rez_window_GameOver_CloseButtonId);
   
   InitCursor();

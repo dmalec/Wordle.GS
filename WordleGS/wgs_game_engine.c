@@ -60,8 +60,17 @@ void GameEngine_Create(void) {
   GuessState_Create();
 }
 
-void GameEngine_NewGame(void) {
-  GameSequence_NewGame();
+void GameEngine_NewGame(char code_word[]) {
+  if (code_word == NULL) {
+    char dict_code_word[6];
+
+    Dictionary_GetRandomWord(dict_code_word);
+    GameSequence_NewGame(dict_code_word);
+
+  } else {
+    GameSequence_NewGame(code_word);
+  }
+
   GameEngine_NextRound();
 }
 

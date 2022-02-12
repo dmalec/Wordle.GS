@@ -31,7 +31,7 @@
 /* Lifecycle Methods */
 
 void GameEngine_Create(void);
-void GameEngine_NewGame(void);
+void GameEngine_NewGame(char code[]);
 void GameEngine_NextRound(void);
 void GameEngine_UpdateFinished(void);
 void GameEngine_Destroy(void);

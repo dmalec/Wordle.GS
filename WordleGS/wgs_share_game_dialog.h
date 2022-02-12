@@ -22,26 +22,11 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEwgs_dictionary_
-#define _GUARD_PROJECTWordleGS_FILEwgs_dictionary_
-
-#include <types.h>
+#ifndef _GUARD_PROJECTWordleGS_FILEwgs_share_game_dialog_
+#define _GUARD_PROJECTWordleGS_FILEwgs_share_game_dialog_
 
 
-/* Lifecycle Methods */
-
-void Dictionary_Create(void);
-void Dictionary_NextRound(void);
-void Dictionary_UpdateFinished(void);
-void Dictionary_Destroy(void);
+void ShareGameDialog_Show(void);
 
 
-/* Game Methods */
-
-unsigned int Dictionary_GetNumberOfSecretWords(void);
-BOOLEAN Dictionary_IsValidGuess(char *word);
-void Dictionary_GetRandomWord(char *buffer);
-void Dictionary_GetWord(unsigned int index, char *buffer);
-
-
-#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_dictionary_ */
+#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_share_game_dialog_ */

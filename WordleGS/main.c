@@ -51,7 +51,8 @@ void HandleAboutDialog(void) {
 }
 
 void HandleNewGame(void) {
-  Str255 code_buffer;
+  Str255 code_str255;
+  char code_c_string[] = "     ";
   int i;
   unsigned seed = 0;
   
@@ -66,14 +67,13 @@ void HandleNewGame(void) {
     return;
   }
 
-  NewGameDialog_GetCode(&code_buffer);
+  NewGameDialog_GetCode(&code_str255);
   
-  for (i=0; i<code_buffer.textLength; i++) {
-    seed += code_buffer.text[i];
+  for (i=0; i<5; i++) {
+    code_c_string[i] = code_str255.text[i];
   }
-  srand(seed);
   
-  GameEngine_NewGame();
+  GameEngine_NewGame(code_c_string);
   AppWindow_NextRound();
 }
 
@@ -153,7 +153,7 @@ int main (void) {
   InitCursor();
   
   GameEngine_Create();
-  GameEngine_NewGame();
+  GameEngine_NewGame(NULL);
   
   CreateRenderSystem();
   CreateAppWindow();

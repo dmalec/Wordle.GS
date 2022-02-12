@@ -38,6 +38,18 @@ resource rMenuBar (rez_menubar_Main) {
   };
 };
 
+/* Generic Menu Items */
+
+resource rMenuItem (rez_menuitem_Divider) {
+  rez_menuitem_DividerId,
+  "","",
+  0,
+  refIsResource*itemTitleRefShift + fDisabled,
+  rez_menuitem_DividerTitle
+};
+
+resource rPString (rez_menuitem_DividerTitle, noCrossBank) {"-"};
+
 /* Apple Menu */
 
 resource rMenu (rez_menu_Apple) {
@@ -48,7 +60,8 @@ resource rMenu (rez_menu_Apple) {
   rez_menu_AppleTitle,
   {
     rez_menuitem_About,
-    rez_menuitem_Help
+    rez_menuitem_Help,
+    rez_menuitem_Divider
   };
 };
 
@@ -69,8 +82,7 @@ resource rMenuItem (rez_menuitem_Help) {
   rez_menuitem_HelpId,
   "?","/",
   0,
-  refIsResource*itemTitleRefShift
-  + fDivider,
+  refIsResource*itemTitleRefShift,
   rez_menuitem_HelpTitle
 };
 
@@ -87,6 +99,7 @@ resource rMenu (rez_menu_File) {
   rez_menu_FileTitle,
   {
     rez_menuitem_NewGame,
+    rez_menuitem_Divider,
     rez_menuitem_Quit
   };
 };
@@ -97,8 +110,7 @@ resource rMenuItem (rez_menuitem_NewGame) {
   rez_menuitem_NewGameId,
   "N","n",
   0,
-  refIsResource*itemTitleRefShift
-  + fDivider,
+  refIsResource*itemTitleRefShift,
   rez_menuitem_NewGameTitle
 };
 
@@ -125,6 +137,7 @@ resource rMenu (rez_menu_Edit) {
   rez_menu_EditTitle,
   {
     rez_menuitem_Undo,
+    rez_menuitem_Divider,
     rez_menuitem_Cut,
     rez_menuitem_Copy,
     rez_menuitem_Paste,
@@ -138,8 +151,7 @@ resource rMenuItem (rez_menuitem_Undo) {
   rez_menuitem_UndoId,
   "Z","z",
   0,
-  refIsResource*itemTitleRefShift
-  + fDivider,
+  refIsResource*itemTitleRefShift,
   rez_menuitem_UndoTitle
 };
 
@@ -297,13 +309,14 @@ resource rWindParam1 (rez_window_GameOver) {
 resource rControlList (rez_window_GameOver_ControlList) {
   {
     rez_window_GameOver_NewGameButton,
+    rez_window_GameOver_ShareGameButton,
     rez_window_GameOver_CloseButton
   }
 };
 
 resource rControlTemplate (rez_window_GameOver_NewGameButton) {
   rez_window_GameOver_NewGameButtonId,              /* control ID */
-  {138,148,0,0},                                    /* control Rect */
+  {138,167,0,0},                                    /* control Rect */
   SimpleButtonControl {{
     $0001,                                          /* flags */
     $3002,                                          /* more flags */
@@ -316,9 +329,24 @@ resource rControlTemplate (rez_window_GameOver_NewGameButton) {
 
 resource rPString (rez_window_GameOver_NewGameButtonTitle) {"Next Word"};
 
+resource rControlTemplate (rez_window_GameOver_ShareGameButton) {
+  rez_window_GameOver_ShareGameButtonId,            /* control ID */
+  {138,86,0,0},                                      /* control Rect */
+  SimpleButtonControl {{
+    $0000,                                          /* flags */
+    $3002,                                          /* more flags */
+    0,                                              /* refcon */
+    rez_window_GameOver_ShareGameButtonTitle,       /* Title Ref */
+    0,                                              /* color table ref */
+    {"\$1B","\$1B",0,0}                             /* key equivalents */
+  }};
+};
+
+resource rPString (rez_window_GameOver_ShareGameButtonTitle) {"Share"};
+
 resource rControlTemplate (rez_window_GameOver_CloseButton) {
   rez_window_GameOver_CloseButtonId,                /* control ID */
-  {138,39,0,0},                                     /* control Rect */
+  {138,8,0,0},                                     /* control Rect */
   SimpleButtonControl {{
     $0000,                                          /* flags */
     $3002,                                          /* more flags */
@@ -524,4 +552,50 @@ resource rControlTemplate (rez_window_NewGame_GameCode) {
     6,                                              /* max size */
     0                                               /* text Ref */
   }};
+};
+
+/* Share Game Dialog */
+
+resource rWindParam1 (rez_window_ShareGame) {
+  $DDA5,                                            /* wFrameBits */
+  nil,                                              /* wTitle */
+  0,                                                /* wRefCon */
+  {0,0,0,0},                                        /* ZoomRect */
+  nil,                                              /* wColor ID */
+  {0,0},                                            /* Origin */
+  {1,1},                                            /* data size */
+  {0,0},                                            /* max height-width */
+  {8,8},                                            /* scroll ver hors */
+  {0,0},                                            /* page ver horiz */
+  0,                                                /* winfoRefcon */
+  0,                                                /* wInfoHeight */
+  {0,0,200,320},                                    /* wposition */
+  infront,                                          /* wPlane */
+  rez_window_ShareGame_ControlList,                 /* wStorage */
+  $0809                                             /* wInVerb */
+};
+
+resource rControlList (rez_window_ShareGame_ControlList) {
+  {
+    rez_window_ShareGame_CloseButton
+  }
+};
+
+resource rControlTemplate (rez_window_ShareGame_CloseButton) {
+  rez_window_ShareGame_CloseButtonId,               /* control ID */
+  {176,125,0,0},                                    /* control Rect */
+  SimpleButtonControl {{
+    $0001,                                          /* flags */
+    $300A,                                          /* more flags */
+    0,                                              /* refcon */
+    rez_window_ShareGame_CloseButtonTitle,          /* Title Ref */
+    rez_window_ShareGame_CloseButtonColorTable,     /* color table ref */
+    {"\$0D","\$1B",0,0}                             /* key equivalents */
+  }};
+};
+
+resource rPString (rez_window_ShareGame_CloseButtonTitle) {"Close"};
+
+data rCtlColorTbl (rez_window_ShareGame_CloseButtonColorTable) {
+  $"F000 0000 F000 0F00 F000"
 };
