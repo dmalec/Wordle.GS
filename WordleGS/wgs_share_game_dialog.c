@@ -28,6 +28,7 @@
 #include <window.h>
 
 #include "main.h"
+#include "wgs_game_engine.h"
 #include "wgs_game_sequence.h"
 #include "wgs_game_types.h"
 #include "wgs_guess_state.h"
@@ -57,7 +58,7 @@ void ShareGameDialog_DrawContents(void) {
   char code_word[] = "     ";
   char buffer[128];
   int title_width = CStringWidth(WGS_TITLE_TEXT);
-  int game_info_width;
+  int buffer_screen_width;
   int row, col;
   wgs_letter_state raw_letter_state, share_letter_state;
 
@@ -72,11 +73,27 @@ void ShareGameDialog_DrawContents(void) {
   MoveTo(320 / 2 - title_width / 2, 30);
   DrawCString(WGS_TITLE_TEXT);
 
-  /* Draw Game Info */
+  /* Draw Code Info */
   GameSequence_GetSequenceCode(code_word);
-  sprintf(buffer, "%s  %d  %d/6", code_word, GameSequence_GetSequenceIndex(), GuessState_GetRow() + 1);
-  game_info_width = CStringWidth(buffer);
-  MoveTo(160 - game_info_width / 2, 45);
+  sprintf(buffer, "Code: %s", code_word);
+  buffer_screen_width = CStringWidth(buffer);
+  MoveTo(10, 45);
+  DrawCString(buffer);
+
+  /* Draw Game Info */
+  if (GameEngine_GetGameState() == Lost) {
+    sprintf(buffer, "-/6");
+  } else {
+    sprintf(buffer, "%d/6", GuessState_GetRow() + 1);
+  }
+  buffer_screen_width = CStringWidth(buffer);
+  MoveTo(160 - buffer_screen_width / 2, 45);
+  DrawCString(buffer);
+
+  /* Draw Word Info */
+  sprintf(buffer, "Word: %d", GameSequence_GetSequenceIndex());
+  buffer_screen_width = CStringWidth(buffer);
+  MoveTo(310 - buffer_screen_width, 45);
   DrawCString(buffer);
 
   /* Draw Round */
