@@ -266,7 +266,7 @@ resource rAlertString (rez_alert_About) {
   "9"                                               /* size */
   "0"                                               /* icon */
   "/"                                               /* divider */
-  "WORDLE GS v0.3\n"                                /* begin text */
+  "WORDLE GS v0.4\n"                                /* begin text */
   "by Dan Malec\n"
   "\n"
   "Based on WORDLE\n"
