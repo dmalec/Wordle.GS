@@ -27,4 +27,6 @@
 
 unsigned int Utils_GetBitmask16(unsigned short bits[]);
 
+void Utils_StringNCopy(char *destination, char *source, unsigned int number_of_chars);
+
 #endif /* define _GUARD_PROJECTWordleGS_FILEwgs_utils_ */

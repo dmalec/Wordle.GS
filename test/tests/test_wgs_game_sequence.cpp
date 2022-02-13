@@ -62,6 +62,9 @@ TEST_GROUP(GameSequence) {
     mock().expectOneCall("HLock").withPointerParameter("handle", sequence_handle);
     mock().expectOneCall("HUnlock").withPointerParameter("handle", sequence_handle);
 
+    mock().expectOneCall("GsShim_ShowProgressDialog");
+    mock().expectOneCall("GsShim_HideProgressDialog");
+
     GameSequence_NewGame(sequence_code);
   }
 

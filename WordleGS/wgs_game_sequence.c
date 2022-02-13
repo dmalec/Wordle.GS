@@ -25,6 +25,8 @@
 #include <memory.h>
 
 #include "wgs_game_sequence.h"
+#include "wgs_gs_shim.h"
+#include "wgs_utils.h"
 
 /* State */
 
@@ -47,6 +49,8 @@ void GameSequence_NewGame(char code_word[]) {
   unsigned int *data;
   unsigned seed = 0;
 
+  GsShim_ShowProgressDialog();
+
   for (i=0; i<5; i++) {
     wgs_game_sequence_code_word[i] = code_word[i];
     seed += code_word[i];
@@ -67,8 +71,14 @@ void GameSequence_NewGame(char code_word[]) {
     }
 
     data[random_index] = sequence_number;
+    
+    if (sequence_number % 100 == 0) {
+      GsShim_UpdateProgressDialog(sequence_number, wgs_game_sequence_size);
+    }
   }
   HUnlock(wgs_game_sequence_memory);
+
+  GsShim_HideProgressDialog();
 
   wgs_game_sequence_index = 0;
 }
@@ -93,11 +103,7 @@ void GameSequence_Destroy(void) {
 /* Game Methods */
 
 void GameSequence_GetSequenceCode(char code_word[]) {
-  int i;
-
-  for (i=0; i<5; i++) {
-    code_word[i] = wgs_game_sequence_code_word[i];
-  }
+  Utils_StringNCopy(code_word, wgs_game_sequence_code_word, 5);
 }
 
 unsigned int GameSequence_GetSequenceIndex(void) {

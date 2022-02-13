@@ -36,3 +36,19 @@ void GsShim_LoadFile(char *c_str_file_name, Handle *file_handle, LongWord *file_
     .withOutputParameter("file_handle", file_handle)
     .withOutputParameter("file_length", file_length);
 }
+
+void GsShim_ShowProgressDialog(void) {
+  mock().actualCall("GsShim_ShowProgressDialog");
+}
+
+void GsShim_UpdateProgressDialog(unsigned int mercury_value, unsigned int mercury_scale) {
+  mock()
+    .actualCall("GsShim_UpdateProgressDialog")
+    .withUnsignedLongIntParameter("mercury_value", mercury_value)
+    .withUnsignedLongIntParameter("mercury_scale", mercury_scale);
+
+}
+
+void GsShim_HideProgressDialog(void) {
+  mock().actualCall("GsShim_HideProgressDialog");
+}

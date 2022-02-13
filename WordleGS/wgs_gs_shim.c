@@ -22,11 +22,23 @@
  * SOFTWARE.
  */
 
+#include <control.h>
 #include <gsos.h>
 #include <memory.h>
 #include <misctool.h>
+#include <quickdraw.h>
+#include <resources.h>
+#include <window.h>
 
+#include "main.h"
 #include "wgs_gs_shim.h"
+
+/* State */
+
+static GrafPortPtr wgs_shim_progress_dialog_ptr;
+
+/* Methods */
+
 
 void GsShim_LoadFile(char *c_str_file_name, Handle *file_handle, LongWord *file_length) {
   BOOLEAN success = TRUE;
@@ -80,4 +92,28 @@ void GsShim_LoadFile(char *c_str_file_name, Handle *file_handle, LongWord *file_
   CloseGS(&close_file_rev);
 
   HUnlock(file_contents);
+}
+
+void GsShim_ShowProgressDialog(void) {
+  EventRecord dlg_event;
+  unsigned short modal_dialog_flags[] = {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0};
+  Word modal_dialog_mask = Utils_GetBitmask16(modal_dialog_flags);
+
+  wgs_shim_progress_dialog_ptr = NewWindow2("\pProgress", 0, NULL, NULL, 0x02, rez_window_Progress, rWindParam1);
+  if (wgs_shim_progress_dialog_ptr == NULL) return;
+  
+  DoModalWindow(&dlg_event, NULL, NULL, NULL, modal_dialog_mask);
+}
+
+void GsShim_UpdateProgressDialog(unsigned int mercury_value, unsigned int mercury_scale) {
+  CtlRecHndl thermometer_control_handle;
+  double percentage = (double)mercury_value / (double)mercury_scale * 100.0;
+  
+  thermometer_control_handle = GetCtlHandleFromID(wgs_shim_progress_dialog_ptr, rez_window_Progress_ThermometerId);
+  SetCtlValue((int)percentage, thermometer_control_handle);
+}
+
+void GsShim_HideProgressDialog(void) {
+  InitCursor();
+  CloseWindow(wgs_shim_progress_dialog_ptr);
 }
