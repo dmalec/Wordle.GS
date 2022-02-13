@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+#include <types.h>
+
 #include "wgs_utils.h"
 
 
@@ -40,4 +42,17 @@ unsigned int Utils_GetBitmask16(unsigned short bits[]) {
   }
 
   return result;
+}
+
+void Utils_StringNCopy(char *destination, char *source, unsigned int number_of_chars) {
+  unsigned int i;
+  BOOLEAN fill_null = FALSE;
+
+  for (i=0; i<number_of_chars; i++) {
+    if (source[i] == '\0') {
+      fill_null = TRUE;
+    }
+
+    destination[i] = (fill_null) ? '\0' : source[i];
+  }
 }

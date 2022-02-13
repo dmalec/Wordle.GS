@@ -174,6 +174,7 @@ int main (void) {
   int i;
   char time_string[21];
   unsigned seed = 0;
+  Rect background;
   
   ReadAsciiTime(time_string);
   for (i=0; i<21; i++) {
@@ -182,9 +183,14 @@ int main (void) {
   srand(seed);
   
   startdesk(320);
+
+  SetRect(&background, 0, 0, 320, 200);
+  SetSolidPenPat(0);
+  PaintRect(&background);
+
   InitMenus();
   InitCursor();
-  
+
   GameEngine_Create();
   GameEngine_NewGame(NULL);
   

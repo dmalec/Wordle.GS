@@ -28,6 +28,8 @@
 #include "wgs_dictionary.h"
 #include "wgs_game_sequence.h"
 #include "wgs_guess_state.h"
+#include "wgs_utils.h"
+
 
 
 /* State */
@@ -91,11 +93,7 @@ void GameEngine_NextRound(void) {
 }
 
 void GameEngine_NewSecretWord(char *secret_word) {
-  int i;
-
-  for (i=0; i<5; i++) {
-    wgs_game_engine_secret_word[i] = secret_word[i];
-  }
+  Utils_StringNCopy(wgs_game_engine_secret_word, secret_word, 5);
   wgs_game_engine_secret_word[5] = '\0';
 }
 
@@ -202,15 +200,9 @@ int GameEngine_IndexOfLetter(char* word, char letter) {
   return -1;
 }
 
-
 void GameEngine_GetSecretWord(char *word) {
-  int i;
-
-  for (i=0; i<5; i++) {
-    word[i] = wgs_game_engine_secret_word[i];
-  }
+  Utils_StringNCopy(word, wgs_game_engine_secret_word, 5);
 }
-
 
 int GameEngine_GetWinStat(int guess_num) {
   return wgs_game_engine_win_stats[guess_num];

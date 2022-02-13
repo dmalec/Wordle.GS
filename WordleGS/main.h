@@ -214,4 +214,18 @@
 #define rez_window_ShareGame_CloseButtonTitle   1401
 #define rez_window_ShareGame_CloseButtonColorTable 1401
 
+/* Progress Dialog */
+
+#define rez_window_Progress                     1501
+
+#define rez_window_Progress_ControlList         1501
+
+#define rez_window_Progress_Label               1502
+#define rez_window_Progress_LabelId                2
+#define rez_window_Progress_LabelTitle          1502
+
+#define rez_window_Progress_Thermometer         1503
+#define rez_window_Progress_ThermometerId          3
+
+
 #endif /* defined(_____PROJECTNAMEASIDENTIFIER________FILEBASENAMEASIDENTIFIER_____) */

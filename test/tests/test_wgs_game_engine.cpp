@@ -113,6 +113,9 @@ TEST_GROUP(GameEngine) {
     mock().expectOneCall("HLock").withPointerParameter("handle", secrets_handle);
     mock().expectOneCall("HUnlock").withPointerParameter("handle", secrets_handle);
 
+    mock().expectOneCall("GsShim_ShowProgressDialog");
+    mock().expectOneCall("GsShim_HideProgressDialog");
+
     GameEngine_NewGame(sequence_code);
   }
 

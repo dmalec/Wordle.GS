@@ -671,3 +671,57 @@ resource rPString (rez_window_ShareGame_CloseButtonTitle) {"Close"};
 data rCtlColorTbl (rez_window_ShareGame_CloseButtonColorTable) {
   $"F000 0000 F000 0F00 F000"
 };
+
+/* Progress Dialog */
+
+resource rWindParam1 (rez_window_Progress) {
+  $2028,                                            /* wFrameBits */
+  nil,                                              /* wTitle */
+  0,                                                /* wRefCon */
+  {0,0,0,0},                                        /* ZoomRect */
+  nil,                                              /* wColor ID */
+  {0,0},                                            /* Origin */
+  {1,1},                                            /* data size */
+  {0,0},                                            /* max height-width */
+  {0,0},                                            /* scroll ver hors */
+  {0,0},                                            /* page ver horiz */
+  0,                                                /* winfoRefcon */
+  0,                                                /* wInfoHeight */
+  {75,50,128,270},                                  /* wposition */
+  infront,                                          /* wPlane */
+  rez_window_Progress_ControlList,                  /* wStorage */
+  $0809                                             /* wInVerb */
+};
+
+resource rControlList (rez_window_Progress_ControlList) {
+  {
+    rez_window_Progress_Label,
+    rez_window_Progress_Thermometer
+  }
+};
+
+resource rControlTemplate (rez_window_Progress_Label) {
+  rez_window_Progress_LabelId,                      /* control ID */
+  {6,8,20,200},                                     /* control Rect */
+  statTextControl {{
+    $0000,                                          /* flags */
+    $1002,                                          /* more flags */
+    0,                                              /* refcon */
+    rez_window_Progress_LabelTitle                  /* Title Ref */
+  }};
+};
+
+resource rTextForLETextBox2 (rez_window_Progress_LabelTitle) {"Calculating Word Sequence"};
+
+resource rControlTemplate (rez_window_Progress_Thermometer) {
+  rez_window_Progress_ThermometerId,                /* control ID */
+  {22,8,30,200},                                    /* control Rect */
+  thermometerControl {{
+    $0001,                                          /* flags */
+    $1000,                                          /* more flags */
+    0,                                              /* refcon */
+    0,                                              /* value for pos of mercury */
+    100,                                            /* scale for mercury */
+    $00000000                                       /* color table reference */
+  }};
+};
