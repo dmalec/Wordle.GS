@@ -25,6 +25,8 @@
 #include <control.h>
 #include <desk.h>
 #include <event.h>
+#include <locator.h>
+#include <memory.h>
 #include <menu.h>
 #include <misctool.h>
 #include <orca.h>
@@ -45,6 +47,7 @@
 BOOLEAN done;
 EventRecord my_event;
 int menu_num, menu_item_num;
+unsigned int user_id;
 
 /* Prototypes */
 
@@ -175,14 +178,19 @@ int main (void) {
   char time_string[21];
   unsigned seed = 0;
   Rect background;
-  
+  Ref toolStartupRef;
+
   ReadAsciiTime(time_string);
   for (i=0; i<21; i++) {
     seed += time_string[i];
   }
   srand(seed);
   
-  startdesk(320);
+  user_id = MMStartUp();
+
+  TLStartUp();
+
+  toolStartupRef = StartUpTools(user_id, refIsResource, rez_tools);
 
   SetRect(&background, 0, 0, 320, 200);
   SetSolidPenPat(0);
@@ -225,5 +233,7 @@ int main (void) {
   
   GameEngine_Destroy();
   
-  enddesk();
+  ShutDownTools(refIsHandle, toolStartupRef);
+  TLShutDown();
+  MMShutDown(user_id);
 }
