@@ -35,6 +35,7 @@
 GrafPortPtr game_over_dialog_ptr;
 
 void GameOverDialogDrawContents (void) {
+  char buffer[128];
   char secret_word[] = "     ";
   int i, h, offset;
   int max_wins = 0;
@@ -62,7 +63,6 @@ void GameOverDialogDrawContents (void) {
     DrawCString(secret_word);
   } else {
     char code_word[] = "     ";
-    char buffer[128];
 
     MoveTo(8, 10);
     DrawCString("WORDLE GS!\0");
@@ -75,9 +75,10 @@ void GameOverDialogDrawContents (void) {
   }
   
   for (i=0; i<6; i++) {
+    sprintf(buffer, "%d", i+1);
     MoveTo(8, 50 + i * 14);
-    printf("%d", i+1);
-    
+    DrawCString(buffer);
+
     stat = GameEngine_GetWinStat(i);
     if (stat > max_wins) {
       max_wins = stat;
@@ -146,8 +147,9 @@ void GameOverDialogDrawContents (void) {
     }
     
     h = 20 + offset;
+    sprintf(buffer, "%d", stat);
     MoveTo(h, 50 + i * 14);
-    printf("%d", stat);
+    DrawCString(buffer);
   }
 
   DrawControls(game_over_dialog_ptr);

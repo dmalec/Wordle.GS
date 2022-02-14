@@ -116,7 +116,7 @@ void RenderSystemDrawLetterGuess(wgs_letter_state letter_state) {
     SetForeColor(15);
     SetBackColor(fill_color);
     MoveTo(letter_state.render_box.h1 + WGS_LETTER_GUESS_INSET_H, letter_state.render_box.v1 + WGS_LETTER_GUESS_INSET_V);
-    putchar(letter_state.letter);
+    DrawChar(letter_state.letter);
   }
   
   SetSolidPenPat(line_color);
@@ -152,7 +152,7 @@ void RenderSystemDrawLetterKey(wgs_letter_state letter_state) {
   SetForeColor(15);
   SetBackColor(fill_color);
   MoveTo(letter_state.render_box.h1 + WGS_LETTER_KEY_INSET_H, letter_state.render_box.v1 + WGS_LETTER_GUESS_INSET_V);
-  putchar(letter_state.letter);
+  DrawChar(letter_state.letter);
   
   SetSolidPenPat(line_color);
   FrameRect(&letter_state.render_box);
