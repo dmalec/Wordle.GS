@@ -231,11 +231,19 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		368A4CD727BF456F00A3C65A /* WordleGS.Data */ = {
+			isa = PBXGroup;
+			children = (
+				36B5FF0227A3A06D0097B2BD /* secrets.txt */,
+				36B5FF0127A3A06D0097B2BD /* dictionary.txt */,
+			);
+			path = WordleGS.Data;
+			sourceTree = "<group>";
+		};
 		36B5FF0027A3A06D0097B2BD /* data */ = {
 			isa = PBXGroup;
 			children = (
-				36B5FF0127A3A06D0097B2BD /* dictionary.txt */,
-				36B5FF0227A3A06D0097B2BD /* secrets.txt */,
+				368A4CD727BF456F00A3C65A /* WordleGS.Data */,
 			);
 			path = data;
 			sourceTree = "<group>";
