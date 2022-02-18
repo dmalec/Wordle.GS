@@ -53,13 +53,13 @@ void setupFileMocks(void) {
 
   mock()
     .expectOneCall("GsShim_LoadFile")
-    .withStringParameter("c_str_file_name", "dictionary.txt")
+    .withStringParameter("c_str_file_name", "WordleGS.Data/dictionary.txt")
     .withOutputParameterReturning("file_handle", &dictionary_handle, sizeof(Handle))
     .withOutputParameterReturning("file_length", &dictionary_length, sizeof(LongWord));
 
   mock()
     .expectOneCall("GsShim_LoadFile")
-    .withStringParameter("c_str_file_name", "secrets.txt")
+    .withStringParameter("c_str_file_name", "WordleGS.Data/secrets.txt")
     .withOutputParameterReturning("file_handle", &secrets_handle, sizeof(Handle))
     .withOutputParameterReturning("file_length", &secrets_length, sizeof(LongWord));
 

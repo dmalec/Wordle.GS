@@ -30,8 +30,8 @@
 
 /* Constants */
 
-#define DICTIONARY_FILENAME         "dictionary.txt\0"
-#define SECRETS_FILENAME            "secrets.txt\0"
+#define DICTIONARY_FILENAME         "WordleGS.Data/dictionary.txt\0"
+#define SECRETS_FILENAME            "WordleGS.Data/secrets.txt\0"
 
 
 /* State */
