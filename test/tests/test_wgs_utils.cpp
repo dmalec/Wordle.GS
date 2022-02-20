@@ -42,3 +42,33 @@ TEST(Utils, GetBitmask16) {
   unsigned short mixed[] = {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0};
   LONGS_EQUAL_TEXT(0x4008, Utils_GetBitmask16(mixed), "Mixed generates expected mask");
 }
+
+TEST(Utils, StringNCopy) {
+  char actual[32];
+
+  Utils_StringNCopy(actual, "ROBOT", 3);
+  STRNCMP_EQUAL_TEXT("ROB", actual, 3, "Partial copy works");
+
+  Utils_StringNCopy(actual, "ROBOT", 5);
+  STRNCMP_EQUAL_TEXT("ROBOT", actual, 5, "Full copy works");
+
+  Utils_StringNCopy(actual, "ROBOT", 10);
+  STRCMP_EQUAL_TEXT("ROBOT", actual, "Excess copy works");
+}
+
+TEST(Utils, StringNFindChar) {
+  char *actual;
+  char str[] = "ROBOT";
+
+  actual = Utils_StringNFindChar(str, 5, 'A');
+  POINTERS_EQUAL_TEXT(NULL, actual, "Non-existant letter not found");
+
+  actual = Utils_StringNFindChar(str, 5, 'R');
+  POINTERS_EQUAL_TEXT(str, actual, "First letter found");
+
+  actual = Utils_StringNFindChar(str, 5, 'T');
+  POINTERS_EQUAL_TEXT(&str[4], actual, "Last letter found");
+
+  actual = Utils_StringNFindChar(str, 2, 'T');
+  POINTERS_EQUAL_TEXT(NULL, actual, "Length limit works");
+}
