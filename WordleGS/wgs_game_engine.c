@@ -44,7 +44,6 @@ static char wgs_game_engine_secret_word[6] = "ROBOT";
 /* Local Prototypes */
 
 void GameEngine_NewSecretWord(char *word);
-int GameEngine_IndexOfLetter(char* word, char letter);
 
 
 /* Lifecycle Methods */
@@ -160,15 +159,15 @@ wgs_guess_status GameEngine_GuessCurrentWord(void) {
       AlphabetState_MaybeUpdateLetterStatus(c, gtCorrectLetter);
       matches++;
     } else {
-      int letter_idx = GameEngine_IndexOfLetter(tmp_secret, c);
+      char *letter_location = Utils_StringNFindChar(tmp_secret, 5, c);
 
-      if (letter_idx >= 0) {
+      if (letter_location != NULL) {
         GuessState_MaybeUpdateLetterStatus(i, gtWrongPlaceLetter);
         AlphabetState_MaybeUpdateLetterStatus(c, gtWrongPlaceLetter);
 
         // Clear the letter, so it won't be double counted
         // if it appears again in the guess.
-        tmp_secret[letter_idx] = ' ';
+        *letter_location = ' ';
       } else {
         GuessState_MaybeUpdateLetterStatus(i, gtIncorrectLetter);
         AlphabetState_MaybeUpdateLetterStatus(c, gtIncorrectLetter);
@@ -186,18 +185,6 @@ wgs_guess_status GameEngine_GuessCurrentWord(void) {
   }
 
   return ValidGuess;
-}
-
-int GameEngine_IndexOfLetter(char* word, char letter) {
-  int i;
-
-  for (i=0; i<5; i++) {
-    if (word[i] == letter) {
-      return i;
-    }
-  }
-
-  return -1;
 }
 
 void GameEngine_GetSecretWord(char *word) {

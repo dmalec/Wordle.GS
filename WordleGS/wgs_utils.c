@@ -56,3 +56,17 @@ void Utils_StringNCopy(char *destination, char *source, unsigned int number_of_c
     destination[i] = (fill_null) ? '\0' : source[i];
   }
 }
+
+char * Utils_StringNFindChar(char *str, unsigned int number_of_chars, char c) {
+  unsigned int i;
+  char *first_occurence = NULL;
+
+  for (i=0; i<number_of_chars; i++) {
+    if (str[i] == c) {
+      first_occurence = &str[i];
+      break;
+    }
+  }
+
+  return first_occurence;
+}
