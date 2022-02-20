@@ -43,6 +43,7 @@ static char wgs_game_engine_secret_word[6] = "ROBOT";
 
 /* Local Prototypes */
 
+int GameEngine_GradeWord(char *guess, char *secret, wgs_letter_status *status);
 void GameEngine_NewSecretWord(char *word);
 
 
@@ -124,11 +125,10 @@ BOOLEAN GameEngine_IsGameInProgress(void) {
 
 wgs_guess_status GameEngine_GuessCurrentWord(void) {
   int current_guess_row = GuessState_GetRow();
-  int i, letter_index;
-  int matches = 0;
-  char tmp_secret[5];
+  wgs_letter_status guess_grade[5];
   char guess_word[] = "     ";
-  char c;
+  int i;
+  int matches;
 
   if (GuessState_GetRow() >= 6) return MaxGuesses;
   if (GuessState_GetCol() < 5) return WordFilled;
@@ -136,43 +136,10 @@ wgs_guess_status GameEngine_GuessCurrentWord(void) {
   GuessState_GetGuessWord(guess_word);
   if (!Dictionary_IsValidGuess(guess_word)) return InvalidWord;
 
+  matches = GameEngine_GradeWord(guess_word, wgs_game_engine_secret_word, guess_grade);
   for (i=0; i<5; i++) {
-    wgs_letter_state letter_state = GuessState_GetLetterState(current_guess_row, i);
-
-    // Mark matches in advance - this will help with properly
-    // marking misplaced versus incorrect letters later.
-    if (letter_state.letter == wgs_game_engine_secret_word[i]) {
-      tmp_secret[i] = '+';
-    } else {
-      tmp_secret[i] = wgs_game_engine_secret_word[i];
-    }
-  }
-
-  for (i=0; i<5; i++) {
-    wgs_letter_state letter_state = GuessState_GetLetterState(current_guess_row, i);
-
-    c = letter_state.letter;
-    letter_index = c - 'A';
-
-    if (tmp_secret[i] == '+') {
-      GuessState_MaybeUpdateLetterStatus(i, gtCorrectLetter);
-      AlphabetState_MaybeUpdateLetterStatus(c, gtCorrectLetter);
-      matches++;
-    } else {
-      char *letter_location = Utils_StringNFindChar(tmp_secret, 5, c);
-
-      if (letter_location != NULL) {
-        GuessState_MaybeUpdateLetterStatus(i, gtWrongPlaceLetter);
-        AlphabetState_MaybeUpdateLetterStatus(c, gtWrongPlaceLetter);
-
-        // Clear the letter, so it won't be double counted
-        // if it appears again in the guess.
-        *letter_location = ' ';
-      } else {
-        GuessState_MaybeUpdateLetterStatus(i, gtIncorrectLetter);
-        AlphabetState_MaybeUpdateLetterStatus(c, gtIncorrectLetter);
-      }
-    }
+    GuessState_MaybeUpdateLetterStatus(i, guess_grade[i]);
+    AlphabetState_MaybeUpdateLetterStatus(guess_word[i], guess_grade[i]);
   }
 
   if (matches >= 5) {
@@ -185,6 +152,48 @@ wgs_guess_status GameEngine_GuessCurrentWord(void) {
   }
 
   return ValidGuess;
+}
+
+int GameEngine_GradeWord(char *guess, char *secret, wgs_letter_status *status) {
+  int i;
+  char tmp_secret[5];
+  int matches = 0;
+
+  /*
+     Mark perfect matches in advance. This will help with marking non-matching
+     letters later. Specifically, it helps avoid marking a letter as misplaced
+     when all occurences of the letter in the secret word have already been
+     accounted for.
+  */
+
+  for (i=0; i<5; i++) {
+    if (guess[i] == secret[i]) {
+      tmp_secret[i] = '+';
+    } else {
+      tmp_secret[i] = secret[i];
+    }
+  }
+
+  for (i=0; i<5; i++) {
+    if (tmp_secret[i] == '+') {
+      status[i] = gtCorrectLetter;
+      matches++;
+    } else {
+      char *letter_location = Utils_StringNFindChar(tmp_secret, 5, guess[i]);
+
+      if (letter_location != NULL) {
+        status[i] = gtWrongPlaceLetter;
+
+        // Clear the letter, so it won't be double counted
+        // if it appears again in the guess.
+        *letter_location = ' ';
+      } else {
+        status[i] = gtIncorrectLetter;
+      }
+    }
+  }
+
+  return matches;
 }
 
 void GameEngine_GetSecretWord(char *word) {
