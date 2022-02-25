@@ -59,9 +59,12 @@ endif
 
 CPPUTEST_WARNINGFLAGS += -Wno-unused-parameter
 
+CPPUTEST_CFLAGS += -O0
+CPPUTEST_CXXFLAGS += -O0
+
 lcov: gcov
-	lcov --no-checksum --directory "WordleGS" --capture --output-file "lcov.info"
-	genhtml --output-directory  "WordleGS-HTML" "lcov.info"
+	lcov --capture --rc lcov_branch_coverage=1 --directory "WordleGS" --output-file "lcov.info"
+	genhtml  --rc lcov_branch_coverage=1 --output-directory  "WordleGS-HTML" "lcov.info"
 	@echo "See WordleGS-HTML directory for details"
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk

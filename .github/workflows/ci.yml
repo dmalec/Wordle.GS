@@ -20,9 +20,11 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Install lcov
-      run: >
-        sudo apt-get install
-        lcov
+      run: |
+        wget https://github.com/linux-test-project/lcov/releases/download/v1.15/lcov-1.15.tar.gz
+        tar -zxf lcov-1.15.tar.gz
+        cd lcov-1.15
+        sudo make install
 
     - name: Pull Submodules
       run: |
@@ -61,6 +63,12 @@ jobs:
       run: |
         make lcov
 
+    - name: Build Archive
+      working-directory: test
+      run: |
+        cp lcov.info WordleGS-HTML/lcov.info
+        cp -r gcov WordleGS-HTML/gcov
+
     - name: Archive Coverage
       uses: actions/upload-artifact@v2
       with:
@@ -68,9 +76,19 @@ jobs:
         path: test/WordleGS-HTML
         retention-days: 7
 
+    - name: Check main branch coverage
+      if: github.event_name == 'pull_request'
+      working-directory: test
+      run: |
+        mv lcov.info lcov_pr.info
+        git fetch
+        git checkout origin/${{ github.event.pull_request.base.ref }}
+        make lcov
+        mv lcov.info lcov_main.info
+
     - name: Comment with Coverage
       if: github.event_name == 'pull_request'
-      uses: romeovs/lcov-reporter-action@v0.2.17
+      uses: romeovs/lcov-reporter-action@v0.3.1
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        lcov-file: test/lcov.info
+        lcov-file: test/lcov_pr.info
+        lcov-base: test/lcov_main.info
