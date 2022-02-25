@@ -34,10 +34,12 @@ void GameSequence_NextRound(void);
 void GameSequence_UpdateFinished(void);
 void GameSequence_Destroy(void);
 
+
 /* Game Methods */
 
 void GameSequence_GetSequenceCode(char code_word[]);
 unsigned int GameSequence_GetSequenceIndex(void);
 unsigned int GameSequence_GetSequenceValue(void);
+
 
 #endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_sequence_ */

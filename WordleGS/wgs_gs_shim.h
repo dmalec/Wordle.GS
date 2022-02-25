@@ -34,4 +34,5 @@ void GsShim_ShowProgressDialog(void);
 void GsShim_UpdateProgressDialog(unsigned int mercury_value, unsigned int mercury_scale);
 void GsShim_HideProgressDialog(void);
 
+
 #endif /* define _GUARD_PROJECTWordleGS_FILEwgs_gs_shim_ */

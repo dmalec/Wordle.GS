@@ -37,6 +37,7 @@
 #define WGS_GAME_GUESSES_NUMBER_OF_ROWS                6
 #define WGS_GAME_GUESSES_NUMBER_OF_COLS                5
 
+
 /* Enums */
 
 typedef enum {

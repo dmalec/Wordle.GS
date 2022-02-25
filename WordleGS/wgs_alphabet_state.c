@@ -24,6 +24,7 @@
 
 #include "wgs_alphabet_state.h"
 
+
 /* Constants */
 
 #define WGS_NUMBER_OF_KEY_ROWS              3
@@ -36,7 +37,6 @@
 #define WGS_SCREEN_HEIGHT                  200
 
 #define WGS_SCREEN_MIDDLE                  (WGS_SCREEN_WIDTH / 2)
-
 
 #define WGS_KEYBOARD_WIDTH                 (WGS_NUMBER_OF_KEY_COLUMNS * WGS_LETTER_KEY_SQUARE_SIZE)
 #define WGS_KEYBOARD_LEFT                  (WGS_SCREEN_MIDDLE - (WGS_KEYBOARD_WIDTH / 2))

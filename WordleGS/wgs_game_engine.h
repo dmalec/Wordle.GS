@@ -48,4 +48,5 @@ void GameEngine_GetSecretWord(char *word);
 
 int GameEngine_GetWinStat(int guess_num);
 
+
 #endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_engine_ */

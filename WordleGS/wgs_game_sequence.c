@@ -28,12 +28,14 @@
 #include "wgs_gs_shim.h"
 #include "wgs_utils.h"
 
+
 /* State */
 
 static Handle wgs_game_sequence_memory = NULL;
 static unsigned int wgs_game_sequence_size = 0;
 static unsigned int wgs_game_sequence_index = 0;
 static char  wgs_game_sequence_code_word[] = "     ";
+
 
 /* Lifecycle Methods */
 
@@ -99,6 +101,7 @@ void GameSequence_Destroy(void) {
     DisposeHandle(wgs_game_sequence_memory);
   }
 }
+
 
 /* Game Methods */
 
