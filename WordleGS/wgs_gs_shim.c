@@ -33,12 +33,13 @@
 #include "main.h"
 #include "wgs_gs_shim.h"
 
+
 /* State */
 
 static GrafPortPtr wgs_shim_progress_dialog_ptr;
 
-/* Methods */
 
+/* Methods */
 
 void GsShim_LoadFile(char *c_str_file_name, Handle *file_handle, LongWord *file_length) {
   BOOLEAN success = TRUE;

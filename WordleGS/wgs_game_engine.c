@@ -31,7 +31,6 @@
 #include "wgs_utils.h"
 
 
-
 /* State */
 
 static wgs_game_state wgs_game_engine_game_state;

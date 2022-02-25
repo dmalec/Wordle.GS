@@ -29,7 +29,6 @@
 
 /* Constants */
 
-
 #define WGS_LETTER_GUESS_SQUARE_SIZE        20
 #define WGS_LETTER_GUESS_SQUARE_INSET        2
 
@@ -40,7 +39,6 @@
 #define WGS_GUESS_WIDTH                    (WGS_GAME_GUESSES_NUMBER_OF_COLS * WGS_LETTER_GUESS_SQUARE_SIZE)
 #define WGS_GUESS_LEFT                     (WGS_SCREEN_MIDDLE - (WGS_GUESS_WIDTH / 2))
 #define WGS_LETTER_GUESS_SQUARE_TOP         25
-
 
 
 /* State */
