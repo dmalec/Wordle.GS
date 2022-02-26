@@ -83,6 +83,7 @@ jobs:
         mv lcov.info lcov_pr.info
         git fetch
         git checkout origin/${{ github.event.pull_request.base.ref }}
+        make clean
         make lcov
         mv lcov.info lcov_main.info
 

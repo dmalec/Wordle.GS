@@ -22,31 +22,31 @@
  * SOFTWARE.
  */
 
-#ifndef _GUARD_PROJECTWordleGS_FILEwgs_game_engine_
-#define _GUARD_PROJECTWordleGS_FILEwgs_game_engine_
+#ifndef _GUARD_PROJECTWordleGS_FILEwgs_scoring_
+#define _GUARD_PROJECTWordleGS_FILEwgs_scoring_
 
 #include "wgs_game_types.h"
 
 
 /* Lifecycle Methods */
 
-void GameEngine_Create(void);
-void GameEngine_NewGame(char code[]);
-void GameEngine_NextRound(void);
-void GameEngine_UpdateFinished(void);
-void GameEngine_Destroy(void);
+void Scoring_Create(void);
 
 
 /* Game Methods */
 
-wgs_game_state GameEngine_GetGameState(void);
-BOOLEAN GameEngine_IsGameInProgress(void);
+int Scoring_GradeWord(char *guess, char *secret, wgs_letter_status *status);
 
-wgs_guess_status GameEngine_GuessCurrentWord(void);
+void Scoring_RecordWin(int guess_num);
+void Scoring_RecordLoss(void);
 
-void GameEngine_GetSecretWord(char *word);
+int Scoring_GetMaxGuessDistribution(void);
+int Scoring_GetGuessDistributionAbsolute(int guess_num);
+float Scoring_GetGuessDistributionPercentage(int guess_num);
 
-wgs_game_stats GameEngine_GetStats(void);
+int Scoring_GetTotalPlayed(void);
+int Scoring_GetWinPercentage(void);
+int Scoring_GetCurrentStreak(void);
+int Scoring_GetLongestStreak(void);
 
-
-#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_engine_ */
+#endif /* define _GUARD_PROJECTWordleGS_FILEwgs_scoring_ */

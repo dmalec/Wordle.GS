@@ -48,7 +48,7 @@ static LongWord sequence_length = 2;
 
 static char sequence_code[] = "TESTS";
 
-void setupFileMocks(void) {
+static void setupFileMocks(void) {
   int user_id = 42;
 
   mock()
@@ -93,10 +93,6 @@ TEST_GROUP(GameEngine_Creation) {
 
 TEST(GameEngine_Creation, Create) {
   GameEngine_Create();
-
-  for (int guess_num=0; guess_num<WGS_GAME_ENGINE_MAX_GUESSES; guess_num++) {
-    LONGS_EQUAL_TEXT(0, GameEngine_GetWinStat(guess_num), "All win stats should start at zero");
-  }
 
   ENUMS_EQUAL_INT_TEXT(InProgress, GameEngine_GetGameState(), "Game should start in 'InProgress'");
 }
