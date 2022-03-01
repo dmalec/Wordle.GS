@@ -103,3 +103,13 @@ TEST(Scoring, GetLongestStreak) {
   Scoring_RecordWin(2);
   LONGS_EQUAL_TEXT(3, Scoring_GetLongestStreak(), "Longest streak updates after a longer streak");
 }
+
+TEST(Scoring, GetTotalPlayed) {
+  LONGS_EQUAL_TEXT(0, Scoring_GetTotalPlayed(), "Total played starts at zero");
+
+  Scoring_RecordWin(2);
+  LONGS_EQUAL_TEXT(1, Scoring_GetTotalPlayed(), "Total played increments after a win");
+
+  Scoring_RecordLoss();
+  LONGS_EQUAL_TEXT(2, Scoring_GetTotalPlayed(), "Total played increments after a loss");
+}

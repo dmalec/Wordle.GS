@@ -169,7 +169,3 @@ wgs_game_stats GameEngine_GetStats(void) {
 
   return game_stats;
 }
-
-int GameEngine_GetWinStat(int guess_num) {
-  return Scoring_GetGuessDistributionAbsolute(guess_num);
-}
