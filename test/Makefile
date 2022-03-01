@@ -30,6 +30,7 @@ SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_dictionary.c
 SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_game_engine.c
 SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_game_sequence.c
 SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_guess_state.c
+SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_scoring.c
 SRC_FILES += $(PROJECT_HOME_DIR)/WordleGS/wgs_utils.c
 
 TEST_SRC_DIRS += tests

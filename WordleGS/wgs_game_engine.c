@@ -28,6 +28,7 @@
 #include "wgs_dictionary.h"
 #include "wgs_game_sequence.h"
 #include "wgs_guess_state.h"
+#include "wgs_scoring.h"
 #include "wgs_utils.h"
 
 
@@ -35,30 +36,22 @@
 
 static wgs_game_state wgs_game_engine_game_state;
 
-static int wgs_game_engine_win_stats[WGS_GAME_ENGINE_MAX_GUESSES];
-
 static char wgs_game_engine_secret_word[6] = "ROBOT";
 
 
 /* Local Prototypes */
 
-int GameEngine_GradeWord(char *guess, char *secret, wgs_letter_status *status);
 void GameEngine_NewSecretWord(char *word);
 
 
 /* Lifecycle Methods */
 
 void GameEngine_Create(void) {
-  int guess_num;
-
-  for (guess_num=0; guess_num<WGS_GAME_ENGINE_MAX_GUESSES; guess_num++) {
-    wgs_game_engine_win_stats[guess_num] = 0;
-  }
-
   AlphabetState_Create();
   Dictionary_Create();
   GameSequence_Create(Dictionary_GetNumberOfSecretWords());
   GuessState_Create();
+  Scoring_Create();
 }
 
 void GameEngine_NewGame(char code_word[]) {
@@ -135,7 +128,7 @@ wgs_guess_status GameEngine_GuessCurrentWord(void) {
   GuessState_GetGuessWord(guess_word);
   if (!Dictionary_IsValidGuess(guess_word)) return InvalidWord;
 
-  matches = GameEngine_GradeWord(guess_word, wgs_game_engine_secret_word, guess_grade);
+  matches = Scoring_GradeWord(guess_word, wgs_game_engine_secret_word, guess_grade);
   for (i=0; i<5; i++) {
     GuessState_MaybeUpdateLetterStatus(i, guess_grade[i]);
     AlphabetState_MaybeUpdateLetterStatus(guess_word[i], guess_grade[i]);
@@ -143,9 +136,10 @@ wgs_guess_status GameEngine_GuessCurrentWord(void) {
 
   if (matches >= 5) {
     wgs_game_engine_game_state = Won;
-    wgs_game_engine_win_stats[current_guess_row]++;
+    Scoring_RecordWin(current_guess_row);
   } else if (current_guess_row >= 5) {
     wgs_game_engine_game_state = Lost;
+    Scoring_RecordLoss();
   } else {
     GuessState_NextGuess();
   }
@@ -153,52 +147,25 @@ wgs_guess_status GameEngine_GuessCurrentWord(void) {
   return ValidGuess;
 }
 
-int GameEngine_GradeWord(char *guess, char *secret, wgs_letter_status *status) {
-  int i;
-  char tmp_secret[5];
-  int matches = 0;
-
-  /*
-     Mark perfect matches in advance. This will help with marking non-matching
-     letters later. Specifically, it helps avoid marking a letter as misplaced
-     when all occurences of the letter in the secret word have already been
-     accounted for.
-  */
-
-  for (i=0; i<5; i++) {
-    if (guess[i] == secret[i]) {
-      tmp_secret[i] = '+';
-    } else {
-      tmp_secret[i] = secret[i];
-    }
-  }
-
-  for (i=0; i<5; i++) {
-    if (tmp_secret[i] == '+') {
-      status[i] = gtCorrectLetter;
-      matches++;
-    } else {
-      char *letter_location = Utils_StringNFindChar(tmp_secret, 5, guess[i]);
-
-      if (letter_location != NULL) {
-        status[i] = gtWrongPlaceLetter;
-
-        // Clear the letter, so it won't be double counted
-        // if it appears again in the guess.
-        *letter_location = ' ';
-      } else {
-        status[i] = gtIncorrectLetter;
-      }
-    }
-  }
-
-  return matches;
-}
-
 void GameEngine_GetSecretWord(char *word) {
   Utils_StringNCopy(word, wgs_game_engine_secret_word, 5);
 }
 
-int GameEngine_GetWinStat(int guess_num) {
-  return wgs_game_engine_win_stats[guess_num];
+wgs_game_stats GameEngine_GetStats(void) {
+  int guess_num;
+  wgs_game_stats game_stats;
+
+  game_stats.guess_max_distribution = Scoring_GetMaxGuessDistribution();
+
+  for (guess_num=0; guess_num<WGS_GAME_ENGINE_MAX_GUESSES; guess_num++) {
+    game_stats.guess_distribution[guess_num] = Scoring_GetGuessDistributionAbsolute(guess_num);
+    game_stats.guess_distribution_percentage[guess_num] = Scoring_GetGuessDistributionPercentage(guess_num);
+  }
+
+  game_stats.total_played = Scoring_GetTotalPlayed();
+  game_stats.win_percentage = Scoring_GetWinPercentage();
+  game_stats.current_streak = Scoring_GetCurrentStreak();
+  game_stats.longest_streak = Scoring_GetLongestStreak();
+
+  return game_stats;
 }

@@ -29,6 +29,7 @@ extern "C" {
 #include "wgs_game_engine.h"
 #include "wgs_guess_state.h"
 #include "wgs_dictionary.h"
+#include "wgs_scoring.h"
 }
 
 static char dictionary_memory[] = "BABELCRAMSROOTS";
@@ -48,7 +49,7 @@ static LongWord sequence_length = 2;
 
 static char sequence_code[] = "TESTS";
 
-void setupFileMocks(void) {
+static void setupFileMocks(void) {
   int user_id = 42;
 
   mock()
@@ -93,10 +94,6 @@ TEST_GROUP(GameEngine_Creation) {
 
 TEST(GameEngine_Creation, Create) {
   GameEngine_Create();
-
-  for (int guess_num=0; guess_num<WGS_GAME_ENGINE_MAX_GUESSES; guess_num++) {
-    LONGS_EQUAL_TEXT(0, GameEngine_GetWinStat(guess_num), "All win stats should start at zero");
-  }
 
   ENUMS_EQUAL_INT_TEXT(InProgress, GameEngine_GetGameState(), "Game should start in 'InProgress'");
 }
@@ -233,4 +230,20 @@ TEST(GameEngine, GetSecretWord) {
 
   GameEngine_GetSecretWord(actual_secret_word);
   STRNCMP_EQUAL_TEXT(expected_secret_word, actual_secret_word, 5, "Secret word should be returned unchanged");
+}
+
+TEST(GameEngine, GetStats) {
+  wgs_game_stats game_stats = GameEngine_GetStats();
+
+  LONGS_EQUAL_TEXT(Scoring_GetMaxGuessDistribution(), game_stats.guess_max_distribution, "Max distribution is passed through correctly");
+
+  for (int guess_num=0; guess_num<WGS_GAME_ENGINE_MAX_GUESSES; guess_num++) {
+    LONGS_EQUAL_TEXT(Scoring_GetGuessDistributionAbsolute(guess_num), game_stats.guess_distribution[guess_num], "Absolute distirbution is passed through correctly");
+    DOUBLES_EQUAL_TEXT(Scoring_GetGuessDistributionPercentage(guess_num), game_stats.guess_distribution_percentage[guess_num], 0.001, "Percentage distribution is passed through correctly");
+  }
+
+  LONGS_EQUAL_TEXT(Scoring_GetTotalPlayed(), game_stats.total_played, "Total played is passed through correctly");
+  LONGS_EQUAL_TEXT(Scoring_GetWinPercentage(), game_stats.win_percentage, "TotalWin percentage is passed through correctly");
+  LONGS_EQUAL_TEXT(Scoring_GetCurrentStreak(), game_stats.current_streak, "Current streak is passed through correctly");
+  LONGS_EQUAL_TEXT(Scoring_GetLongestStreak(), game_stats.longest_streak, "Longest streak is passed through correctly");
 }

@@ -16,6 +16,7 @@
 		3636743827AB8AE800582831 /* wgs_game_engine.c in Sources */ = {isa = PBXBuildFile; fileRef = 3636743727AB8AE800582831 /* wgs_game_engine.c */; };
 		3636744B27ACAE9500582831 /* wgs_alphabet_state.c in Sources */ = {isa = PBXBuildFile; fileRef = 3636744A27ACAE9500582831 /* wgs_alphabet_state.c */; };
 		3636747D27AD4AFC00582831 /* wgs_guess_state.c in Sources */ = {isa = PBXBuildFile; fileRef = 3636747C27AD4AFC00582831 /* wgs_guess_state.c */; };
+		3645410027CA7C0D00123B5C /* wgs_scoring.c in Sources */ = {isa = PBXBuildFile; fileRef = 364540FF27CA7C0D00123B5C /* wgs_scoring.c */; };
 		3669C9C627B356B400FC0D8A /* wgs_gs_shim.c in Sources */ = {isa = PBXBuildFile; fileRef = 3669C9C527B356B400FC0D8A /* wgs_gs_shim.c */; };
 		3669C9F027B48F2400FC0D8A /* wgs_game_sequence.c in Sources */ = {isa = PBXBuildFile; fileRef = 3669C9EF27B48F2400FC0D8A /* wgs_game_sequence.c */; };
 		3669CA1E27B6891D00FC0D8A /* wgs_new_game_dialog.c in Sources */ = {isa = PBXBuildFile; fileRef = 3669CA1D27B6891D00FC0D8A /* wgs_new_game_dialog.c */; };
@@ -84,6 +85,8 @@
 		3636745027ACAF2300582831 /* wgs_game_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_game_types.h; sourceTree = "<group>"; };
 		3636747B27AD4AFC00582831 /* wgs_guess_state.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_guess_state.h; sourceTree = "<group>"; };
 		3636747C27AD4AFC00582831 /* wgs_guess_state.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wgs_guess_state.c; sourceTree = "<group>"; };
+		364540FE27CA7C0D00123B5C /* wgs_scoring.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_scoring.h; sourceTree = "<group>"; };
+		364540FF27CA7C0D00123B5C /* wgs_scoring.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wgs_scoring.c; sourceTree = "<group>"; };
 		3669C9C427B356B400FC0D8A /* wgs_gs_shim.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_gs_shim.h; sourceTree = "<group>"; };
 		3669C9C527B356B400FC0D8A /* wgs_gs_shim.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wgs_gs_shim.c; sourceTree = "<group>"; };
 		3669C9EE27B48F2400FC0D8A /* wgs_game_sequence.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wgs_game_sequence.h; sourceTree = "<group>"; };
@@ -163,6 +166,8 @@
 				3636747C27AD4AFC00582831 /* wgs_guess_state.c */,
 				3669C9C427B356B400FC0D8A /* wgs_gs_shim.h */,
 				3669C9C527B356B400FC0D8A /* wgs_gs_shim.c */,
+				364540FE27CA7C0D00123B5C /* wgs_scoring.h */,
+				364540FF27CA7C0D00123B5C /* wgs_scoring.c */,
 			);
 			name = "Game Engine";
 			sourceTree = "<group>";
@@ -381,6 +386,7 @@
 				3636743827AB8AE800582831 /* wgs_game_engine.c in Sources */,
 				3630F8D727A5B2F60018042C /* wgs_render_system.c in Sources */,
 				3630F8D527A5B2F60018042C /* wgs_game_over_dialog.c in Sources */,
+				3645410027CA7C0D00123B5C /* wgs_scoring.c in Sources */,
 				3636744B27ACAE9500582831 /* wgs_alphabet_state.c in Sources */,
 				3669CA1E27B6891D00FC0D8A /* wgs_new_game_dialog.c in Sources */,
 				3630F8D327A5B2F60018042C /* wgs_app_window.c in Sources */,

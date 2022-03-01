@@ -71,5 +71,14 @@ typedef struct wgs_letter_state {
   BOOLEAN changed;
 } wgs_letter_state;
 
+typedef struct wgs_game_stats {
+  int guess_max_distribution;
+  int guess_distribution[WGS_GAME_ENGINE_MAX_GUESSES];
+  float guess_distribution_percentage[WGS_GAME_ENGINE_MAX_GUESSES];
+  int total_played;
+  int win_percentage;
+  int current_streak;
+  int longest_streak;
+} wgs_game_stats;
 
 #endif /* define _GUARD_PROJECTWordleGS_FILEwgs_game_types_ */

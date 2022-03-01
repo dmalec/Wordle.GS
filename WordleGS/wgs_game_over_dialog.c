@@ -23,8 +23,10 @@
  */
 
 #include <control.h>
+#include <font.h>
 #include <quickdraw.h>
 #include <resources.h>
+#include <types.h>
 #include <window.h>
 
 #include "main.h"
@@ -32,124 +34,169 @@
 #include "wgs_game_over_dialog.h"
 #include "wgs_share_game_dialog.h"
 
-GrafPortPtr game_over_dialog_ptr;
 
-void GameOverDialogDrawContents (void) {
+/* Constants */
+
+#define DIALOG_WIDTH                  280
+#define DIALOG_HEIGHT                 157
+
+#define DIALOG_H_CENTER               (DIALOG_WIDTH / 2)
+
+#define STATS_H                       (DIALOG_H_CENTER + 8)
+
+#define THERMOMETER_H                 18
+#define THERMOMETER_WIDTH             (DIALOG_H_CENTER - 8 - THERMOMETER_H)
+
+
+/* Structs */
+
+typedef struct wgs_game_over_dialog_guess_thermometer {
+  Point guess_number_point;
+  Rect thermometer_outline;
+  Rect thermometer_fill_perimeter;
+  Rect thermometer_fill_inside;
+  Point guess_value_point;
+} wgs_game_over_dialog_guess_thermometer;
+
+
+/* State */
+
+GrafPortPtr game_over_dialog_ptr;
+static wgs_game_over_dialog_guess_thermometer guess_distribution[6];
+
+
+/* Methods */
+
+void GameOverDialog_DrawInt(int val) {
+  char buffer[32];
+
+  sprintf(buffer, "%d", val);
+  DrawCString(buffer);
+}
+
+void GameOverDialog_BuildGuessDistribution(wgs_game_stats game_stats) {
+  int guess_number;
+  int base_line;
+  int fill_line;
+
+  for (guess_number=0; guess_number<6; guess_number++) {
+    base_line = 50 + guess_number * 14;
+
+    if (game_stats.guess_distribution[guess_number] == 0) {
+      fill_line = 0;
+    } else {
+      fill_line = (THERMOMETER_WIDTH - 10) * game_stats.guess_distribution_percentage[guess_number] - 2;
+    }
+
+    SetPt(&guess_distribution[guess_number].guess_number_point, THERMOMETER_H - 10, base_line);
+    SetPt(&guess_distribution[guess_number].guess_value_point, THERMOMETER_H + 2 + fill_line, base_line);
+    SetRect(&guess_distribution[guess_number].thermometer_outline, THERMOMETER_H, base_line - 10, THERMOMETER_H + THERMOMETER_WIDTH, base_line + 3);
+    SetRect(&guess_distribution[guess_number].thermometer_fill_perimeter, THERMOMETER_H + 1, base_line - 9, THERMOMETER_H + 11 + fill_line, base_line + 2);
+    SetRect(&guess_distribution[guess_number].thermometer_fill_inside, THERMOMETER_H + 2, base_line - 8, THERMOMETER_H + 10 + fill_line, base_line + 1);
+  }
+}
+
+void GameOverDialogDrawContents(void) {
   char buffer[128];
   char secret_word[] = "     ";
-  int i, h, offset;
-  int max_wins = 0;
-  int stat;
+  int i;
+  int title_width;
   Rect r;
+  wgs_game_stats game_stats;
+  FontID font_id;
 
-  // Erase Background
-  GetPortRect(&r);
-  SetSolidPenPat(15);
-  PaintRect(&r);
+  game_stats = GameEngine_GetStats();
+  GameOverDialog_BuildGuessDistribution(game_stats);
+  GameEngine_GetSecretWord(secret_word);
 
+  /* Draw labels and lines in black on white */
   SetForeColor(0);
+  SetSolidPenPat(0);
   SetBackColor(15);
-  
+
+  /* Draw banner text */
   if (GameEngine_GetGameState() == Won) {
-    MoveTo(8, 10);
-    DrawCString("Congratulations!\0");
-    MoveTo(8, 28);
-    DrawCString("You guessed the word!\0");
+    sprintf(buffer, "You successfully guessed %s", secret_word);
   } else if (GameEngine_GetGameState() == Lost) {
-    MoveTo(8, 10);
-    DrawCString("The word was:\0");
-    MoveTo(8, 28);
-    GameEngine_GetSecretWord(secret_word);
-    DrawCString(secret_word);
+    sprintf(buffer, "The word was actually: %s", secret_word);
   } else {
     char code_word[] = "     ";
 
-    MoveTo(8, 10);
-    DrawCString("WORDLE GS!\0");
-
     GameSequence_GetSequenceCode(code_word);
-    sprintf(buffer, "%s  %d  %d/6", code_word, GameSequence_GetSequenceIndex(), GuessState_GetRow() + 1);
-
-    MoveTo(8, 28);
-    DrawCString(buffer);
+    sprintf(buffer, "Code: %s   Word: %d   Guess: %d/6", code_word, GameSequence_GetSequenceIndex(), GuessState_GetRow() + 1);
   }
-  
+  title_width = CStringWidth(buffer);
+  MoveTo(DIALOG_H_CENTER - (title_width / 2), 10);
+  DrawCString(buffer);
+
+  /* Draw section headers */
+
+  /* switch to bold */
+  font_id.fidLong = FMGetCurFID();
+  font_id.fidRec.fontStyle = font_id.fidRec.fontStyle | 0x1;
+  InstallFont(font_id, 0);
+
+  MoveTo(THERMOMETER_H, 34);
+  DrawCString("Distribution");
+
+  MoveTo(180, 34);
+  DrawCString("Stats");
+
+  /* switch to plain */
+  font_id.fidLong = FMGetCurFID();
+  font_id.fidRec.fontStyle = font_id.fidRec.fontStyle & 0xE;
+  InstallFont(font_id, 0);
+
+  /* Draw horizontal divider */
+  MoveTo(DIALOG_H_CENTER, 40);
+  LineTo(DIALOG_H_CENTER, 123);
+
+  /* Draw stats */
+  MoveTo(STATS_H, 64);
+  sprintf(buffer, "Played: %d", game_stats.total_played);
+  DrawCString(buffer);
+
+  MoveTo(STATS_H, 78);
+  sprintf(buffer, "Win %%: %d", game_stats.win_percentage);
+  DrawCString(buffer);
+
+  MoveTo(STATS_H, 92);
+  sprintf(buffer, "Streak: %d", game_stats.current_streak);
+  DrawCString(buffer);
+
+  MoveTo(STATS_H, 106);
+  sprintf(buffer, "Max Streak: %d", game_stats.longest_streak);
+  DrawCString(buffer);
+
+  /* Draw distribution labels */
   for (i=0; i<6; i++) {
-    sprintf(buffer, "%d", i+1);
-    MoveTo(8, 50 + i * 14);
-    DrawCString(buffer);
-
-    stat = GameEngine_GetWinStat(i);
-    if (stat > max_wins) {
-      max_wins = stat;
-    }
+    MoveTo(guess_distribution[i].guess_number_point.h, guess_distribution[i].guess_number_point.v);
+    GameOverDialog_DrawInt(i+1);
   }
 
-  SetSolidPenPat(0);
-
+  /* Draw outline of thermometers */
   for (i=0; i<6; i++) {
-    r.h1 = 18;
-    r.v1 = 50 + i * 14 - 10;
-
-    r.h2 = r.h1 + 240;
-    r.v2 = r.v1 + 13;
-
-    FrameRect(&r);
+    FrameRect(&guess_distribution[i].thermometer_outline);
   }
 
-  SetSolidPenPat(10); // greem
-
+  /* Draw outline of thermometer fill in light green */
+  SetSolidPenPat(10);
   for (i=0; i<6; i++) {
-    stat = GameEngine_GetWinStat(i);
-    if (stat == 0) {
-      offset = 0;
-    } else {
-      offset = 230 * ((float)stat / (float)max_wins) - 2;
-    }
-
-    r.h1 = 19;
-    r.v1 = 50 + i * 14 - 9;
-
-    r.h2 = r.h1 + 10 + offset;
-    r.v2 = r.v1 + 11;
-
-    FrameRect(&r);
+    FrameRect(&guess_distribution[i].thermometer_fill_perimeter);
   }
 
+  /* Draw interior of thermometer fill in dark green */
   SetSolidPenPat(5);
-
   for (i=0; i<6; i++) {
-    stat = GameEngine_GetWinStat(i);
-    if (stat == 0) {
-      offset = 0;
-    } else {
-      offset = 230 * ((float)stat / (float)max_wins) - 2;
-    }
-    
-    r.h1 = 20;
-    r.v1 = 50 + i * 14 - 8;
-
-    r.h2 = r.h1 + 8 + offset;
-    r.v2 = r.v1 + 9;
-
-    PaintRect(&r);
+    PaintRect(&guess_distribution[i].thermometer_fill_inside);
   }
 
+  /* Draw distribution value in white on dark green */
   SetForeColor(15);
   SetBackColor(5);
-
   for (i=0; i<6; i++) {
-    stat = GameEngine_GetWinStat(i);
-    if (stat == 0) {
-      offset = 0;
-    } else {
-      offset = 230 * ((float)stat / (float)max_wins) - 2;
-    }
-    
-    h = 20 + offset;
-    sprintf(buffer, "%d", stat);
-    MoveTo(h, 50 + i * 14);
-    DrawCString(buffer);
+    MoveTo(guess_distribution[i].guess_value_point.h, guess_distribution[i].guess_value_point.v);
+    GameOverDialog_DrawInt(game_stats.guess_distribution[i]);
   }
 
   DrawControls(game_over_dialog_ptr);
