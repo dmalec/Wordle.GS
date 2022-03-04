@@ -22,15 +22,20 @@
  * SOFTWARE.
  */
 
-#include "wgs_game_engine.h"
+#include <memory.h>
 
 #include "wgs_alphabet_state.h"
 #include "wgs_dictionary.h"
 #include "wgs_game_sequence.h"
+#include "wgs_game_engine.h"
 #include "wgs_guess_state.h"
 #include "wgs_scoring.h"
 #include "wgs_utils.h"
 
+
+/* Constants */
+
+#define SAVE_FILENAME         "WordleGS.Save\0"
 
 /* State */
 
@@ -42,6 +47,8 @@ static char wgs_game_engine_secret_word[6] = "ROBOT";
 /* Local Prototypes */
 
 void GameEngine_NewSecretWord(char *word);
+void GameEngine_LoadGame(void);
+void GameEngine_SaveGame(void);
 
 
 /* Lifecycle Methods */
@@ -55,14 +62,20 @@ void GameEngine_Create(void) {
 }
 
 void GameEngine_NewGame(char code_word[]) {
-  if (code_word == NULL) {
+
+  if (code_word != NULL) {
+    GameSequence_NewGame(code_word);
+
+    GameEngine_SaveGame();
+  } else if (GsShim_DoesFileExist(SAVE_FILENAME)) {
+    GameEngine_LoadGame();
+  } else {
     char dict_code_word[6];
 
     Dictionary_GetRandomWord(dict_code_word);
     GameSequence_NewGame(dict_code_word);
 
-  } else {
-    GameSequence_NewGame(code_word);
+    GameEngine_SaveGame();
   }
 
   GameEngine_NextRound();
@@ -97,6 +110,8 @@ void GameEngine_UpdateFinished(void) {
 }
 
 void GameEngine_Destroy(void) {
+  GameEngine_SaveGame();
+
   AlphabetState_Destroy();
   Dictionary_Destroy();
   GameSequence_Destroy();
@@ -168,4 +183,54 @@ wgs_game_stats GameEngine_GetStats(void) {
   game_stats.longest_streak = Scoring_GetLongestStreak();
 
   return game_stats;
+}
+
+void GameEngine_LoadGame(void) {
+  Handle data_handle;
+  LongWord *file_length;
+  char *data;
+
+  GsShim_LoadFile(SAVE_FILENAME, &data_handle, &file_length);
+
+  HLock(data_handle);
+  data = (char *)*data_handle;
+
+  if (Utils_StringNCompare(data, "WGS001", 6)) {
+    data += 6;
+
+    GameSequence_NewGame(data);
+    data += 5;
+
+    GameSequence_SetSequenceIndex(*(unsigned int *)data);
+    data += sizeof(unsigned int);
+
+  }
+
+  HUnlock(data_handle);
+
+  if (data_handle != NULL) {
+    DisposeHandle(data_handle);
+  }
+}
+
+void GameEngine_SaveGame(void) {
+  char buffer[256];
+  char *p = buffer;
+  int i;
+  Pointer data = (Pointer)(&buffer);
+  LongWord bytes = 0;
+
+  Utils_StringNCopy(p, "WGS001", 6);
+  bytes += 6;
+  p += 6;
+
+  GameSequence_GetSequenceCode(p);
+  bytes += 5;
+  p += 5;
+
+  *(unsigned int *)p = GameSequence_GetSequenceIndex() - 1;
+  bytes += sizeof(unsigned int);
+  p += sizeof(unsigned int);
+
+  GsShim_SaveFile(SAVE_FILENAME, data, bytes);
 }

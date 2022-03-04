@@ -39,6 +39,7 @@ void GameSequence_Destroy(void);
 
 void GameSequence_GetSequenceCode(char code_word[]);
 unsigned int GameSequence_GetSequenceIndex(void);
+void GameSequence_SetSequenceIndex(unsigned int sequence_index);
 unsigned int GameSequence_GetSequenceValue(void);
 
 

@@ -105,6 +105,10 @@ TEST_GROUP(GameEngine) {
     setupFileMocks();
     GameEngine_Create();
 
+    mock()
+      .expectNCalls(2, "GsShim_SaveFile")
+      .ignoreOtherParameters();
+
     mock().expectNCalls(2, "HLock").withPointerParameter("handle", sequence_handle);
     mock().expectNCalls(2, "HUnlock").withPointerParameter("handle", sequence_handle);
     mock().expectOneCall("HLock").withPointerParameter("handle", secrets_handle);

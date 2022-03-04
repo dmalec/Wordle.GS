@@ -29,6 +29,7 @@ unsigned int Utils_GetBitmask16(unsigned short bits[]);
 
 /* String utilities */
 
+int Utils_StringNCompare(char *str1, char *str2, unsigned int number_of_chars);
 void Utils_StringNCopy(char *destination, char *source, unsigned int number_of_chars);
 char * Utils_StringNFindChar(char *str, unsigned int number_of_chars, char c);
 

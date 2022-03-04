@@ -28,7 +28,10 @@
 #include <types.h>
 
 
+BOOLEAN GsShim_DoesFileExist(char *c_str_file_name);
 void GsShim_LoadFile(char *c_str_file_name, Handle *file_handle, LongWord *file_length);
+void GsShim_SaveFile(char *c_str_file_name, Pointer data, LongWord bytes);
+
 
 void GsShim_ShowProgressDialog(void);
 void GsShim_UpdateProgressDialog(unsigned int mercury_value, unsigned int mercury_scale);

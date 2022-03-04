@@ -113,6 +113,10 @@ unsigned int GameSequence_GetSequenceIndex(void) {
   return wgs_game_sequence_index;
 }
 
+void GameSequence_SetSequenceIndex(unsigned int sequence_index) {
+  wgs_game_sequence_index = sequence_index;
+}
+
 unsigned int GameSequence_GetSequenceValue(void) {
   unsigned int result = 0;
   unsigned int *data;

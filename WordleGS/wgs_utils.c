@@ -44,6 +44,18 @@ unsigned int Utils_GetBitmask16(unsigned short bits[]) {
   return result;
 }
 
+int Utils_StringNCompare(char *str1, char *str2, unsigned int number_of_chars) {
+  unsigned int i;
+
+  for (i=0; i<number_of_chars; i++) {
+    if (str1[i] != str2[i]) {
+      return str1[i] - str2[i];
+    } else if (str1[i] == NULL) {
+      return NULL;
+    }
+  }
+}
+
 void Utils_StringNCopy(char *destination, char *source, unsigned int number_of_chars) {
   unsigned int i;
   BOOLEAN fill_null = FALSE;

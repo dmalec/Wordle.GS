@@ -41,6 +41,26 @@ static GrafPortPtr wgs_shim_progress_dialog_ptr;
 
 /* Methods */
 
+BOOLEAN GsShim_DoesFileExist(char *c_str_file_name) {
+  FileInfoRecGS file_info_rec;
+  GSString255 file_name;
+
+  file_name.length = 0;
+  while (file_name.length < 255 && c_str_file_name[file_name.length] != '\0') {
+    file_name.text[file_name.length] = c_str_file_name[file_name.length];
+    file_name.length++;
+  }
+
+  file_info_rec.pCount = 2;
+  file_info_rec.pathname = &file_name;
+  GetFileInfoGS(&file_info_rec);
+  if (toolerror() == 0) {
+    return TRUE;
+  } else {
+    return FALSE;
+  }
+}
+
 void GsShim_LoadFile(char *c_str_file_name, Handle *file_handle, LongWord *file_length) {
   BOOLEAN success = TRUE;
   OpenRecGS open_file_rec;
@@ -93,6 +113,59 @@ void GsShim_LoadFile(char *c_str_file_name, Handle *file_handle, LongWord *file_
   CloseGS(&close_file_rev);
 
   HUnlock(file_contents);
+}
+
+void GsShim_SaveFile(char *c_str_file_name, Pointer data, LongWord bytes) {
+  CreateRecGS create_file_rec;
+  IORecGS write_file_rec;
+  NameRecGS destroy_file_rec;
+  OpenRecGS open_file_rec;
+  RefNumRecGS close_file_rec;
+  GSString255 file_name;
+
+  file_name.length = 0;
+  while (file_name.length < 255 && c_str_file_name[file_name.length] != '\0') {
+    file_name.text[file_name.length] = c_str_file_name[file_name.length];
+    file_name.length++;
+  }
+
+  destroy_file_rec.pCount = 1;
+  destroy_file_rec.pathname = &file_name;
+  DestroyGS(&destroy_file_rec);
+
+  create_file_rec.pCount = 5;
+  create_file_rec.pathname = &file_name;
+  create_file_rec.access = 0x00C3;
+  create_file_rec.fileType = 0x0004;
+  create_file_rec.auxType = 0;
+  create_file_rec.storageType = 1;
+  CreateGS(&create_file_rec);
+  if (toolerror() != 0) {
+    SysBeep(); //FlagError(4, toolerror());
+    return;
+  }
+
+  open_file_rec.pCount = 3;
+  open_file_rec.pathname = &file_name;
+  open_file_rec.requestAccess = 2;
+  OpenGS(&open_file_rec);
+  if (toolerror() != 0) {
+    SysBeep(); //FlagError(4, toolerror());
+    return;
+  }
+
+  write_file_rec.pCount = 4;
+  write_file_rec.refNum = open_file_rec.refNum;
+  write_file_rec.dataBuffer = data;
+  write_file_rec.requestCount = bytes;
+  WriteGS(&write_file_rec);
+  if (toolerror() != 0) {
+    SysBeep(); //FlagError(4, toolerror());
+  }
+
+  close_file_rec.pCount = 1;
+  close_file_rec.refNum = open_file_rec.refNum;
+  CloseGS(&close_file_rec);
 }
 
 void GsShim_ShowProgressDialog(void) {
