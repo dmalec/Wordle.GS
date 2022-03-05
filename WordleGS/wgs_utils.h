@@ -41,5 +41,7 @@ int Utils_HydrateIntAndAdvancePointer(char **data);
 void Utils_DehydrateFloatAndAdvancePointer(char **data, float value);
 float Utils_HydrateFloatAndAdvancePointer(char **data);
 
+void Utils_DehydrateStringAndAdvancePointer(char **data, char *str, unsigned int number_of_chars);
+void Utils_HydrateStringAndAdvancePointer(char **data, char *str, unsigned int number_of_chars);
 
 #endif /* define _GUARD_PROJECTWordleGS_FILEwgs_utils_ */

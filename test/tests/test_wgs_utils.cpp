@@ -118,3 +118,29 @@ TEST(Utils, HydrateFloatAndAdvancePointer) {
 
   POINTERS_EQUAL_TEXT((char *)&buffer + sizeof(float) * 2, data, "Pointer advanced as expected");
 }
+
+TEST(Utils, DehydrateStringAndAdvancePointer) {
+  char buffer[256];
+  char *data = (char *)&buffer;
+
+  Utils_DehydrateStringAndAdvancePointer(&data, "HELLO", 5);
+  Utils_DehydrateStringAndAdvancePointer(&data, "WORLD", 5);
+
+  POINTERS_EQUAL_TEXT((char *)&buffer + 10, data, "Pointer advanced as expected");
+
+  STRNCMP_EQUAL_TEXT("HELLOWORLD", buffer, 10, "Values written as expected");
+}
+
+TEST(Utils, HydrateStringAndAdvancePointer) {
+  char buffer[] = "HELLOWORLD";
+  char str[256];
+  char *data = (char *)&buffer;
+
+  Utils_HydrateStringAndAdvancePointer(&data, str, 5);
+  STRNCMP_EQUAL_TEXT("HELLO", str, 5, "First value read as expected");
+
+  Utils_HydrateStringAndAdvancePointer(&data, str, 5);
+  STRNCMP_EQUAL_TEXT("WORLD", str, 5, "Second value read as expected");
+
+  POINTERS_EQUAL_TEXT((char *)&buffer + 10, data, "Pointer advanced as expected");
+}

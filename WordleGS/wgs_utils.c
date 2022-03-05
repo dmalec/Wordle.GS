@@ -117,3 +117,15 @@ float Utils_HydrateFloatAndAdvancePointer(char **data) {
 
   return value;
 }
+
+void Utils_DehydrateStringAndAdvancePointer(char **data, char *str, unsigned int number_of_chars) {
+  Utils_StringNCopy(*data, str, number_of_chars);
+
+  *data = *data + number_of_chars;
+}
+
+void Utils_HydrateStringAndAdvancePointer(char **data, char *str, unsigned int number_of_chars) {
+  Utils_StringNCopy(str, *data, number_of_chars);
+
+  *data = *data + number_of_chars;
+}
