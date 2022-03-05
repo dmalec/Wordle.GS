@@ -55,6 +55,35 @@ void Scoring_Create(void) {
   }
 }
 
+void Scoring_Dehydrate(char **data) {
+  int guess_num;
+
+  Utils_DehydrateIntAndAdvancePointer(data, wgs_scoring_win_count);
+  Utils_DehydrateIntAndAdvancePointer(data, wgs_scoring_loss_count);
+  Utils_DehydrateIntAndAdvancePointer(data, wgs_scoring_current_streak);
+  Utils_DehydrateIntAndAdvancePointer(data, wgs_scoring_longest_streak);
+  Utils_DehydrateIntAndAdvancePointer(data, wgs_scoring_guess_max_distribution);
+
+  for (guess_num=0; guess_num<WGS_GAME_ENGINE_MAX_GUESSES; guess_num++) {
+    Utils_DehydrateIntAndAdvancePointer(data, wgs_scoring_guess_distribution[guess_num]);
+    Utils_DehydrateFloatAndAdvancePointer(data, wgs_scoring_guess_distribution_percentage[guess_num]);
+  }
+}
+
+void Scoring_Hydrate(char **data) {
+  int guess_num;
+
+  wgs_scoring_win_count = Utils_HydrateIntAndAdvancePointer(data);
+  wgs_scoring_loss_count = Utils_HydrateIntAndAdvancePointer(data);
+  wgs_scoring_current_streak = Utils_HydrateIntAndAdvancePointer(data);
+  wgs_scoring_longest_streak = Utils_HydrateIntAndAdvancePointer(data);
+  wgs_scoring_guess_max_distribution = Utils_HydrateIntAndAdvancePointer(data);
+
+  for (guess_num=0; guess_num<WGS_GAME_ENGINE_MAX_GUESSES; guess_num++) {
+    wgs_scoring_guess_distribution[guess_num] = Utils_HydrateIntAndAdvancePointer(data);
+    wgs_scoring_guess_distribution_percentage[guess_num] = Utils_HydrateFloatAndAdvancePointer(data);
+  }
+}
 
 /* Game Methods */
 
@@ -123,6 +152,26 @@ void Scoring_RecordWin(int guess_num) {
 void Scoring_RecordLoss(void) {
   wgs_scoring_loss_count++;
   wgs_scoring_current_streak = 0;
+}
+
+
+wgs_game_stats Scoring_GetStats(void) {
+  int guess_num;
+  wgs_game_stats game_stats;
+
+  game_stats.guess_max_distribution = Scoring_GetMaxGuessDistribution();
+
+  for (guess_num=0; guess_num<WGS_GAME_ENGINE_MAX_GUESSES; guess_num++) {
+    game_stats.guess_distribution[guess_num] = Scoring_GetGuessDistributionAbsolute(guess_num);
+    game_stats.guess_distribution_percentage[guess_num] = Scoring_GetGuessDistributionPercentage(guess_num);
+  }
+
+  game_stats.total_played = Scoring_GetTotalPlayed();
+  game_stats.win_percentage = Scoring_GetWinPercentage();
+  game_stats.current_streak = Scoring_GetCurrentStreak();
+  game_stats.longest_streak = Scoring_GetLongestStreak();
+
+  return game_stats;
 }
 
 int Scoring_GetMaxGuessDistribution(void) {

@@ -31,6 +31,8 @@
 /* Lifecycle Methods */
 
 void Scoring_Create(void);
+void Scoring_Dehydrate(char **data);
+void Scoring_Hydrate(char **data);
 
 
 /* Game Methods */
@@ -39,6 +41,8 @@ int Scoring_GradeWord(char *guess, char *secret, wgs_letter_status *status);
 
 void Scoring_RecordWin(int guess_num);
 void Scoring_RecordLoss(void);
+
+wgs_game_stats Scoring_GetStats(void);
 
 int Scoring_GetMaxGuessDistribution(void);
 int Scoring_GetGuessDistributionAbsolute(int guess_num);

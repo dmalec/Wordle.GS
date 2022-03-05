@@ -113,3 +113,36 @@ TEST(Scoring, GetTotalPlayed) {
   Scoring_RecordLoss();
   LONGS_EQUAL_TEXT(2, Scoring_GetTotalPlayed(), "Total played increments after a loss");
 }
+
+TEST(Scoring, Hydration) {
+  char buffer[256];
+  char *data = (char *)&buffer;
+  wgs_game_stats before, after;
+
+  Scoring_RecordWin(2);
+  Scoring_RecordLoss();
+  Scoring_RecordWin(2);
+  Scoring_RecordWin(3);
+  Scoring_RecordWin(2);
+
+  data = (char *)&buffer;
+  before = Scoring_GetStats();
+  Scoring_Dehydrate(&data);
+
+  Scoring_Create();
+
+  data = (char *)&buffer;
+  Scoring_Hydrate(&data);
+  after = Scoring_GetStats();
+
+  LONGS_EQUAL_TEXT(before.guess_max_distribution, after.guess_max_distribution, "Max distribution is dehydrated/hydrated correctly");
+  LONGS_EQUAL_TEXT(before.total_played, after.total_played, "Total played is dehydrated/hydrated correctly");
+  LONGS_EQUAL_TEXT(before.win_percentage, after.win_percentage, "Win percentage is dehydrated/hydrated correctly");
+  LONGS_EQUAL_TEXT(before.current_streak, after.current_streak, "Current streak is dehydrated/hydrated correctly");
+  LONGS_EQUAL_TEXT(before.longest_streak, after.longest_streak, "Longest streak is dehydrated/hydrated correctly");
+
+  for (int guess_num=0; guess_num<WGS_GAME_ENGINE_MAX_GUESSES; guess_num++) {
+    LONGS_EQUAL_TEXT(before.guess_distribution[guess_num], after.guess_distribution[guess_num], "Absolute distribution is dehydrated/hydrated correctly");
+    DOUBLES_EQUAL_TEXT(before.guess_distribution_percentage[guess_num], after.guess_distribution_percentage[guess_num], 0.001, "Percentage distribution is dehydrated/hydrated correctly");
+  }
+}

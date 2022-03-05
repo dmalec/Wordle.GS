@@ -167,22 +167,7 @@ void GameEngine_GetSecretWord(char *word) {
 }
 
 wgs_game_stats GameEngine_GetStats(void) {
-  int guess_num;
-  wgs_game_stats game_stats;
-
-  game_stats.guess_max_distribution = Scoring_GetMaxGuessDistribution();
-
-  for (guess_num=0; guess_num<WGS_GAME_ENGINE_MAX_GUESSES; guess_num++) {
-    game_stats.guess_distribution[guess_num] = Scoring_GetGuessDistributionAbsolute(guess_num);
-    game_stats.guess_distribution_percentage[guess_num] = Scoring_GetGuessDistributionPercentage(guess_num);
-  }
-
-  game_stats.total_played = Scoring_GetTotalPlayed();
-  game_stats.win_percentage = Scoring_GetWinPercentage();
-  game_stats.current_streak = Scoring_GetCurrentStreak();
-  game_stats.longest_streak = Scoring_GetLongestStreak();
-
-  return game_stats;
+  return Scoring_GetStats();
 }
 
 void GameEngine_LoadGame(void) {
