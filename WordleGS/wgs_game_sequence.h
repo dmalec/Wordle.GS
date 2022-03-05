@@ -34,6 +34,9 @@ void GameSequence_NextRound(void);
 void GameSequence_UpdateFinished(void);
 void GameSequence_Destroy(void);
 
+void GameSequence_Dehydrate(char **data);
+void GameSequence_Hydrate(char **data);
+
 
 /* Game Methods */
 

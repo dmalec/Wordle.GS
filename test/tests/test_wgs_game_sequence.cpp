@@ -121,3 +121,36 @@ TEST(GameSequence, GetSequenceValue) {
 
   UNSIGNED_LONGS_EQUAL_TEXT(sequence_memory[0], GameSequence_GetSequenceValue(), "Sequence value should be as expected");
 }
+
+TEST(GameSequence, Hydration) {
+  char buffer[256];
+  char *data;
+  unsigned int before_sequence_index;
+  char before_sequence_code[5];
+  char after_sequence_code[5];
+
+  GameSequence_NextRound();
+  GameSequence_NextRound();
+  GameSequence_NextRound();
+
+  GameSequence_GetSequenceCode(before_sequence_code);
+  before_sequence_index = GameSequence_GetSequenceIndex();
+
+  data = (char *)&buffer;
+  GameSequence_Dehydrate(&data);
+
+  mock().expectOneCall("GsShim_ShowProgressDialog");
+  mock().expectOneCall("GsShim_HideProgressDialog");
+  mock().expectOneCall("HLock").withPointerParameter("handle", sequence_handle);
+  mock().expectOneCall("HUnlock").withPointerParameter("handle", sequence_handle);
+
+  GameSequence_NewGame("TEMPO");
+
+  data = (char *)&buffer;
+  GameSequence_Hydrate(&data);
+
+  GameSequence_GetSequenceCode(after_sequence_code);
+  STRNCMP_EQUAL_TEXT(before_sequence_code, after_sequence_code, 5, "Sequence code is dehydrated/hydrated correctly");
+
+  UNSIGNED_LONGS_EQUAL_TEXT(before_sequence_index, GameSequence_GetSequenceIndex(), "Sequence index is dehydrated/hydrated correctly");
+}

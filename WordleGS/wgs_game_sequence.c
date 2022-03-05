@@ -62,7 +62,7 @@ void GameSequence_NewGame(char code_word[]) {
   HLock(wgs_game_sequence_memory);
   data = (unsigned int *)*wgs_game_sequence_memory;
 
-  // Use the "inside-out" variant of the Durstenfeld implemenmtation of a Fisher-Yates shuffle
+  // Use the "inside-out" variant of the Durstenfeld implementation of a Fisher-Yates shuffle
   // to reorder the list.
   data[0] = 0;
   for (sequence_number=1; sequence_number<wgs_game_sequence_size; sequence_number++) {
@@ -100,6 +100,16 @@ void GameSequence_Destroy(void) {
   if (wgs_game_sequence_memory != NULL) {
     DisposeHandle(wgs_game_sequence_memory);
   }
+}
+
+void GameSequence_Dehydrate(char **data) {
+  Utils_DehydrateIntAndAdvancePointer(data, wgs_game_sequence_index);
+  Utils_DehydrateStringAndAdvancePointer(data, wgs_game_sequence_code_word, 5);
+}
+
+void GameSequence_Hydrate(char **data) {
+  wgs_game_sequence_index = Utils_HydrateIntAndAdvancePointer(data);
+  Utils_HydrateStringAndAdvancePointer(data, wgs_game_sequence_code_word, 5);
 }
 
 
