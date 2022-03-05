@@ -33,4 +33,13 @@ int Utils_StringNCompare(char *str1, char *str2, unsigned int number_of_chars);
 void Utils_StringNCopy(char *destination, char *source, unsigned int number_of_chars);
 char * Utils_StringNFindChar(char *str, unsigned int number_of_chars, char c);
 
+/* Hydration utilities */
+
+void Utils_DehydrateIntAndAdvancePointer(char **data, int value);
+int Utils_HydrateIntAndAdvancePointer(char **data);
+
+void Utils_DehydrateFloatAndAdvancePointer(char **data, float value);
+float Utils_HydrateFloatAndAdvancePointer(char **data);
+
+
 #endif /* define _GUARD_PROJECTWordleGS_FILEwgs_utils_ */

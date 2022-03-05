@@ -72,3 +72,49 @@ TEST(Utils, StringNFindChar) {
   actual = Utils_StringNFindChar(str, 2, 'T');
   POINTERS_EQUAL_TEXT(NULL, actual, "Length limit works");
 }
+
+TEST(Utils, DehydrateIntAndAdvancePointer) {
+  char buffer[256];
+  char *data = (char *)&buffer;
+
+  Utils_DehydrateIntAndAdvancePointer(&data, 42);
+  Utils_DehydrateIntAndAdvancePointer(&data, 56);
+
+  POINTERS_EQUAL_TEXT((char *)&buffer + sizeof(int) * 2, data, "Pointer advanced as expected");
+
+  LONGS_EQUAL_TEXT(42, *(int *)&buffer, "First value written as expected");
+  LONGS_EQUAL_TEXT(56, *(((int *)&buffer) + 1), "Second value written as expected");
+}
+
+TEST(Utils, HydrateIntAndAdvancePointer) {
+  int buffer[] = { 42, 56, -1 };
+  char *data = (char *)&buffer;
+
+  LONGS_EQUAL_TEXT(42, Utils_HydrateIntAndAdvancePointer(&data), "First value read as expected");
+  LONGS_EQUAL_TEXT(56, Utils_HydrateIntAndAdvancePointer(&data), "Second value read as expected");
+
+  POINTERS_EQUAL_TEXT((char *)&buffer + sizeof(int) * 2, data, "Pointer advanced as expected");
+}
+
+TEST(Utils, DehydrateFloatAndAdvancePointer) {
+  char buffer[256];
+  char *data = (char *)&buffer;
+
+  Utils_DehydrateFloatAndAdvancePointer(&data, 1.345);
+  Utils_DehydrateFloatAndAdvancePointer(&data, 13.37);
+
+  POINTERS_EQUAL_TEXT((char *)&buffer + sizeof(float) * 2, data, "Pointer advanced as expected");
+
+  DOUBLES_EQUAL_TEXT(1.345, *(float *)&buffer, 0.0001, "First value written as expected");
+  DOUBLES_EQUAL_TEXT(13.37, *(((float *)&buffer) + 1), 0.0001, "Second value written as expected");
+}
+
+TEST(Utils, HydrateFloatAndAdvancePointer) {
+  float buffer[] = { 1.345, 13.37, -1 };
+  char *data = (char *)&buffer;
+
+  DOUBLES_EQUAL_TEXT(1.345, Utils_HydrateFloatAndAdvancePointer(&data), 0.0001, "First value read as expected");
+  DOUBLES_EQUAL_TEXT(13.37, Utils_HydrateFloatAndAdvancePointer(&data), 0.0001, "Second value read as expected");
+
+  POINTERS_EQUAL_TEXT((char *)&buffer + sizeof(float) * 2, data, "Pointer advanced as expected");
+}

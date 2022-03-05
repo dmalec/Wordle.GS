@@ -82,3 +82,38 @@ char * Utils_StringNFindChar(char *str, unsigned int number_of_chars, char c) {
 
   return first_occurence;
 }
+
+
+/* Hydration utilities */
+
+void Utils_DehydrateIntAndAdvancePointer(char **data, int value) {
+  int **ptr = (int **)data;
+
+  **ptr = value;
+  *ptr = *ptr + 1;
+}
+
+int Utils_HydrateIntAndAdvancePointer(char **data) {
+  int **ptr = (int **)data;
+  int value = **ptr;
+
+  *ptr = *ptr + 1;
+
+  return value;
+}
+
+void Utils_DehydrateFloatAndAdvancePointer(char **data, float value) {
+  float **ptr = (float **)data;
+
+  **ptr = value;
+  *ptr = *ptr + 1;
+}
+
+float Utils_HydrateFloatAndAdvancePointer(char **data) {
+  float **ptr = (float **)data;
+  float value = **ptr;
+
+  *ptr = *ptr + 1;
+
+  return value;
+}
