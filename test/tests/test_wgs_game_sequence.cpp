@@ -146,6 +146,11 @@ TEST(GameSequence, Hydration) {
 
   GameSequence_NewGame("TEMPO");
 
+  mock().expectOneCall("GsShim_ShowProgressDialog");
+  mock().expectOneCall("GsShim_HideProgressDialog");
+  mock().expectOneCall("HLock").withPointerParameter("handle", sequence_handle);
+  mock().expectOneCall("HUnlock").withPointerParameter("handle", sequence_handle);
+
   data = (char *)&buffer;
   GameSequence_Hydrate(&data);
 

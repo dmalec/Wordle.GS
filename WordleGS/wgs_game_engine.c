@@ -174,21 +174,20 @@ void GameEngine_LoadGame(void) {
   Handle data_handle;
   LongWord *file_length;
   char *data;
+  int version;
 
   GsShim_LoadFile(SAVE_FILENAME, &data_handle, &file_length);
 
   HLock(data_handle);
   data = (char *)*data_handle;
 
-  if (Utils_StringNCompare(data, "WGS001", 6)) {
-    data += 6;
+  if (Utils_StringNCompare(data, "WGS", 3)) {
+    data += 3;
 
-    GameSequence_NewGame(data);
-    data += 5;
+    version = Utils_HydrateIntAndAdvancePointer(&data);
 
-    GameSequence_SetSequenceIndex(*(unsigned int *)data);
-    data += sizeof(unsigned int);
-
+    GameSequence_Hydrate(&data);
+    Scoring_Hydrate(&data);
   }
 
   HUnlock(data_handle);
@@ -200,22 +199,15 @@ void GameEngine_LoadGame(void) {
 
 void GameEngine_SaveGame(void) {
   char buffer[256];
-  char *p = buffer;
-  int i;
-  Pointer data = (Pointer)(&buffer);
-  LongWord bytes = 0;
+  char *data = (char *)&buffer;
+  Pointer ptr = (Pointer)&buffer;
 
-  Utils_StringNCopy(p, "WGS001", 6);
-  bytes += 6;
-  p += 6;
+  /* Write out magic number and version */
+  Utils_DehydrateStringAndAdvancePointer(&data, "WGS", 3);
+  Utils_DehydrateIntAndAdvancePointer(&data, 1);
 
-  GameSequence_GetSequenceCode(p);
-  bytes += 5;
-  p += 5;
+  GameSequence_Dehydrate(&data);
+  Scoring_Dehydrate(&data);
 
-  *(unsigned int *)p = GameSequence_GetSequenceIndex() - 1;
-  bytes += sizeof(unsigned int);
-  p += sizeof(unsigned int);
-
-  GsShim_SaveFile(SAVE_FILENAME, data, bytes);
+  GsShim_SaveFile(SAVE_FILENAME, ptr, (data - buffer));
 }

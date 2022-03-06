@@ -36,6 +36,10 @@ static unsigned int wgs_game_sequence_size = 0;
 static unsigned int wgs_game_sequence_index = 0;
 static char  wgs_game_sequence_code_word[] = "     ";
 
+/* Local Prototypes */
+
+void GameSequence_Shuffle(void);
+
 
 /* Lifecycle Methods */
 
@@ -46,16 +50,51 @@ void GameSequence_Create(unsigned int size) {
 }
 
 void GameSequence_NewGame(char code_word[]) {
-  unsigned int sequence_number;
+  Utils_StringNCopy(wgs_game_sequence_code_word, code_word, 5);
+  wgs_game_sequence_index = 0;
+
+  GameSequence_Shuffle();
+}
+
+void GameSequence_NextRound(void) {
+  wgs_game_sequence_index++;
+
+  if (wgs_game_sequence_index >= wgs_game_sequence_size) {
+    wgs_game_sequence_index = 0;
+  }
+}
+
+void GameSequence_UpdateFinished(void) {
+}
+
+void GameSequence_Destroy(void) {
+  if (wgs_game_sequence_memory != NULL) {
+    DisposeHandle(wgs_game_sequence_memory);
+  }
+}
+
+void GameSequence_Dehydrate(char **data) {
+  Utils_DehydrateIntAndAdvancePointer(data, wgs_game_sequence_index);
+  Utils_DehydrateStringAndAdvancePointer(data, wgs_game_sequence_code_word, 5);
+}
+
+void GameSequence_Hydrate(char **data) {
+  wgs_game_sequence_index = Utils_HydrateIntAndAdvancePointer(data);
+  Utils_HydrateStringAndAdvancePointer(data, wgs_game_sequence_code_word, 5);
+
+  GameSequence_Shuffle();
+}
+
+void GameSequence_Shuffle(void) {
   int i;
   unsigned int *data;
+  unsigned int sequence_number;
   unsigned seed = 0;
 
   GsShim_ShowProgressDialog();
 
   for (i=0; i<5; i++) {
-    wgs_game_sequence_code_word[i] = code_word[i];
-    seed += code_word[i];
+    seed += wgs_game_sequence_code_word[i];
   }
   srand(seed);
   
@@ -81,35 +120,6 @@ void GameSequence_NewGame(char code_word[]) {
   HUnlock(wgs_game_sequence_memory);
 
   GsShim_HideProgressDialog();
-
-  wgs_game_sequence_index = 0;
-}
-
-void GameSequence_NextRound(void) {
-  wgs_game_sequence_index++;
-  
-  if (wgs_game_sequence_index >= wgs_game_sequence_size) {
-    wgs_game_sequence_index = 0;
-  }
-}
-
-void GameSequence_UpdateFinished(void) {
-}
-
-void GameSequence_Destroy(void) {
-  if (wgs_game_sequence_memory != NULL) {
-    DisposeHandle(wgs_game_sequence_memory);
-  }
-}
-
-void GameSequence_Dehydrate(char **data) {
-  Utils_DehydrateIntAndAdvancePointer(data, wgs_game_sequence_index);
-  Utils_DehydrateStringAndAdvancePointer(data, wgs_game_sequence_code_word, 5);
-}
-
-void GameSequence_Hydrate(char **data) {
-  wgs_game_sequence_index = Utils_HydrateIntAndAdvancePointer(data);
-  Utils_HydrateStringAndAdvancePointer(data, wgs_game_sequence_code_word, 5);
 }
 
 
@@ -121,10 +131,6 @@ void GameSequence_GetSequenceCode(char code_word[]) {
 
 unsigned int GameSequence_GetSequenceIndex(void) {
   return wgs_game_sequence_index;
-}
-
-void GameSequence_SetSequenceIndex(unsigned int sequence_index) {
-  wgs_game_sequence_index = sequence_index;
 }
 
 unsigned int GameSequence_GetSequenceValue(void) {
