@@ -123,7 +123,7 @@ void GameOverDialogDrawContents(void) {
     char code_word[] = "     ";
 
     GameSequence_GetSequenceCode(code_word);
-    sprintf(buffer, "Code: %s   Word: %d   Guess: %d/6", code_word, GameSequence_GetSequenceIndex(), GuessState_GetRow() + 1);
+    sprintf(buffer, "Code: %s   Word: %d   Guess: %d/6", code_word, GameSequence_GetSequenceIndex() + 1, GuessState_GetRow() + 1);
   }
   title_width = CStringWidth(buffer);
   MoveTo(DIALOG_H_CENTER - (title_width / 2), 10);
