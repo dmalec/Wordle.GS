@@ -62,23 +62,31 @@ void GameEngine_Create(void) {
 }
 
 void GameEngine_NewGame(char code_word[]) {
+  unsigned int secret_word_index;
+  char secret_word[] = "     ";
 
   if (code_word != NULL) {
     GameSequence_NewGame(code_word);
+    secret_word_index = GameSequence_GetSequenceValue();
 
     GameEngine_SaveGame();
   } else if (GsShim_DoesFileExist(SAVE_FILENAME)) {
     GameEngine_LoadGame();
+    secret_word_index = GameSequence_GetSequenceValue();
   } else {
     char dict_code_word[6];
 
     Dictionary_GetRandomWord(dict_code_word);
     GameSequence_NewGame(dict_code_word);
+    secret_word_index = GameSequence_GetSequenceValue();
 
     GameEngine_SaveGame();
   }
 
-  GameEngine_NextRound();
+  Dictionary_GetWord(secret_word_index, secret_word);
+  GameEngine_NewSecretWord(secret_word);
+
+  wgs_game_engine_game_state = InProgress;
 }
 
 void GameEngine_NextRound(void) {
@@ -87,12 +95,12 @@ void GameEngine_NextRound(void) {
 
   AlphabetState_NextRound();
   Dictionary_NextRound();
-  secret_word_index = GameSequence_GetSequenceValue();
   GameSequence_NextRound();
   GuessState_NextRound();
 
   wgs_game_engine_game_state = InProgress;
 
+  secret_word_index = GameSequence_GetSequenceValue();
   Dictionary_GetWord(secret_word_index, secret_word);
   GameEngine_NewSecretWord(secret_word);
 }
