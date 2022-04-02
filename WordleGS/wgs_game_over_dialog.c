@@ -78,6 +78,8 @@ void GameOverDialog_BuildGuessDistribution(wgs_game_stats game_stats) {
   int guess_number;
   int base_line;
   int fill_line;
+  int distribution_value_width;
+  char buffer[128];
 
   for (guess_number=0; guess_number<6; guess_number++) {
     base_line = 50 + guess_number * 14;
@@ -88,8 +90,11 @@ void GameOverDialog_BuildGuessDistribution(wgs_game_stats game_stats) {
       fill_line = (THERMOMETER_WIDTH - 10) * game_stats.guess_distribution_percentage[guess_number] - 2;
     }
 
+    sprintf(buffer, "%d", game_stats.guess_distribution[guess_number]);
+    distribution_value_width = CStringWidth(buffer);
+
     SetPt(&guess_distribution[guess_number].guess_number_point, THERMOMETER_H - 10, base_line);
-    SetPt(&guess_distribution[guess_number].guess_value_point, THERMOMETER_H + 2 + fill_line, base_line);
+    SetPt(&guess_distribution[guess_number].guess_value_point, THERMOMETER_H + 2 + fill_line - distribution_value_width + 8, base_line);
     SetRect(&guess_distribution[guess_number].thermometer_outline, THERMOMETER_H, base_line - 10, THERMOMETER_H + THERMOMETER_WIDTH, base_line + 3);
     SetRect(&guess_distribution[guess_number].thermometer_fill_perimeter, THERMOMETER_H + 1, base_line - 9, THERMOMETER_H + 11 + fill_line, base_line + 2);
     SetRect(&guess_distribution[guess_number].thermometer_fill_inside, THERMOMETER_H + 2, base_line - 8, THERMOMETER_H + 10 + fill_line, base_line + 1);
